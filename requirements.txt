@@ -1,0 +1,33 @@
+# Core dependencies
+requests>=2.31.0
+pydantic>=2.0.0
+typing-extensions>=4.5.0
+asyncio-mqtt>=0.16.0
+
+# LLM and AI
+openai>=1.0.0
+anthropic>=0.7.0
+ollama>=0.1.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+json5>=0.9.0
+
+# Evaluation and metrics
+rouge-score>=0.1.2
+nltk>=3.8.0
+scikit-learn>=1.3.0
+
+# Utilities
+tqdm>=4.65.0
+rich>=13.0.0
+click>=8.1.0
+python-dotenv>=1.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Documentation
+markdown>=3.4.0 

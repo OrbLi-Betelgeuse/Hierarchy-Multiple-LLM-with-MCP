@@ -1,0 +1,900 @@
+2025-06-21 17:58:21,222 - utils.evaluation - INFO - Performance monitoring started
+2025-06-21 17:58:21,255 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 17:58:21,255 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 17:58:21,271 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 17:58:21,272 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 17:58:21,288 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 17:58:21,288 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 17:58:21,288 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 3 executors
+2025-06-21 17:58:21,288 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-06-21 17:58:21,288 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - models.manager - ERROR - Error in task decomposition: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - models.manager - ERROR - Task execution failed: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - experiments.summarization_experiment - ERROR - Error running task doc_1: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - experiments.summarization_experiment - ERROR - Failed to complete task doc_1: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-06-21 17:58:21,289 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - models.manager - ERROR - Error in task decomposition: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - models.manager - ERROR - Task execution failed: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - experiments.summarization_experiment - ERROR - Error running task doc_2: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,289 - experiments.summarization_experiment - ERROR - Failed to complete task doc_2: Client.chat() got an unexpected keyword argument 'temperature'
+2025-06-21 17:58:21,291 - __main__ - ERROR - summarization experiment failed: 'ExperimentPipeline' object has no attribute 'executors'
+2025-06-21 17:58:21,291 - utils.evaluation - INFO - Performance monitoring stopped
+2025-06-21 17:59:38,603 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 17:59:38,603 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 17:59:38,619 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 17:59:38,623 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 17:59:38,639 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 17:59:38,639 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 17:59:38,641 - utils.evaluation - INFO - Performance monitoring started
+2025-06-21 17:59:38,673 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 17:59:38,673 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 17:59:38,689 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 17:59:38,690 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 17:59:38,706 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 17:59:38,706 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 17:59:38,706 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 3 executors
+2025-06-21 17:59:38,706 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-06-21 18:33:55,593 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 18:33:55,593 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 18:33:55,609 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 18:33:55,609 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 18:33:55,626 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 18:33:55,626 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 18:33:55,628 - models.executor - INFO - Executor executor_01 starting message processing
+2025-06-21 18:38:33,097 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 18:38:33,097 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 18:38:33,112 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 18:38:33,112 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 18:38:33,127 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 18:38:33,127 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 18:38:33,129 - utils.evaluation - INFO - Performance monitoring started
+2025-06-21 18:38:33,159 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 18:38:33,159 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 18:38:33,173 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 18:38:33,173 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 18:38:33,188 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 18:38:33,188 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 18:38:33,188 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 3 executors
+2025-06-21 18:38:33,189 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-06-21 18:38:43,326 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:38:43,328 - models.manager - INFO - Task decomposed into 5 subtasks
+2025-06-21 18:38:53,419 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:38:53,420 - models.manager - WARNING - No suitable executor found for task summarize-document-1
+2025-06-21 18:38:53,420 - models.manager - WARNING - No suitable executor found for task identify-key-points
+2025-06-21 18:38:53,420 - models.manager - WARNING - No suitable executor found for task evaluate-challenges
+2025-06-21 18:38:53,420 - models.manager - WARNING - No suitable executor found for task recommendations
+2025-06-21 18:38:53,420 - models.manager - WARNING - No suitable executor found for task overall-strategy
+2025-06-21 18:38:53,421 - models.manager - ERROR - Error in execution coordination: division by zero
+2025-06-21 18:38:53,421 - models.manager - ERROR - Task execution failed: division by zero
+2025-06-21 18:38:53,421 - experiments.summarization_experiment - ERROR - Error running task doc_1: division by zero
+2025-06-21 18:38:53,421 - experiments.summarization_experiment - ERROR - Failed to complete task doc_1: division by zero
+2025-06-21 18:38:53,421 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-06-21 18:39:03,527 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:39:03,529 - models.manager - INFO - Task decomposed into 5 subtasks
+2025-06-21 18:39:12,139 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:39:12,140 - models.manager - ERROR - Failed to parse execution plan: {
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["task_id1", "task_id2"],
+                "estimated_duration": "3 weeks",
+                "dependencies": ["phase_id"],
+                "quality_gates": ["check1", "check2"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_id1": {
+                    "task_id1": "reader",
+                    "task_id2": "summarizer"
+                },
+                "executor_id2": {
+                    "task_id1": "researcher",
+                    "task_id2": "writer"
+                }
+            },
+            "estimated_costs": {
+                "computational": "500 hours",
+                "time": "3 weeks"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Insufficient expertise in summarization techniques",
+                "mitigation": "Provide training and resources for summarization skills"
+            },
+            {
+                "risk": "Inadequate understanding of the document's content",
+                "mitigation": "Conduct thorough analysis and reading comprehension to ensure accurate summary"
+            },
+            {
+                "risk": "Lack of clarity in the summary",
+                "mitigation": "Use clear and concise language, and organize focused areas into a logical structure"
+            }
+        ]
+    }
+}
+
+Note: The estimated duration and costs are fictional and used only for illustrative purposes. Actual estimates may vary based on factors such as the complexity of the task, the size of the team, and the resources available.
+2025-06-21 18:39:12,140 - models.manager - WARNING - No suitable executor found for task summarize-document
+2025-06-21 18:39:12,140 - models.manager - WARNING - No suitable executor found for task identify-focused-areas
+2025-06-21 18:39:12,140 - models.manager - WARNING - No suitable executor found for task write-clear-style
+2025-06-21 18:39:12,140 - models.manager - WARNING - No suitable executor found for task proofread-content
+2025-06-21 18:39:12,140 - models.manager - WARNING - No suitable executor found for task format-document
+2025-06-21 18:39:12,140 - models.manager - ERROR - Error in execution coordination: division by zero
+2025-06-21 18:39:12,140 - models.manager - ERROR - Task execution failed: division by zero
+2025-06-21 18:39:12,140 - experiments.summarization_experiment - ERROR - Error running task doc_2: division by zero
+2025-06-21 18:39:12,140 - experiments.summarization_experiment - ERROR - Failed to complete task doc_2: division by zero
+2025-06-21 18:39:12,152 - utils.evaluation - INFO - Metrics exported to results/summarization_metrics.json
+2025-06-21 18:39:12,153 - utils.evaluation - INFO - Performance monitoring stopped
+2025-06-21 18:39:51,920 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 18:39:51,921 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 18:39:51,936 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 18:39:51,936 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 18:39:51,951 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 18:39:51,951 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 18:39:51,953 - utils.evaluation - INFO - Performance monitoring started
+2025-06-21 18:39:51,984 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-06-21 18:39:51,984 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-06-21 18:39:51,999 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-06-21 18:39:51,999 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-06-21 18:39:52,014 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-06-21 18:39:52,014 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-06-21 18:39:52,014 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 3 executors
+2025-06-21 18:39:52,014 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-06-21 18:40:00,947 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:40:00,949 - models.manager - INFO - Task decomposed into 5 subtasks
+2025-06-21 18:40:23,242 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:40:23,243 - models.manager - ERROR - Failed to parse execution plan: Executive Summary:
+This execution plan outlines the detailed strategy for completing the task of summarizing a document while ensuring accuracy, efficiency, and quality. The plan includes task assignment strategies, resource allocation, timeline estimation, quality control measures, and contingency plans.
+
+Phase 1: Planning and Preparation (estimated duration: 2 weeks)
+
+* Tasks: Identify focused areas of the document (task ID: identify-focused-areas), determine the style of the document (task ID: determine-style), extract key points and main arguments (task ID: extract-key-points), and verify accuracy (task ID: verify-accuracy).
+* Dependencies: Summarize the document (task ID: summarize-document) must be completed before any other task can begin.
+* Quality gates: The summary must pass a thorough review process to ensure accuracy and completeness.
+
+Resource Allocation:
+
+* Executors: Assign two experienced AI project managers (executor ID: pm1, pm2) to oversee the execution of tasks in this phase.
+* Estimated Costs: Computational costs are estimated at $500, and time costs are estimated at $700.
+
+Timeline Estimation:
+
+* Start date: January 15, 2023
+* End date: February 1, 2023
+* Duration: 4 weeks
+
+Quality Control Measures:
+
+* Thorough review of the summary by multiple stakeholders to ensure accuracy and completeness.
+* Regular progress updates and status reports to monitor execution against the plan.
+
+Contingency Plans:
+
+* Delays in task completion may require adjustments to the timeline or resource allocation.
+* Unexpected issues with the document's content or format may require additional time for review and revision.
+
+Phase 2: Execution (estimated duration: 4 weeks)
+
+* Tasks: Summarize the document (task ID: summarize-document), identify focused areas of the document (task ID: identify-focused-areas), determine the style of the document (task ID: determine-style), extract key points and main arguments (task ID: extract-key-points), and verify accuracy (task ID: verify-accuracy).
+* Dependencies: No tasks in this phase depend on others.
+* Quality gates: The summary must pass a thorough review process to ensure accuracy and completeness.
+
+Resource Allocation:
+
+* Executors: Assign two experienced AI project managers (executor ID: pm1, pm2) to oversee the execution of tasks in this phase.
+* Estimated Costs: Computational costs are estimated at $500, and time costs are estimated at $700.
+
+Timeline Estimation:
+
+* Start date: January 15, 2023
+* End date: February 1, 2023
+* Duration: 4 weeks
+
+Quality Control Measures:
+
+* Thorough review of the summary by multiple stakeholders to ensure accuracy and completeness.
+* Regular progress updates and status reports to monitor execution against the plan.
+
+Contingency Plans:
+
+* Delays in task completion may require adjustments to the timeline or resource allocation.
+* Unexpected issues with the document's content or format may require additional time for review and revision.
+
+Phase 3: Review and Revision (estimated duration: 2 weeks)
+
+* Tasks: Verify accuracy (task ID: verify-accuracy) and revise as necessary (task ID: revise-summary).
+* Dependencies: The summary must be completed before any other task can begin.
+* Quality gates: The revised summary must pass a thorough review process to ensure accuracy and completeness.
+
+Resource Allocation:
+
+* Executors: Assign one experienced AI project manager (executor ID: pm1) to oversee the execution of tasks in this phase.
+* Estimated Costs: Computational costs are estimated at $300, and time costs are estimated at $500.
+
+Timeline Estimation:
+
+* Start date: February 2, 2023
+* End date: February 14, 2023
+* Duration: 2 weeks
+
+Quality Control Measures:
+
+* Thorough review of the revised summary by multiple stakeholders to ensure accuracy and completeness.
+* Regular progress updates and status reports to monitor execution against the plan.
+
+Contingency Plans:
+
+* Delays in task completion may require adjustments to the timeline or resource allocation.
+* Unexpected issues with the document's content or format may require additional time for review and revision.
+
+Phase 4: Deployment (estimated duration: 1 week)
+
+* Tasks: Deploy the revised summary (task ID: deploy-summary).
+* Dependencies: The revised summary must be completed before any other task can begin.
+* Quality gates: The deployed summary must pass a thorough review process to ensure accuracy and completeness.
+
+Resource Allocation:
+
+* Executors: Assign one experienced AI project manager (executor ID: pm1) to oversee the execution of tasks in this phase.
+* Estimated Costs: Computational costs are estimated at $200, and time costs are estimated at $300.
+
+Timeline Estimation:
+
+* Start date: February 15, 2023
+* End date: February 21, 2023
+* Duration: 1 week
+
+Quality Control Measures:
+
+* Thorough review of the deployed summary by multiple stakeholders to ensure accuracy and completeness.
+* Regular progress updates and status reports to monitor execution against the plan.
+
+Contingency Plans:
+
+* Delays in task completion may require adjustments to the timeline or resource allocation.
+* Unexpected issues with the document's content or format may require additional time for review and revision.
+2025-06-21 18:40:23,244 - models.mcp_protocol - INFO - Task registered: summarize-document
+2025-06-21 18:40:23,244 - models.mcp_protocol - INFO - Task registered: identify-focused-areas
+2025-06-21 18:40:23,244 - models.mcp_protocol - INFO - Task registered: determine-style
+2025-06-21 18:40:23,245 - models.mcp_protocol - INFO - Task registered: extract-key-points
+2025-06-21 18:40:23,245 - models.mcp_protocol - INFO - Task registered: verify-accuracy
+2025-06-21 18:40:23,245 - models.manager - INFO - Executing task summarize-document with executor executor_01
+2025-06-21 18:40:23,246 - models.manager - WARNING - No executor instance found for task summarize-document
+2025-06-21 18:40:23,246 - models.manager - INFO - Executing task identify-focused-areas with executor executor_02
+2025-06-21 18:40:23,246 - models.manager - WARNING - No executor instance found for task identify-focused-areas
+2025-06-21 18:40:23,246 - models.manager - INFO - Executing task determine-style with executor executor_03
+2025-06-21 18:40:23,246 - models.manager - WARNING - No executor instance found for task determine-style
+2025-06-21 18:40:23,246 - models.manager - INFO - Executing task extract-key-points with executor executor_01
+2025-06-21 18:40:23,246 - models.manager - WARNING - No executor instance found for task extract-key-points
+2025-06-21 18:40:23,246 - models.manager - INFO - Executing task verify-accuracy with executor executor_02
+2025-06-21 18:40:23,246 - models.manager - WARNING - No executor instance found for task verify-accuracy
+2025-06-21 18:40:23,246 - models.manager - INFO - Task execution completed successfully
+2025-06-21 18:40:24,985 - absl - INFO - Using default tokenizer.
+2025-06-21 18:40:24,986 - experiments.summarization_experiment - INFO - Completed task doc_1
+2025-06-21 18:40:24,986 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-06-21 18:40:33,500 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:40:33,501 - models.manager - INFO - Task decomposed into 4 subtasks
+2025-06-21 18:40:40,786 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 18:40:40,787 - models.mcp_protocol - INFO - Task registered: summarize-doc
+2025-06-21 18:40:40,787 - models.mcp_protocol - INFO - Task registered: identify-key-points
+2025-06-21 18:40:40,787 - models.mcp_protocol - INFO - Task registered: style-evaluation
+2025-06-21 18:40:40,787 - models.mcp_protocol - INFO - Task registered: provide-feedback
+2025-06-21 18:40:40,787 - models.manager - INFO - Executing task summarize-doc with executor executor_03
+2025-06-21 18:40:40,787 - models.manager - WARNING - No executor instance found for task summarize-doc
+2025-06-21 18:40:40,787 - models.manager - INFO - Executing task identify-key-points with executor executor_01
+2025-06-21 18:40:40,787 - models.manager - WARNING - No executor instance found for task identify-key-points
+2025-06-21 18:40:40,787 - models.manager - INFO - Executing task style-evaluation with executor executor_02
+2025-06-21 18:40:40,787 - models.manager - WARNING - No executor instance found for task style-evaluation
+2025-06-21 18:40:40,788 - models.manager - INFO - Executing task provide-feedback with executor executor_03
+2025-06-21 18:40:40,788 - models.manager - WARNING - No executor instance found for task provide-feedback
+2025-06-21 18:40:40,788 - models.manager - INFO - Task execution completed successfully
+2025-06-21 18:40:40,788 - absl - INFO - Using default tokenizer.
+2025-06-21 18:40:40,789 - experiments.summarization_experiment - INFO - Completed task doc_2
+2025-06-21 18:40:40,792 - utils.evaluation - INFO - Metrics exported to results/summarization_metrics.json
+2025-06-21 18:40:40,792 - utils.evaluation - INFO - Performance monitoring stopped

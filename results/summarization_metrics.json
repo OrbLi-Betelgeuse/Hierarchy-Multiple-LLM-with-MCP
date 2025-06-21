@@ -1,0 +1,22 @@
+{
+  "experiment_type": "summarization",
+  "total_tasks": 2,
+  "successful_tasks": 0,
+  "success_rate": 0.0,
+  "average_execution_time": 23.51751068750309,
+  "total_execution_time": 47.03502137500618,
+  "manager_performance": {},
+  "executor_performance": {},
+  "quality_metrics": {
+    "average_quality_score": 0.0,
+    "min_quality_score": 0.0,
+    "max_quality_score": 0.0,
+    "quality_variance": 0.0
+  },
+  "resource_utilization": {
+    "cpu_usage": "estimated",
+    "memory_usage": "estimated",
+    "network_usage": "estimated",
+    "storage_usage": "estimated"
+  }
+}

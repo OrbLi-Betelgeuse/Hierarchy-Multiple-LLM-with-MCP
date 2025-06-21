@@ -1,0 +1,61 @@
+{
+  "manager": {
+    "provider": "ollama",
+    "model": "llama2:70b",
+    "manager_id": "manager_01",
+    "kwargs": {
+      "base_url": "http://localhost:11434"
+    }
+  },
+  "executors": [
+    {
+      "provider": "ollama",
+      "model": "llama2:7b",
+      "executor_id": "executor_01",
+      "capabilities": ["summarization", "general"],
+      "specialized": false,
+      "kwargs": {
+        "base_url": "http://localhost:11434"
+      }
+    },
+    {
+      "provider": "ollama",
+      "model": "llama2:7b",
+      "executor_id": "executor_02",
+      "capabilities": ["question_answering", "general"],
+      "specialized": false,
+      "kwargs": {
+        "base_url": "http://localhost:11434"
+      }
+    },
+    {
+      "provider": "ollama",
+      "model": "llama2:7b",
+      "executor_id": "executor_03",
+      "capabilities": ["table_generation", "general"],
+      "specialized": false,
+      "kwargs": {
+        "base_url": "http://localhost:11434"
+      }
+    }
+  ],
+  "experiments": {
+    "summarization": {
+      "enabled": true,
+      "num_tasks": 2
+    },
+    "question_answering": {
+      "enabled": true,
+      "num_tasks": 2
+    },
+    "table_generation": {
+      "enabled": true,
+      "num_tasks": 2
+    }
+  },
+  "output": {
+    "results_dir": "results",
+    "export_metrics": true,
+    "generate_visualizations": false
+  }
+} 
