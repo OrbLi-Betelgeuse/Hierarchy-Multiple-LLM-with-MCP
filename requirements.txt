@@ -1,4 +1,4 @@
-# Core dependencies
+# Core dependencies for Experiment A
 asyncio
 aiohttp
 requests
@@ -11,14 +11,8 @@ ollama
 openai
 
 # Evaluation and metrics
-rouge-score
 numpy
 pandas
-
-# RAGFlow integration
-ragflow-client
-sentence-transformers
-faiss-cpu
 
 # Utilities
 python-dotenv
@@ -29,9 +23,6 @@ json5>=0.9.0
 
 # LLM and AI
 anthropic>=0.7.0
-
-# Data processing
-numpy>=1.24.0
 
 # Evaluation and metrics
 nltk>=3.8.0
@@ -45,4 +36,10 @@ pytest>=7.4.0
 pytest-asyncio>=0.21.0
 
 # Documentation
-markdown>=3.4.0 
+markdown>=3.4.0
+
+# RAGFlow integration (optional - for later experiments)
+# ragflow-client
+# sentence-transformers
+# faiss-cpu
+# rouge-score 

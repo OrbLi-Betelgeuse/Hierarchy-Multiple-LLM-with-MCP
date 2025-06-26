@@ -10,7 +10,6 @@ import logging
 from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass, asdict
 from enum import Enum
-from pydantic import BaseModel, Field
 import asyncio
 
 logger = logging.getLogger(__name__)
@@ -54,6 +53,10 @@ class Task:
     error: Optional[str] = None
     created_at: Optional[str] = None
     completed_at: Optional[str] = None
+
+    def __post_init__(self):
+        if self.dependencies is None:
+            self.dependencies = []
 
 
 @dataclass
