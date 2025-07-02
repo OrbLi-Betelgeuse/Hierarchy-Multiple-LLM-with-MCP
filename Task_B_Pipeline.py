@@ -1,8 +1,16 @@
 """
-Main Pipeline for Manager-Executor Collaboration System
+请把这个py文件放在和pipeline.py相同的路径下
+这个Task_B_Pipeline是根据pipeline.py修改的，针对于TaskB的变种代码
+修改的大部分在run_task_b_pipeline()中
+代码整体存在标红的部分，但是不影响测试运行
+代码思路为：拿到提出的问题（TODO:需要改成从文件读入，数据集和Summary实验的最好一致）
+之后丢给Pudge模型切片成三个不同的小问题，传给子处理模型（sub_executors）
+最终重用Pudge来对结果进行整合并输出
 
-Orchestrates the complete experimental pipeline for evaluating the hierarchical
-Manager-Executor collaboration model on natural language tasks.
+使用的评价指标为之前写好的utils/evaluation.py，运行结果大部分保存在results/comprehensive_report.json中（TODO：剩下的动态route results和metrics不知道有什么必要，暂时还没写）
+
+小型实验代码在pudge_experiment.py task_solver_experiment.py 和 test.py中，可具体查看
+TODO：需要查看evaluate中的expected result，我好像没有找到正确的比对方法。具体可以查看experiments/summarization_experiment.py的比对方法，让GPT迁移到QA问题上，查看具体的结果。
 """
 
 import asyncio
@@ -26,6 +34,8 @@ from experiments.summarization_experiment import SummarizationExperiment
 from experiments.qa_experiment import QAExperiment
 from experiments.table_generation_experiment import TableGenerationExperiment
 from utils.evaluation import Evaluator, PerformanceMonitor
+from pprint import pprint
+import time
 
 # Setup logging
 logging.basicConfig(
@@ -55,45 +65,31 @@ class ExperimentPipeline:
 
         # Default configuration
         return {
-            "manager": {
-                "provider": "ollama",
-                "model": "deepseek-r1:7b",
-                "manager_id": "manager_01",
-                "kwargs": {"base_url": "http://localhost:11434"},
+            #使用的模型，但是感觉需要更改，因为此时参数量没有对齐。TODO：可能需要对齐参数量
+            "decomposer": {
+              "provider": "ollama",
+              "model": "qwen2.5:7b",
+              "kwargs": {"base_url": "http://localhost:11434"}
             },
             "executors": [
                 {
                     "provider": "ollama",
-                    "model": "llama2:7b",
-                    "executor_id": "executor_01",
-                    "capabilities": ["summarization", "general"],
-                    "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11434"},
+                    "model": "qwen2.5:14b",
+                    "executor_id": "executor1",
+                    "kwargs": {"base_url": "http://localhost:11434"}
                 },
                 {
                     "provider": "ollama",
-                    "model": "llama2:7b",
-                    "executor_id": "executor_02",
-                    "capabilities": ["question_answering", "general"],
-                    "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11434"},
+                    "model": "qwen2.5:14b",
+                    "executor_id": "executor2",
+                    "kwargs": {"base_url": "http://localhost:11434"}
                 },
                 {
                     "provider": "ollama",
-                    "model": "llama2:7b",
-                    "executor_id": "executor_03",
-                    "capabilities": ["table_generation", "general"],
-                    "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11434"},
-                },
-                {
-                    "provider": "ollama",
-                    "model": "deepseekr1:1.5b",
-                    "executor_id": "executor_04",
-                    "capabilities": ["general"],
-                    "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11435"},
-                },
+                    "model": "qwen2.5:14b",
+                    "executor_id": "executor3",
+                    "kwargs": {"base_url": "http://localhost:11434"}
+                }
             ],
             "experiments": {
                 "summarization": {"enabled": True, "num_tasks": 2},
@@ -156,7 +152,11 @@ class ExperimentPipeline:
                     executor_id=config["executor_id"],
                     capabilities=config["capabilities"],
                 )
-                
+
+            # Store executor references in manager for direct access
+            self.manager.executor_instances = {
+                executor.executor_id: executor for executor in self.executors
+            }
 
             console.print(
                 f"✅ System setup complete: 1 manager, {len(self.executors)} executors"
@@ -166,63 +166,143 @@ class ExperimentPipeline:
             console.print(f"❌ Error setting up system: {e}", style="bold red")
             raise
 
-    async def run_summarization_experiment(self) -> Dict[str, Any]:
-        """Run the summarization experiment."""
-        console.print(Panel.fit("Running Summarization Experiment", style="bold green"))
+    async def run_task_b_pipeline(self, input_text: str) -> str:
+        """运行基于 TaskB 架构的任务处理流程"""
+        self.performance_monitor.start_monitoring()  # ✅ 开始监控
+        try:
+            # 初始化 pudge 模型为 decomposer
+            decomposer_cfg = self.config["decomposer"]
+            pudge_llm = create_llm_interface(
+                provider=decomposer_cfg["provider"],
+                model_name=decomposer_cfg["model"],
+                **decomposer_cfg.get("kwargs", {})
+            )
 
-        experiment = SummarizationExperiment(
-            manager_config=self.config["manager"],
-            executor_configs=self.config["executors"],
-        )
+            # 初始化三个 executor 模型（20B）
+            sub_executors = []
+            for executor_cfg in self.config["executors"]:
+                llm = create_llm_interface(
+                    provider=executor_cfg["provider"],
+                    model_name=executor_cfg["model"],
+                    **executor_cfg.get("kwargs", {})
+                )
+                sub_executors.append(Executor(
+                    executor_id=executor_cfg["executor_id"],
+                    llm_interface=llm,
+                    capabilities=[]
+                ))
 
-        await experiment.setup()
-        results = await experiment.run_experiment()
-        report = experiment.generate_report()
+            # 步骤1：用 pudge 分解任务
+            prompt = (
+                f"请将下面这个问题拆分成三个独立的步骤，只返回一个 JSON 数组，例如："
+                f'["步骤1", "步骤2", "步骤3"]。\n\n任务如下：{input_text}'
+            )
 
-        console.print(f"✅ Summarization experiment completed: {len(results)} tasks")
-        return report
+            response = await pudge_llm.generate(prompt)
 
-    async def run_qa_experiment(self) -> Dict[str, Any]:
-        """Run the question answering experiment."""
-        console.print(
-            Panel.fit("Running Question Answering Experiment", style="bold green")
-        )
+            # 提取字符串内容
+            if isinstance(response, dict):
+                content = response.get("content", "")
+            else:
+                content = getattr(response, "content", str(response))
 
-        experiment = QAExperiment(
-            manager_config=self.config["manager"],
-            executor_configs=self.config["executors"],
-        )
+            # 打印内容调试（推荐保留）
+            print("🧪 Pudge 返回内容如下 ↓↓↓")
+            print(content)
+            print("⛓️ 尝试将其解析为 JSON...")
 
-        await experiment.setup()
-        results = await experiment.run_experiment()
-        report = experiment.generate_report()
+            # 判断是否为空或空格
+            if not isinstance(content, str) or not content.strip():
+                raise ValueError("❌ Pudge 模型返回为空，无法解析为步骤")
 
-        console.print(f"✅ QA experiment completed: {len(results)} tasks")
-        return report
+            # 尝试解析为 JSON
+            try:
+                steps = json.loads(content)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"❌ JSON 解析失败，模型返回内容如下：\n{content}") from e
 
-    async def run_table_generation_experiment(self) -> Dict[str, Any]:
-        """Run the table generation experiment."""
-        console.print(
-            Panel.fit("Running Table Generation Experiment", style="bold green")
-        )
+            # 打印查看是否返回了内容
+            if not content.strip():
+                raise ValueError("Pudge 模型返回为空，无法解析为步骤")
 
-        experiment = TableGenerationExperiment(
-            manager_config=self.config["manager"],
-            executor_configs=self.config["executors"],
-        )
+            try:
+                steps = json.loads(content)
+            except json.JSONDecodeError as e:
+                print(f"❌ JSON 解析失败，模型返回内容为：{content}")
+                raise e
 
-        await experiment.setup()
-        results = await experiment.run_experiment()
-        report = experiment.generate_report()
+            # 步骤2：三个模型并行处理各自步骤
+            sub_results = await asyncio.gather(*[
+                executor.run_step(steps[i]) for i, executor in enumerate(sub_executors)
+            ])
 
-        console.print(f"✅ Table generation experiment completed: {len(results)} tasks")
-        if "success" in report:
-            print(f"Table generation success: {report['success']}")
-        elif "overall_status" in report:
-            print(f"Table generation status: {report['overall_status']}")
-        else:
-            print("Table generation result status unknown.")
-        return report
+            # 步骤3：将结果交还给 pudge 进行整合
+            merge_prompt = f"请根据以下三个结果整合成一个完整答案：{json.dumps(sub_results, ensure_ascii=False)}"
+            print(f"请根据以下三个结果整合成一个完整答案：{json.dumps(sub_results, ensure_ascii=False)}")
+            final_response = await pudge_llm.generate(merge_prompt)
+
+            # 取返回内容
+            if isinstance(final_response, dict):
+                final_response_text = final_response.get("content", "")
+            else:
+                final_response_text = getattr(final_response, "content", str(final_response))
+
+            # 打印结果
+            print(final_response_text)
+
+            # ✅ 记录总耗时
+            execution_time = time.time() - self.performance_monitor.start_time
+
+            # ✅ 提取模型最终结果（兼容不同格式）
+            final_output = getattr(final_response, "content", None)
+            if not final_output:
+                final_output = final_response if isinstance(final_response, str) else str(final_response)
+
+            # ✅ 构造 evaluation 能识别的结果结构
+            self.results["taskb"] = {
+                "experiment_type": "taskb",
+                "total_tasks": 1,
+                "successful_tasks": 1,
+                "execution_times": [execution_time],
+                "detailed_results": [
+                    {
+                        "status": "completed",
+                        "execution_time": execution_time,
+                        "output": final_output
+                    }
+                ],
+                "manager_metrics": {
+                    "model": self.config.get("decomposer", {}).get("model", "unknown"),
+                    "task": "task decomposition and final synthesis"
+                },
+                "executor_metrics": {
+                    executor.executor_id: {
+                        "model": executor.llm_interface.model_name if hasattr(executor.llm_interface,
+                                                                              'model_name') else "unknown",
+                        "task": f"subtask-{i + 1}"
+                    }
+                    for i, executor in enumerate(sub_executors)
+                }
+            }
+
+            # ✅ 生成综合报告
+            report = self.generate_comprehensive_report()
+
+            # ✅ 展示结果
+            self.display_results(report)
+
+            # ✅ 导出结果
+            self.export_results(report)
+
+            # ✅ 返回结果（用于 CLI 显示等用途）
+            return final_output
+
+        except Exception as e:
+            logger.error(f"TaskB 失败: {e}", exc_info=True)
+            raise
+
+        finally:
+            self.performance_monitor.stop_monitoring()  # ✅ 停止监控
 
     async def run_single_experiment(self, experiment_type: str) -> Dict[str, Any]:
         """Run a single experiment."""
@@ -280,7 +360,6 @@ class ExperimentPipeline:
 
         self.performance_monitor.start_monitoring()
 
-        experiments_config = self.config["experiments"]
         all_results = {}
 
         with Progress(
@@ -341,10 +420,15 @@ class ExperimentPipeline:
         performance_summary = self.performance_monitor.get_summary()
 
         # Evaluate each experiment
+        # Evaluate each experiment
         evaluation_results = {}
         for experiment_type, results in self.results.items():
             metrics = self.evaluator.generate_comprehensive_report(results)
             evaluation_results[experiment_type] = metrics
+
+            # 如果是 TaskB，则手动转换为 dict（否则 json.dump 会报错）
+            if experiment_type == "taskb":
+                evaluation_results[experiment_type] = metrics.__dict__
 
         # Overall system metrics
         total_tasks = sum(
@@ -367,8 +451,8 @@ class ExperimentPipeline:
             "performance_monitoring": performance_summary,
             "experiment_results": evaluation_results,
             "system_configuration": {
-                "manager": self.config["manager"],
-                "executors": [executor.executor_id for executor in self.executors],
+                "manager": self.config.get("manager", {"model": "N/A"}),
+                "executors": [executor.executor_id for executor in getattr(self, "executors", [])],
             },
         }
 
@@ -389,13 +473,13 @@ class ExperimentPipeline:
         for experiment_type, results in report["experiment_results"].items():
             table.add_row(
                 experiment_type.replace("_", " ").title(),
-                str(results.total_tasks),
-                f"{results.success_rate:.2%}",
-                f"{results.average_execution_time:.2f}",
+                str(results["total_tasks"]),
+                f"{results['success_rate']:.2%}",
+                f"{results['average_execution_time']:.2f}",
                 (
                     "✅"
-                    if results.success_rate > 0.8
-                    else "⚠️" if results.success_rate > 0.5 else "❌"
+                    if results.get("success_rate", 0.0) > 0.8
+                    else "⚠️" if results["success_rate"] > 0.5 else "❌"
                 ),
             )
 
@@ -490,13 +574,14 @@ class ExperimentPipeline:
     "--experiment",
     "-e",
     "experiment_type",
-    type=click.Choice(["summarization", "qa", "table", "all"]),
-    default="all",
+    type=click.Choice(["summarization", "qa", "table", "all", "taskb"]),
+    default="taskb",
     help="Type of experiment to run",
 )
 @click.option("--manager-model", help="Manager LLM model name")
 @click.option("--executor-model", help="Executor LLM model name")
 @click.option("--output-dir", help="Output directory for results")
+
 def main(config_path, experiment_type, manager_model, executor_model, output_dir):
     """Manager-Executor Collaboration System Pipeline."""
 
@@ -523,6 +608,11 @@ def main(config_path, experiment_type, manager_model, executor_model, output_dir
     # Run specific experiment or all
     if experiment_type == "all":
         asyncio.run(pipeline.run_pipeline())
+    elif experiment_type == "taskb":
+        # input_text = input("请输入问题描述：")
+        # TODO: 需要改成从文件读入，数据集和Summary实验的最好一致
+        input_text="请帮助我分析中国人口老龄化带来的社会问题，并提出应对策略。"
+        asyncio.run(pipeline.run_task_b_pipeline(input_text))
     else:
         # Run single experiment
         asyncio.run(pipeline.run_single_experiment(experiment_type))
