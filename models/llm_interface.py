@@ -49,6 +49,39 @@ class LLMInterface(ABC):
         pass
 
 
+class MockInterface(LLMInterface):
+    """Mock interface for testing purposes."""
+
+    def __init__(self, model_name: str = "mock", **kwargs):
+        super().__init__(model_name, **kwargs)
+
+    async def generate(self, prompt: str, **kwargs) -> LLMResponse:
+        """Generate mock response."""
+        await asyncio.sleep(0.1)  # Simulate processing time
+
+        return LLMResponse(
+            content=f"Mock response to: {prompt[:50]}...",
+            model=self.model_name,
+            tokens_used=len(prompt.split()) + 10,
+            latency=0.1,
+            metadata={"mock": True},
+        )
+
+    async def generate_with_system_prompt(
+        self, system_prompt: str, user_prompt: str, **kwargs
+    ) -> LLMResponse:
+        """Generate mock response with system prompt."""
+        await asyncio.sleep(0.1)  # Simulate processing time
+
+        return LLMResponse(
+            content=f"Mock response (system: {system_prompt[:30]}...): {user_prompt[:50]}...",
+            model=self.model_name,
+            tokens_used=len(system_prompt.split()) + len(user_prompt.split()) + 10,
+            latency=0.1,
+            metadata={"mock": True},
+        )
+
+
 class OllamaInterface(LLMInterface):
     """Interface for Ollama LLM models."""
 
@@ -215,9 +248,13 @@ class OpenAIInterface(LLMInterface):
             raise
 
 
-def create_llm_interface(provider: str, model_name: str, **kwargs) -> LLMInterface:
+def create_llm_interface(
+    provider: str, model_name: str = "mock", **kwargs
+) -> LLMInterface:
     """Factory function to create LLM interface based on provider."""
-    if provider.lower() == "ollama":
+    if provider.lower() == "mock":
+        return MockInterface(model_name, **kwargs)
+    elif provider.lower() == "ollama":
         return OllamaInterface(model_name, **kwargs)
     elif provider.lower() == "openai":
         return OpenAIInterface(model_name, **kwargs)
