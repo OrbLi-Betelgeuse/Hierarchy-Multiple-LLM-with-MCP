@@ -1,17 +1,12 @@
 {
-  "experiment_type": "question_answering",
-  "total_tasks": 0,
+  "experiment_type": "qa",
+  "total_tasks": 1,
   "successful_tasks": 0,
   "success_rate": 0.0,
-  "average_execution_time": 0.0,
+  "average_execution_time": 73.79083359998185,
   "total_execution_time": 0.0,
   "manager_performance": {},
   "executor_performance": {},
   "quality_metrics": {},
-  "resource_utilization": {
-    "cpu_usage": "estimated",
-    "memory_usage": "estimated",
-    "network_usage": "estimated",
-    "storage_usage": "estimated"
-  }
+  "resource_utilization": {}
 }

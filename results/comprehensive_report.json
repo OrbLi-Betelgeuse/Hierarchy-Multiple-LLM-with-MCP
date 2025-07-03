@@ -2,16 +2,16 @@
   "experiment_summary": {
     "total_experiments": 1,
     "total_tasks": 1,
-    "total_successful_tasks": 1,
-    "overall_success_rate": 1.0
+    "total_successful_tasks": 0,
+    "overall_success_rate": 0.0
   },
   "performance_monitoring": {
-    "monitoring_duration": 0.03184676170349121,
+    "monitoring_duration": 76.34464597702026,
     "metrics_recorded": 0,
     "metric_summaries": {}
   },
   "experiment_results": {
-    "table": "ExperimentMetrics(experiment_type='table_generation', total_tasks=1, successful_tasks=1, success_rate=1.0, average_execution_time=0.005128999939188361, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})"
+    "qa": "ExperimentMetrics(experiment_type='qa', total_tasks=1, successful_tasks=0, success_rate=0.0, average_execution_time=73.79083359998185, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})"
   },
   "system_configuration": {
     "manager": {
@@ -19,14 +19,12 @@
       "model": "deepseek-r1:7b",
       "manager_id": "manager_01",
       "kwargs": {
-        "base_url": "http://localhost:11434"
+        "base_url": "http://localhost:11435"
       }
     },
     "executors": [
-      "executor_01",
-      "executor_02",
-      "executor_03",
-      "executor_04"
+      "executor_04",
+      "executor_05"
     ]
   }
 }

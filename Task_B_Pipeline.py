@@ -65,36 +65,41 @@ class ExperimentPipeline:
 
         # Default configuration
         return {
-            #使用的模型，但是感觉需要更改，因为此时参数量没有对齐。TODO：可能需要对齐参数量
-            "decomposer": {
+            "manager": {
               "provider": "ollama",
-              "model": "qwen2.5:7b",
-              "kwargs": {"base_url": "http://localhost:11434"}
+              "model": "deepseek-r1:7b",
+              "kwargs": {"base_url": "http://localhost:11435"}
             },
             "executors": [
                 {
                     "provider": "ollama",
-                    "model": "qwen2.5:14b",
+                    "model": "deepseek-r1:1.5b",
                     "executor_id": "executor1",
                     "kwargs": {"base_url": "http://localhost:11434"}
                 },
                 {
                     "provider": "ollama",
-                    "model": "qwen2.5:14b",
+                    "model": "deepseek-r1:1.5b",
                     "executor_id": "executor2",
-                    "kwargs": {"base_url": "http://localhost:11434"}
-                },
-                {
-                    "provider": "ollama",
-                    "model": "qwen2.5:14b",
-                    "executor_id": "executor3",
-                    "kwargs": {"base_url": "http://localhost:11434"}
+                    "kwargs": {"base_url": "http://localhost:11436"}
+                # },
+                # {
+                #     "provider": "ollama",
+                #     "model": "qwen2.5:14b",
+                #     "executor_id": "executor2",
+                #     "kwargs": {"base_url": "http://localhost:11434"}
+                # },
+                # {
+                #     "provider": "ollama",
+                #     "model": "qwen2.5:14b",
+                #     "executor_id": "executor3",
+                #     "kwargs": {"base_url": "http://localhost:11434"}
                 }
             ],
             "experiments": {
-                "summarization": {"enabled": True, "num_tasks": 2},
+                "summarization": {"enabled": False, "num_tasks": 2},
                 "question_answering": {"enabled": True, "num_tasks": 2},
-                "table_generation": {"enabled": True, "num_tasks": 2},
+                "table_generation": {"enabled": False, "num_tasks": 2},
             },
             "output": {
                 "results_dir": "results",
@@ -354,63 +359,63 @@ class ExperimentPipeline:
         finally:
             self.performance_monitor.stop_monitoring()
 
-    async def run_all_experiments(self) -> Dict[str, Any]:
-        """Run all enabled experiments."""
-        console.print(Panel.fit("Starting All Experiments", style="bold magenta"))
+    # async def run_all_experiments(self) -> Dict[str, Any]:
+    #     """Run all enabled experiments."""
+    #     console.print(Panel.fit("Starting All Experiments", style="bold magenta"))
 
-        self.performance_monitor.start_monitoring()
+    #     self.performance_monitor.start_monitoring()
 
-        all_results = {}
+    #     all_results = {}
 
-        with Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            console=console,
-        ) as progress:
+    #     with Progress(
+    #         SpinnerColumn(),
+    #         TextColumn("[progress.description]{task.description}"),
+    #         console=console,
+    #     ) as progress:
 
-            # Summarization experiment
-            if experiments_config["summarization"]["enabled"]:
-                task = progress.add_task(
-                    "Running summarization experiment...", total=None
-                )
-                try:
-                    result = await self.run_summarization_experiment()
-                    all_results["summarization"] = result
-                    progress.update(task, description="✅ Summarization completed")
-                except Exception as e:
-                    progress.update(task, description=f"❌ Summarization failed: {e}")
-                    logger.error(f"Summarization experiment failed: {e}")
+    #         # Summarization experiment
+    #         if experiments_config["summarization"]["enabled"]:
+    #             task = progress.add_task(
+    #                 "Running summarization experiment...", total=None
+    #             )
+    #             try:
+    #                 result = await self.run_summarization_experiment()
+    #                 all_results["summarization"] = result
+    #                 progress.update(task, description="✅ Summarization completed")
+    #             except Exception as e:
+    #                 progress.update(task, description=f"❌ Summarization failed: {e}")
+    #                 logger.error(f"Summarization experiment failed: {e}")
 
-            # Question answering experiment
-            if experiments_config["question_answering"]["enabled"]:
-                task = progress.add_task("Running QA experiment...", total=None)
-                try:
-                    result = await self.run_qa_experiment()
-                    all_results["question_answering"] = result
-                    progress.update(task, description="✅ QA completed")
-                except Exception as e:
-                    progress.update(task, description=f"❌ QA failed: {e}")
-                    logger.error(f"QA experiment failed: {e}")
+    #         # Question answering experiment
+    #         if experiments_config["question_answering"]["enabled"]:
+    #             task = progress.add_task("Running QA experiment...", total=None)
+    #             try:
+    #                 result = await self.run_qa_experiment()
+    #                 all_results["question_answering"] = result
+    #                 progress.update(task, description="✅ QA completed")
+    #             except Exception as e:
+    #                 progress.update(task, description=f"❌ QA failed: {e}")
+    #                 logger.error(f"QA experiment failed: {e}")
 
-            # Table generation experiment
-            if experiments_config["table_generation"]["enabled"]:
-                task = progress.add_task(
-                    "Running table generation experiment...", total=None
-                )
-                try:
-                    result = await self.run_table_generation_experiment()
-                    all_results["table_generation"] = result
-                    progress.update(task, description="✅ Table generation completed")
-                except Exception as e:
-                    progress.update(
-                        task, description=f"❌ Table generation failed: {e}"
-                    )
-                    logger.error(f"Table generation experiment failed: {e}")
+    #         # Table generation experiment
+    #         if experiments_config["table_generation"]["enabled"]:
+    #             task = progress.add_task(
+    #                 "Running table generation experiment...", total=None
+    #             )
+    #             try:
+    #                 result = await self.run_table_generation_experiment()
+    #                 all_results["table_generation"] = result
+    #                 progress.update(task, description="✅ Table generation completed")
+    #             except Exception as e:
+    #                 progress.update(
+    #                     task, description=f"❌ Table generation failed: {e}"
+    #                 )
+    #                 logger.error(f"Table generation experiment failed: {e}")
 
-        self.performance_monitor.stop_monitoring()
-        self.results = all_results
+    #     self.performance_monitor.stop_monitoring()
+    #     self.results = all_results
 
-        return all_results
+    #     return all_results
 
     def generate_comprehensive_report(self) -> Dict[str, Any]:
         """Generate a comprehensive report of all experiments."""
