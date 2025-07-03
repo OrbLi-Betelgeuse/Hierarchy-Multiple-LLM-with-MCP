@@ -25,6 +25,7 @@ from models.llm_interface import create_llm_interface
 from experiments.summarization_experiment import SummarizationExperiment
 from experiments.qa_experiment import QAExperiment
 from experiments.table_generation_experiment import TableGenerationExperiment
+from experiments.rag_enhanced_experiment import RAGEnhancedExperiment
 from utils.evaluation import Evaluator, PerformanceMonitor, ExperimentMetrics
 
 # Setup logging
@@ -99,6 +100,7 @@ class ExperimentPipeline:
                 "summarization": {"enabled": True, "num_tasks": 2},
                 "question_answering": {"enabled": True, "num_tasks": 2},
                 "table_generation": {"enabled": True, "num_tasks": 2},
+                "rag_enhanced": {"enabled": True, "num_tasks": 3},
             },
             "output": {
                 "results_dir": "results",
@@ -223,6 +225,34 @@ class ExperimentPipeline:
             print("Table generation result status unknown.")
         return report
 
+    async def run_rag_enhanced_experiment(self) -> Dict[str, Any]:
+        """Run the enhanced RAG experiment (Experiment D)."""
+        console.print(
+            Panel.fit(
+                "Running Enhanced RAG Experiment (Experiment D)", style="bold blue"
+            )
+        )
+
+        # RAGFlow configuration
+        ragflow_config = {"base_url": "http://localhost:9380", "kwargs": {}}
+
+        experiment = RAGEnhancedExperiment(
+            manager_config=self.config["manager"],
+            ragflow_config=ragflow_config,
+        )
+
+        await experiment.setup()
+        results = await experiment.run_experiment()
+        report = experiment.generate_report()
+
+        # Display summary table
+        experiment.display_summary_table()
+
+        console.print(
+            f"✅ Enhanced RAG experiment completed: {len(results)} comparisons"
+        )
+        return report
+
     async def run_single_experiment(self, experiment_type: str) -> Dict[str, Any]:
         """Run a single experiment."""
         await self.setup_system()
@@ -241,6 +271,8 @@ class ExperimentPipeline:
                 result = await self.run_qa_experiment()
             elif experiment_type == "table":
                 result = await self.run_table_generation_experiment()
+            elif experiment_type == "rag":
+                result = await self.run_rag_enhanced_experiment()
             else:
                 raise ValueError(f"Unknown experiment type: {experiment_type}")
 
@@ -326,6 +358,19 @@ class ExperimentPipeline:
                         task, description=f"❌ Table generation failed: {e}"
                     )
                     logger.error(f"Table generation experiment failed: {e}")
+
+            # RAG enhanced experiment
+            if experiments_config.get("rag_enhanced", {}).get("enabled", False):
+                task = progress.add_task(
+                    "Running enhanced RAG experiment...", total=None
+                )
+                try:
+                    result = await self.run_rag_enhanced_experiment()
+                    all_results["rag_enhanced"] = result
+                    progress.update(task, description="✅ Enhanced RAG completed")
+                except Exception as e:
+                    progress.update(task, description=f"❌ Enhanced RAG failed: {e}")
+                    logger.error(f"Enhanced RAG experiment failed: {e}")
 
         self.performance_monitor.stop_monitoring()
         self.results = all_results
@@ -506,7 +551,7 @@ class ExperimentPipeline:
     "--experiment",
     "-e",
     "experiment_type",
-    type=click.Choice(["summarization", "qa", "table", "all"]),
+    type=click.Choice(["summarization", "qa", "table", "rag", "all"]),
     default="all",
     help="Type of experiment to run",
 )
