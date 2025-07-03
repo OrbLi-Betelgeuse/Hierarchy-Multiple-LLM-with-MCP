@@ -8490,3 +8490,59 @@ This structured approach ensures that the task is completed efficiently while ma
 2025-07-02 22:01:17,801 - experiments.table_generation_experiment - ERROR - Task execution failed: 'dict' object has no attribute 'task_id'
 2025-07-02 22:01:17,817 - utils.evaluation - INFO - Metrics exported to results\table_metrics.json
 2025-07-02 22:01:17,820 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-03 15:53:50,897 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-07-03 15:53:50,897 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-07-03 15:53:50,902 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-07-03 15:53:50,902 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-07-03 15:53:50,907 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-07-03 15:53:50,907 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-07-03 15:53:50,912 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['general']
+2025-07-03 15:53:50,912 - models.manager - INFO - Executor executor_04 registered with capabilities: ['general']
+2025-07-03 15:53:50,913 - utils.evaluation - INFO - Performance monitoring started
+2025-07-03 15:53:50,923 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-07-03 15:53:50,923 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-07-03 15:53:50,929 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-07-03 15:53:50,929 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-07-03 15:53:50,934 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-07-03 15:53:50,934 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-07-03 15:53:50,939 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['general']
+2025-07-03 15:53:50,939 - models.manager - INFO - Executor executor_04 registered with capabilities: ['general']
+2025-07-03 15:53:50,939 - experiments.table_generation_experiment - INFO - Initialized: 1 manager, 4 executors
+2025-07-03 15:53:50,939 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Product, Price
+Data: Laptop ($999), Phone ($699), Tablet ($399)
+Format: Use proper markdown table syntax
+2025-07-03 15:53:50,943 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-03 15:53:50,944 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:53:50,944 - models.manager - ERROR - Error in task decomposition: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:53:50,944 - models.manager - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:53:50,944 - experiments.table_generation_experiment - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:53:50,948 - utils.evaluation - INFO - Metrics exported to results/table_metrics.json
+2025-07-03 15:53:50,948 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-03 15:54:46,410 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-07-03 15:54:46,410 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-07-03 15:54:46,415 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-07-03 15:54:46,416 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-07-03 15:54:46,421 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-07-03 15:54:46,421 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-07-03 15:54:46,426 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['general']
+2025-07-03 15:54:46,426 - models.manager - INFO - Executor executor_04 registered with capabilities: ['general']
+2025-07-03 15:54:46,427 - utils.evaluation - INFO - Performance monitoring started
+2025-07-03 15:54:46,437 - models.mcp_protocol - INFO - Executor registered: executor_01 with capabilities: ['summarization', 'general']
+2025-07-03 15:54:46,437 - models.manager - INFO - Executor executor_01 registered with capabilities: ['summarization', 'general']
+2025-07-03 15:54:46,442 - models.mcp_protocol - INFO - Executor registered: executor_02 with capabilities: ['question_answering', 'general']
+2025-07-03 15:54:46,443 - models.manager - INFO - Executor executor_02 registered with capabilities: ['question_answering', 'general']
+2025-07-03 15:54:46,448 - models.mcp_protocol - INFO - Executor registered: executor_03 with capabilities: ['table_generation', 'general']
+2025-07-03 15:54:46,448 - models.manager - INFO - Executor executor_03 registered with capabilities: ['table_generation', 'general']
+2025-07-03 15:54:46,452 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['general']
+2025-07-03 15:54:46,453 - models.manager - INFO - Executor executor_04 registered with capabilities: ['general']
+2025-07-03 15:54:46,453 - experiments.table_generation_experiment - INFO - Initialized: 1 manager, 4 executors
+2025-07-03 15:54:46,453 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Product, Price
+Data: Laptop ($999), Phone ($699), Tablet ($399)
+Format: Use proper markdown table syntax
+2025-07-03 15:54:46,457 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-03 15:54:46,457 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:54:46,457 - models.manager - ERROR - Error in task decomposition: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:54:46,457 - models.manager - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:54:46,457 - experiments.table_generation_experiment - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-03 15:54:46,461 - utils.evaluation - INFO - Metrics exported to results/table_metrics.json
+2025-07-03 15:54:46,461 - utils.evaluation - INFO - Performance monitoring stopped

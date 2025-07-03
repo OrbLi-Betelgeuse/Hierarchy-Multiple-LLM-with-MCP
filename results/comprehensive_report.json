@@ -6,12 +6,12 @@
     "overall_success_rate": 1.0
   },
   "performance_monitoring": {
-    "monitoring_duration": 27.15722155570984,
+    "monitoring_duration": 0.03184676170349121,
     "metrics_recorded": 0,
     "metric_summaries": {}
   },
   "experiment_results": {
-    "table": "ExperimentMetrics(experiment_type='table_generation', total_tasks=1, successful_tasks=0, success_rate=0.0, average_execution_time=25.162495199998375, total_execution_time=25.162495199998375, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={'cpu_usage': 'estimated', 'memory_usage': 'estimated', 'network_usage': 'estimated', 'storage_usage': 'estimated'})"
+    "table": "ExperimentMetrics(experiment_type='table_generation', total_tasks=1, successful_tasks=1, success_rate=1.0, average_execution_time=0.005128999939188361, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})"
   },
   "system_configuration": {
     "manager": {

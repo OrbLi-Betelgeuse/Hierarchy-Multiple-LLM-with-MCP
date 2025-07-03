@@ -25,7 +25,7 @@ from models.llm_interface import create_llm_interface
 from experiments.summarization_experiment import SummarizationExperiment
 from experiments.qa_experiment import QAExperiment
 from experiments.table_generation_experiment import TableGenerationExperiment
-from utils.evaluation import Evaluator, PerformanceMonitor
+from utils.evaluation import Evaluator, PerformanceMonitor, ExperimentMetrics
 
 # Setup logging
 logging.basicConfig(
@@ -156,7 +156,6 @@ class ExperimentPipeline:
                     executor_id=config["executor_id"],
                     capabilities=config["capabilities"],
                 )
-                
 
             console.print(
                 f"✅ System setup complete: 1 manager, {len(self.executors)} executors"
@@ -343,7 +342,24 @@ class ExperimentPipeline:
         # Evaluate each experiment
         evaluation_results = {}
         for experiment_type, results in self.results.items():
-            metrics = self.evaluator.generate_comprehensive_report(results)
+            # Use the experiment's own report if it has the expected format
+            if isinstance(results, dict) and "success_rate" in results:
+                # Convert the experiment report to ExperimentMetrics format
+                metrics = ExperimentMetrics(
+                    experiment_type=results.get("experiment_type", experiment_type),
+                    total_tasks=results.get("total_tasks", 0),
+                    successful_tasks=results.get("successful_tasks", 0),
+                    success_rate=results.get("success_rate", 0.0),
+                    average_execution_time=results.get("average_execution_time", 0.0),
+                    total_execution_time=results.get("total_execution_time", 0.0),
+                    manager_performance=results.get("manager_performance", {}),
+                    executor_performance=results.get("executor_performance", {}),
+                    quality_metrics=results.get("quality_metrics", {}),
+                    resource_utilization=results.get("resource_utilization", {}),
+                )
+            else:
+                # Fallback to evaluator for other formats
+                metrics = self.evaluator.generate_comprehensive_report(results)
             evaluation_results[experiment_type] = metrics
 
         # Overall system metrics
