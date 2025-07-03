@@ -67,46 +67,49 @@ class QAExperiment:
                     "Yes, there are challenges in implementation and validation",
                 ],
             ),
-            # QATask(
-            #     task_id="qa_2",
-            #     context="The Amazon rainforest is the largest tropical rainforest in the world and is home to a vast diversity of species.",
-            #     questions=[
-            #         "What is the Amazon rainforest?",
-            #         "Why is it important?",
-            #         "Name one threat to the Amazon rainforest.",
-            #     ],
-            #     expected_answers=[
-            #         "The largest tropical rainforest in the world",
-            #         "It is important for biodiversity and climate regulation",
-            #         "Deforestation",
-            #     ],
-            # ),
-            # QATask(
-            #     task_id="qa_3",
-            #     context="Python is a popular programming language known for its readability and versatility.",
-            #     questions=[
-            #         "What is Python?",
-            #         "What is Python known for?",
-            #     ],
-            #     expected_answers=[
-            #         "A popular programming language",
-            #         "Readability and versatility",
-            #     ],
-            # ),
+            QATask(
+                task_id="qa_2",
+                context="The Amazon rainforest is the largest tropical rainforest in the world and is home to a vast diversity of species.",
+                questions=[
+                    "What is the Amazon rainforest?",
+                    "Why is it important?",
+                    "Name one threat to the Amazon rainforest.",
+                ],
+                expected_answers=[
+                    "The largest tropical rainforest in the world",
+                    "It is important for biodiversity and climate regulation",
+                    "Deforestation",
+                ],
+            ),
+            QATask(
+                task_id="qa_3",
+                context="Python is a popular programming language known for its readability and versatility.",
+                questions=[
+                    "What is Python?",
+                    "What is Python known for?",
+                ],
+                expected_answers=[
+                    "A popular programming language",
+                    "Readability and versatility",
+                ],
+            ),
         ]
 
     async def setup(self):
-        """Enhanced setup with executor instance tracking"""
+        """Enhanced setup with executor instance tracking, supports executor-only mode."""
         try:
-            # Manager setup
-            manager_llm = create_llm_interface(
-                provider=self.manager_config["provider"],
-                model_name=self.manager_config["model"],
-                **self.manager_config.get("kwargs", {}),
-            )
-            self.manager = Manager(
-                manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
-            )
+            # Only set up manager if manager_config is provided
+            if self.manager_config is not None:
+                manager_llm = create_llm_interface(
+                    provider=self.manager_config["provider"],
+                    model_name=self.manager_config["model"],
+                    **self.manager_config.get("kwargs", {}),
+                )
+                self.manager = Manager(
+                    manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
+                )
+            else:
+                self.manager = None
 
             # Executors setup with instance tracking
             for config in self.executor_configs:
@@ -122,18 +125,17 @@ class QAExperiment:
                 )
                 self.executors.append(executor)
 
-                # Register with manager
-                await self.manager.register_executor(
-                    executor_id=config["executor_id"],
-                    capabilities=config["capabilities"],
-                )
+                # Register with manager if present
+                if self.manager is not None:
+                    await self.manager.register_executor(
+                        executor_id=config["executor_id"],
+                        capabilities=config["capabilities"],
+                    )
+                    if not hasattr(self.manager, "executor_instances"):
+                        self.manager.executor_instances = {}
+                    self.manager.executor_instances[config["executor_id"]] = executor
 
-                # Ensure executor instance is accessible to manager
-                if not hasattr(self.manager, "executor_instances"):
-                    self.manager.executor_instances = {}
-                self.manager.executor_instances[config["executor_id"]] = executor
-
-            logger.info(f"Initialized: 1 manager, {len(self.executors)} executors")
+            logger.info(f"Initialized: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors")
 
         except Exception as e:
             logger.error(f"Setup failed: {e}")
@@ -161,89 +163,174 @@ class QAExperiment:
         return results
 
     async def _execute_with_fallback(self, task: QATask) -> QAResult:
-        """Try to answer each question individually if multi-question prompt fails."""
+        """Try to answer each question individually if multi-question prompt fails. Supports executor-only mode and LLM-based scoring."""
         start_time = asyncio.get_event_loop().time()
         answers = []
+        scores = []
+        per_question_times = []
         try:
-            # First, try the multi-question prompt as before
             prompt = self._build_prompt(task)
             console.print(f"\n[yellow]DEBUG Prompt Sent:[/yellow]\n{prompt}")
-            response = await self.manager.execute_task(
-                task_description=prompt,
-                task_type="qa",
-            )
-            console.print(f"[yellow]DEBUG Raw Response:[/yellow]\n{json.dumps(response, indent=2)}")
-            extracted = False
-            if response:
-                if response.get("answers"):
-                    answers = response["answers"]
-                    extracted = True
-                elif response.get("output"):
-                    output = response["output"]
-                    if isinstance(output, list):
-                        answers = output
-                        extracted = True
-                    elif isinstance(output, str):
-                        answers = [line.strip() for line in output.split("\n") if line.strip()]
-                        extracted = bool(answers)
-                elif response.get("task_results"):
-                    task_results = response["task_results"]
-                    if isinstance(task_results, dict):
-                        outputs = []
-                        for key in sorted(task_results.keys()):
-                            out = task_results[key].get("output", "")
-                            outputs.append(out)
-                        if any(o for o in outputs):
-                            if len(outputs) == len(task.questions):
-                                answers = outputs
-                            else:
-                                answers = [outputs[0]] * len(task.questions)
-                            extracted = True
-            # If nothing extracted or all answers are empty, try per-question execution
-            if not extracted or not any(a.strip() for a in answers):
-                answers = []
-                for q in task.questions:
-                    single_prompt = f"Context: {task.context}\nQuestion: {q}\nPlease answer as clearly as possible."
-                    single_response = await self.manager.execute_task(
-                        task_description=single_prompt,
-                        task_type="qa",
+            if self.manager is None:
+                # Executor-only mode: send each question to the first executor
+                if not self.executors:
+                    raise RuntimeError("No executors available")
+                executor = self.executors[0]
+                from models.executor import Task
+                from utils.evaluation import Evaluator
+                evaluator = Evaluator()
+                for idx, q in enumerate(task.questions):
+                    task_obj = Task(
+                        task_id=f"exec_{task.task_id}_q{idx+1}",
+                        description=f"Context: {task.context}\nQuestion: {q}\nPlease answer by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.",
+                        parameters={},
+                        task_type="qa"
                     )
-                    ans = ""
-                    if single_response:
-                        if isinstance(single_response, dict):
-                            if single_response.get("output"):
-                                ans = single_response["output"]
-                            elif single_response.get("answers"):
-                                # Sometimes answer is in a list
-                                a_list = single_response["answers"]
-                                if isinstance(a_list, list) and a_list:
-                                    ans = a_list[0]
-                        elif isinstance(single_response, str):
-                            ans = single_response
+                    result = await executor.execute_task(task_obj)
+                    # Record per-question execution time if available
+                    exec_time = getattr(result, "execution_time", None)
+                    if exec_time is not None:
+                        per_question_times.append(exec_time)
+                    else:
+                        per_question_times.append(0.0)
+                    if hasattr(result, "result"):
+                        ans = result.result.get("output", "")
+                    elif isinstance(result, dict):
+                        ans = result.get("output", "")
+                    else:
+                        ans = str(result) if result else ""
+                    # Strip <think>...</think> sections from answer
+                    ans = evaluator.strip_think_sections(ans)
                     answers.append(ans if ans else "No answer generated")
+                # LLM-based scoring if expected answers are available
+                if task.expected_answers:
+                    for idx, (gen, exp) in enumerate(zip(answers, task.expected_answers)):
+                        score_prompt = (
+                            f"Compare the following answer to the expected answer and provide a standardized accuracy score between 0 and 1.\n"
+                            f"Answer: {gen}\n"
+                            f"Expected: {exp}\n"
+                            f"Score (0-1):"
+                        )
+                        score_task = Task(
+                            task_id=f"score_{task.task_id}_q{idx+1}",
+                            description=score_prompt,
+                            parameters={},
+                            task_type="qa"
+                        )
+                        score_result = await executor.execute_task(score_task)
+                        score_str = ""
+                        if hasattr(score_result, "result"):
+                            score_str = score_result.result.get("output", "")
+                        elif isinstance(score_result, dict):
+                            score_str = score_result.get("output", "")
+                        else:
+                            score_str = str(score_result) if score_result else ""
+                        # Try to extract a float between 0 and 1
+                        try:
+                            score = float(next((s for s in score_str.split() if self._is_float(s) and 0 <= float(s) <= 1), "0"))
+                        except Exception:
+                            score = 0.0
+                        scores.append(score)
+                else:
+                    scores = [0.0 for _ in answers]
+            else:
+                # Full manager-executor flow (no LLM-based scoring)
+                response = await self.manager.execute_task(
+                    task_description=prompt,
+                    task_type="qa",
+                )
+                console.print(f"[yellow]DEBUG Raw Response:[/yellow]\n{json.dumps(response, indent=2)}")
+                extracted = False
+                if response:
+                    if response.get("answers"):
+                        answers = [Evaluator().strip_think_sections(a) for a in response["answers"]]
+                        extracted = True
+                    elif response.get("output"):
+                        output = response["output"]
+                        if isinstance(output, list):
+                            answers = [Evaluator().strip_think_sections(a) for a in output]
+                            extracted = True
+                        elif isinstance(output, str):
+                            answers = [Evaluator().strip_think_sections(line.strip()) for line in output.split("\n") if line.strip()]
+                            extracted = bool(answers)
+                    elif response.get("task_results"):
+                        task_results = response["task_results"]
+                        if isinstance(task_results, dict):
+                            outputs = []
+                            for key in sorted(task_results.keys()):
+                                out = task_results[key].get("output", "")
+                                outputs.append(Evaluator().strip_think_sections(out))
+                            if any(o for o in outputs):
+                                if len(outputs) == len(task.questions):
+                                    answers = outputs
+                                else:
+                                    answers = [outputs[0]] * len(task.questions)
+                                extracted = True
+                # If nothing extracted or all answers are empty, try per-question execution
+                if not extracted or not any(a.strip() for a in answers):
+                    answers = []
+                    for q in task.questions:
+                        single_prompt = (
+                            f"Context: {task.context}\nQuestion: {q}\nPlease answer by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only."
+                        )
+                        single_response = await self.manager.execute_task(
+                            task_description=single_prompt,
+                            task_type="qa",
+                        )
+                        ans = ""
+                        if single_response:
+                            if isinstance(single_response, dict):
+                                if single_response.get("output"):
+                                    ans = single_response["output"]
+                                elif single_response.get("answers"):
+                                    a_list = single_response["answers"]
+                                    if isinstance(a_list, list) and a_list:
+                                        ans = a_list[0]
+                            elif isinstance(single_response, str):
+                                ans = single_response
+                        # Strip <think>...</think> sections from answer
+                        ans = Evaluator().strip_think_sections(ans)
+                        answers.append(ans if ans else "No answer generated")
         except Exception as e:
             logger.error(f"Task execution failed: {str(e)}")
             answers = await self._simple_generation(task)
+            scores = [0.0 for _ in answers]
         # Ensure answers list matches number of questions
         if len(answers) < len(task.questions):
             answers += ["No answer generated" for _ in range(len(task.questions) - len(answers))]
+            scores += [0.0 for _ in range(len(task.questions) - len(scores))]
         elif len(answers) > len(task.questions):
             answers = answers[:len(task.questions)]
+            scores = scores[:len(task.questions)]
         exec_time = asyncio.get_event_loop().time() - start_time
-        accuracy = self._evaluate_qa(answers, task.expected_answers)
-        return QAResult(
+        # Use average LLM-based score as accuracy_score
+        accuracy = sum(scores) / len(scores) if scores else 0.0
+        # Store per-question execution times in QAResult (as a new field)
+        result_obj = QAResult(
             task_id=task.task_id,
             questions=task.questions,
             answers=answers,
             execution_time=exec_time,
             accuracy_score=accuracy,
         )
+        # Attach per-question times for output
+        result_obj.per_question_times = per_question_times
+        return result_obj
+
+    def _is_float(self, s: str) -> bool:
+        try:
+            float(s)
+            return True
+        except Exception:
+            return False
 
     def _build_prompt(self, task: QATask) -> str:
         prompt = f"Context: {task.context}\n"
         for idx, q in enumerate(task.questions, 1):
             prompt += f"Q{idx}: {q}\n"
-        prompt += "Please answer each question as clearly as possible."
+        prompt += (
+            "Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only."
+        )
         return prompt
 
     async def _direct_executor_execution(self, task: QATask) -> List[str]:
@@ -295,7 +382,7 @@ class QAExperiment:
     def generate_report(self) -> Dict[str, Any]:
         if not self.results:
             return {"status": "no_results"}
-        successful = [r for r in self.results if r.accuracy_score and r.accuracy_score > 0.5]
+        successful = [r for r in self.results if r.accuracy_score and r.accuracy_score >0.5]
         avg_accuracy = sum(r.accuracy_score or 0 for r in self.results) / len(self.results)
         return {
             "experiment_type": "qa",
@@ -309,7 +396,8 @@ class QAExperiment:
                     "task_id": r.task_id,
                     "accuracy_score": r.accuracy_score,
                     "execution_time": r.execution_time,
-                    "status": "success" if (r.accuracy_score or 0) > 0.5 else "failed",
+                    "per_question_times": getattr(r, "per_question_times", []),
+                    "status": "success" if (r.accuracy_score or 0) >0.5 else "failed",
                 }
                 for r in self.results
             ],

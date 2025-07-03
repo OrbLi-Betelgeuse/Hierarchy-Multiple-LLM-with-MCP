@@ -36,12 +36,15 @@ class Evaluator:
         self.metrics_history = []
 
     def calculate_basic_metrics(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Calculate basic performance metrics."""
+        """Calculate basic performance metrics for QA: each result is a document/task, possibly with multiple questions."""
         if not results:
             return {}
 
         total_tasks = len(results)
-        successful_tasks = len([r for r in results if r.get("status") == "completed"])
+        successful_tasks = len([
+            r for r in results
+            if (r.get("status") == "success") or (r.get("accuracy_score") is not None and r.get("accuracy_score", 0) > 0.67)
+        ])
         success_rate = successful_tasks / total_tasks if total_tasks > 0 else 0.0
 
         execution_times = [r.get("execution_time", 0) for r in results]
@@ -205,6 +208,27 @@ class Evaluator:
             ],
             "colors": ["#28a745", "#ffc107", "#17a2b8"],
         }
+
+    def strip_think_sections(self, text: str) -> str:
+        """Remove <think>...</think> sections from LLM output."""
+        import re
+        # Remove <think>...</think> blocks (including multiline)
+        return re.sub(r'<think>[\s\S]*?</think>', '', text, flags=re.IGNORECASE).strip()
+
+    def logic_match(self, generated: str, expected: str) -> bool:
+        """Logic-based answer evaluation: ignore length, focus on logical content overlap."""
+        import re
+        def normalize(text):
+            return set(re.findall(r"\w+", text.lower()))
+        # Strip <think> sections before logic comparison
+        generated = self.strip_think_sections(generated)
+        expected = self.strip_think_sections(expected)
+        gen_set = normalize(generated)
+        exp_set = normalize(expected)
+        if not exp_set:
+            return False
+        overlap = len(gen_set & exp_set) / len(exp_set)
+        return overlap >= 0.5
 
 
 class PerformanceMonitor:

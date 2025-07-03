@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "task_id": "table_1",
+      "generated_table": "| Product | Price |\n|---------|-------|\n| Laptop | $999 |\n| Phone | $699 |\n| Tablet | $399 |",
+      "execution_time": 0.0028074000729247928,
+      "structure_score": 1.0,
+      "content_accuracy": 0.9633507853403142,
+      "error_messages": [
+        "Execution error: Task.__init__() missing 1 required positional argument: 'task_type'"
+      ]
+    }
+  ],
+  "performance": {
+    "time_sec": 0.83,
+    "metrics": {
+      "total_tasks": 1,
+      "successful_tasks": 0,
+      "success_rate": 0.0,
+      "average_execution_time": 0.0028074000729247928,
+      "total_execution_time": 0.0028074000729247928,
+      "min_execution_time": 0.0028074000729247928,
+      "max_execution_time": 0.0028074000729247928
+    }
+  }
+}

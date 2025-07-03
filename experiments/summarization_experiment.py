@@ -229,18 +229,20 @@ class SummarizationExperiment:
         ]
 
     async def setup(self):
-        """Setup the experiment with manager and executors."""
+        """Setup the experiment with manager and executors. Supports executor-only mode."""
         try:
-            # Create manager
-            manager_llm = create_llm_interface(
-                provider=self.manager_config["provider"],
-                model_name=self.manager_config["model"],
-                **self.manager_config.get("kwargs", {}),
-            )
-
-            self.manager = Manager(
-                manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
-            )
+            # Only set up manager if manager_config is provided
+            if self.manager_config is not None:
+                manager_llm = create_llm_interface(
+                    provider=self.manager_config["provider"],
+                    model_name=self.manager_config["model"],
+                    **self.manager_config.get("kwargs", {}),
+                )
+                self.manager = Manager(
+                    manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
+                )
+            else:
+                self.manager = None
 
             # Create executors
             for config in self.executor_configs:
@@ -266,14 +268,15 @@ class SummarizationExperiment:
 
                 self.executors.append(executor)
 
-                # Register executor with manager
-                await self.manager.register_executor(
-                    executor_id=config["executor_id"],
-                    capabilities=config["capabilities"],
-                )
+                # Register executor with manager if present
+                if self.manager is not None:
+                    await self.manager.register_executor(
+                        executor_id=config["executor_id"],
+                        capabilities=config["capabilities"],
+                    )
 
             logger.info(
-                f"Experiment setup complete: 1 manager, {len(self.executors)} executors"
+                f"Experiment setup complete: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors"
             )
 
         except Exception as e:
@@ -281,11 +284,11 @@ class SummarizationExperiment:
             raise
 
     async def run_single_task(self, task: SummarizationTask) -> SummarizationResult:
-        """Run a single summarization task."""
+        """Run a single summarization task, supporting executor-only mode."""
         try:
             start_time = asyncio.get_event_loop().time()
 
-            # Create task description for manager
+            # Create task description for manager/executor
             task_description = f"""
             Summarize the following document:
             
@@ -298,18 +301,45 @@ class SummarizationExperiment:
             {task.document}
             """
 
-            # Execute task using manager-executor system
-            result = await self.manager.execute_task(task_description, "summarization")
+            if self.manager is None:
+                # Executor-only mode: send the whole task to the first executor
+                if not self.executors:
+                    raise RuntimeError("No executors available")
+                executor = self.executors[0]
+                from models.executor import Task
+                task_obj = Task(
+                    task_id=f"exec_{task.task_id}",
+                    description=task_description,
+                    parameters={},
+                    task_type="summarization"
+                )
+                result = await executor.execute_task(task_obj)
+                # Assume result is a dict or has .result
+                if hasattr(result, "result"):
+                    summary = result.result.get("output", "")
+                elif isinstance(result, dict):
+                    summary = result.get("output", "")
+                else:
+                    summary = str(result) if result else ""
+                manager_metrics = {}
+                executor_metrics = {getattr(executor, 'executor_id', 'executor'): executor.get_performance_metrics()}
+            else:
+                # Execute task using manager-executor system
+                result = await self.manager.execute_task(task_description, "summarization")
+                summary = ""
+                if result.get("task_results"):
+                    for task_result in result["task_results"].values():
+                        if "output" in task_result:
+                            summary += task_result["output"] + "\n"
+                manager_metrics = self.manager.get_performance_metrics()
+                executor_metrics = {}
+                for executor in self.executors:
+                    executor_metrics[executor.executor_id] = (
+                        executor.get_performance_metrics()
+                    )
 
             end_time = asyncio.get_event_loop().time()
             execution_time = end_time - start_time
-
-            # Extract summary from results
-            summary = ""
-            if result.get("task_results"):
-                for task_result in result["task_results"].values():
-                    if "output" in task_result:
-                        summary += task_result["output"] + "\n"
 
             # Calculate metrics
             original_length = len(task.document.split())
@@ -317,14 +347,6 @@ class SummarizationExperiment:
             compression_ratio = (
                 summary_length / original_length if original_length > 0 else 0
             )
-
-            # Get performance metrics
-            manager_metrics = self.manager.get_performance_metrics()
-            executor_metrics = {}
-            for executor in self.executors:
-                executor_metrics[executor.executor_id] = (
-                    executor.get_performance_metrics()
-                )
 
             # Calculate quality score if expected summary is available
             quality_score = None

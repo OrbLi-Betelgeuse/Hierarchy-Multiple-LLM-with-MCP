@@ -93,17 +93,20 @@ class TableGenerationExperiment:
         ]
 
     async def setup(self):
-        """Enhanced setup with executor instance tracking"""
+        """Enhanced setup with executor instance tracking, supports executor-only mode."""
         try:
-            # Manager setup
-            manager_llm = create_llm_interface(
-                provider=self.manager_config["provider"],
-                model_name=self.manager_config["model"],
-                **self.manager_config.get("kwargs", {}),
-            )
-            self.manager = Manager(
-                manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
-            )
+            # Only set up manager if manager_config is provided
+            if self.manager_config is not None:
+                manager_llm = create_llm_interface(
+                    provider=self.manager_config["provider"],
+                    model_name=self.manager_config["model"],
+                    **self.manager_config.get("kwargs", {}),
+                )
+                self.manager = Manager(
+                    manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
+                )
+            else:
+                self.manager = None
 
             # Executors setup with instance tracking
             for config in self.executor_configs:
@@ -119,18 +122,18 @@ class TableGenerationExperiment:
                 )
                 self.executors.append(executor)
 
-                # Register with manager
-                await self.manager.register_executor(
-                    executor_id=config["executor_id"],
-                    capabilities=config["capabilities"],
-                )
+                # Register with manager if present
+                if self.manager is not None:
+                    await self.manager.register_executor(
+                        executor_id=config["executor_id"],
+                        capabilities=config["capabilities"],
+                    )
+                    # Ensure executor instance is accessible to manager
+                    if not hasattr(self.manager, "executor_instances"):
+                        self.manager.executor_instances = {}
+                    self.manager.executor_instances[config["executor_id"]] = executor
 
-                # Ensure executor instance is accessible to manager
-                if not hasattr(self.manager, "executor_instances"):
-                    self.manager.executor_instances = {}
-                self.manager.executor_instances[config["executor_id"]] = executor
-
-            logger.info(f"Initialized: 1 manager, {len(self.executors)} executors")
+            logger.info(f"Initialized: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors")
 
         except Exception as e:
             logger.error(f"Setup failed: {e}")
@@ -160,57 +163,65 @@ class TableGenerationExperiment:
         return results
 
     async def _execute_with_fallback(self, task: TableTask) -> TableResult:
-        """Execute task with multiple fallback strategies"""
+        """Execute task with multiple fallback strategies, supporting executor-only mode."""
         start_time = asyncio.get_event_loop().time()
         generated = ""
         error_messages = []
 
         try:
-            # First attempt: Full manager-executor flow
             prompt = self._build_simplified_prompt(task)
             console.print(f"\n[yellow]DEBUG Prompt Sent:[/yellow]\n{prompt}")
 
-            response = await self.manager.execute_task(
-                task_description=prompt,
-                task_type="general",  # Changed to general task type
-            )
+            if self.manager is None:
+                # Executor-only mode: send the whole task to the first executor
+                if not self.executors:
+                    raise RuntimeError("No executors available")
+                executor = self.executors[0]
+                from models.executor import Task
 
-            # Debug output
-            console.print(
-                f"[yellow]DEBUG Raw Response:[/yellow]\n{json.dumps(response, indent=2)}"
-            )
-
-            # Handle different response formats from manager
-            if response:
-                if response.get("output"):
-                    generated = response["output"]
-                elif response.get("task_results"):
-                    # Extract output from task results
-                    task_results = response["task_results"]
-                    if task_results:
-                        # Get the first task result's output
-                        first_result = list(task_results.values())[0]
-                        generated = first_result.get("output", "")
-                    else:
-                        generated = ""
-                elif response.get("summary"):
-                    # Try to extract from summary or other fields
-                    generated = str(response.get("summary", ""))
+                task_obj = Task(
+                    task_id=f"exec_{task.id}",
+                    description=prompt,
+                    parameters={},
+                )
+                result = await executor.execute_task(task_obj)
+                if hasattr(result, "result"):
+                    generated = result.result.get("output", "")
+                elif isinstance(result, dict):
+                    generated = result.get("output", "")
                 else:
-                    # Use the entire response as output
-                    generated = str(response)
+                    generated = str(result) if result else ""
             else:
-                error_messages.append("Empty response from manager")
-                logger.warning("Empty response from manager.execute_task()")
-
-                # Fallback: Direct executor execution
-                generated = await self._direct_executor_execution(task)
+                # Full manager-executor flow
+                response = await self.manager.execute_task(
+                    task_description=prompt,
+                    task_type="general",
+                )
+                console.print(
+                    f"[yellow]DEBUG Raw Response:[/yellow]\n{json.dumps(response, indent=2)}"
+                )
+                if response:
+                    if response.get("output"):
+                        generated = response["output"]
+                    elif response.get("task_results"):
+                        task_results = response["task_results"]
+                        if task_results:
+                            first_result = list(task_results.values())[0]
+                            generated = first_result.get("output", "")
+                        else:
+                            generated = ""
+                    elif response.get("summary"):
+                        generated = str(response.get("summary", ""))
+                    else:
+                        generated = str(response)
+                else:
+                    error_messages.append("Empty response from manager")
+                    logger.warning("Empty response from manager.execute_task()")
+                    generated = await self._direct_executor_execution(task)
 
         except Exception as e:
             error_messages.append(f"Execution error: {str(e)}")
             logger.error(f"Task execution failed: {str(e)}")
-
-            # Final fallback: Simple generation
             generated = await self._simple_generation(task)
 
         # Evaluation
@@ -223,12 +234,19 @@ class TableGenerationExperiment:
         metrics["error_messages"] = error_messages + (
             metrics.get("error_messages") or []
         )
+        # Add status field for evaluator compatibility
+        structure_score = metrics.get("structure_score", 0)
+        status = "completed" if structure_score and structure_score > 0.5 else "failed"
+        metrics["status"] = status
 
         return TableResult(
             task_id=task.id,
             generated_table=generated,
             execution_time=asyncio.get_event_loop().time() - start_time,
-            **metrics,
+            structure_score=metrics.get("structure_score"),
+            content_accuracy=metrics.get("content_accuracy"),
+            error_messages=metrics.get("error_messages"),
+            # status is not a dataclass field, but will be present in dict for evaluator
         )
 
     async def _direct_executor_execution(self, task: TableTask) -> str:
