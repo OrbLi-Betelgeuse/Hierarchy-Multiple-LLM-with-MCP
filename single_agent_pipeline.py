@@ -41,7 +41,7 @@ class SingleAgentPipeline:
         )
         self.executor_llm = create_llm_interface(
             provider="ollama",
-            model_name=self.llm_model or "qwen2.5:7b",
+            model_name=self.llm_model or "deepseek-r1:7b",
             base_url="http://localhost:11434",
         )
 
@@ -50,7 +50,7 @@ class SingleAgentPipeline:
 
         executor_config = {
             "provider": "ollama",
-            "model": self.llm_model or "qwen2.5:7b",
+            "model": self.llm_model or "deepseek-r1:7b",
             "executor_id": "solo_executor",
             "capabilities": ["summarization", "qa", "table_generation"],
             "kwargs": {"base_url": "http://localhost:11434"},

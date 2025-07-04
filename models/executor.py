@@ -110,7 +110,10 @@ Please provide a clear, actionable response that addresses the task requirements
             input_data = self._prepare_input_data(task)
 
             # Generate prompt
-            prompt = prompt_template.format(**input_data)
+            if task.description and task.description.strip():
+                prompt = task.description
+            else:
+                prompt = prompt_template.format(**input_data)
 
             # Execute using LLM
             response = await self.llm_interface.generate_with_system_prompt(

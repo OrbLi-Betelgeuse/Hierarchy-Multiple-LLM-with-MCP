@@ -1,0 +1,73 @@
+{
+  "results": [
+    {
+      "task_id": "qa_1",
+      "questions": [
+        "What is AI doing in healthcare?",
+        "What are the main benefits?",
+        "Are there any challenges?"
+      ],
+      "answers": [
+        "No answer generated",
+        "No answer generated",
+        "No answer generated"
+      ],
+      "execution_time": 0.06341329996939749,
+      "accuracy_score": 0.0,
+      "per_question_times": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "task_id": "qa_2",
+      "questions": [
+        "What is the Amazon rainforest?",
+        "Why is it important?",
+        "Name one threat to the Amazon rainforest."
+      ],
+      "answers": [
+        "No answer generated",
+        "No answer generated",
+        "No answer generated"
+      ],
+      "execution_time": 0.03739549999590963,
+      "accuracy_score": 0.0,
+      "per_question_times": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "task_id": "qa_3",
+      "questions": [
+        "What is Python?",
+        "What is Python known for?"
+      ],
+      "answers": [
+        "No answer generated",
+        "No answer generated"
+      ],
+      "execution_time": 0.02623919991310686,
+      "accuracy_score": 0.0,
+      "per_question_times": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "performance": {
+    "time_sec": 1.11,
+    "metrics": {
+      "total_tasks": 3,
+      "successful_tasks": 0,
+      "success_rate": 0.0,
+      "average_execution_time": 0.04234933329280466,
+      "total_execution_time": 0.12704799987841398,
+      "min_execution_time": 0.02623919991310686,
+      "max_execution_time": 0.06341329996939749
+    }
+  }
+}

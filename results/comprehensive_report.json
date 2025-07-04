@@ -1,30 +1,30 @@
 {
   "experiment_summary": {
-    "total_experiments": 3,
-    "total_tasks": 6,
-    "total_successful_tasks": 2,
-    "overall_success_rate": 0.3333333333333333
+    "total_experiments": 1,
+    "total_tasks": 1,
+    "total_successful_tasks": 1,
+    "overall_success_rate": 1.0
   },
   "performance_monitoring": {
-    "error": "Monitoring not started"
+    "monitoring_duration": 11.392756700515747,
+    "metrics_recorded": 0,
+    "metric_summaries": {}
   },
   "experiment_results": {
-    "summarization": "ExperimentMetrics(experiment_type='summarization', total_tasks=2, successful_tasks=2, success_rate=1.0, average_execution_time=26.598900833458174, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})",
-    "question_answering": "ExperimentMetrics(experiment_type='qa', total_tasks=3, successful_tasks=0, success_rate=0.0, average_execution_time=19.12528879160527, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})",
-    "table_generation": "ExperimentMetrics(experiment_type='table_generation', total_tasks=1, successful_tasks=0, success_rate=0.0, average_execution_time=25.472588791977614, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})"
+    "qa": "ExperimentMetrics(experiment_type='qa', total_tasks=1, successful_tasks=1, success_rate=1.0, average_execution_time=8.73184149991721, total_execution_time=0.0, manager_performance={}, executor_performance={}, quality_metrics={}, resource_utilization={})"
   },
   "system_configuration": {
     "manager": {
       "provider": "ollama",
-      "model": "qwen2.5:7b",
+      "model": "deepseek-r1:7b",
       "manager_id": "manager_01",
       "kwargs": {
         "base_url": "http://localhost:11434"
       }
     },
     "executors": [
-      "executor_04",
-      "executor_05"
+      "executor_06",
+      "executor_07"
     ]
   }
 }

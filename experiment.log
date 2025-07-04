@@ -12000,3 +12000,1662 @@ This plan ensures that all necessary steps are taken to create a well-structured
 2025-07-04 14:28:37,610 - utils.evaluation - INFO - Metrics exported to results/table_generation_metrics.json
 2025-07-04 14:28:37,610 - models.executor - INFO - Executor executor_04 stopping
 2025-07-04 14:28:37,610 - models.executor - INFO - Executor executor_05 stopping
+2025-07-04 14:22:49,138 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:49,139 - models.manager - INFO - Executor executor_04 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:49,444 - models.mcp_protocol - INFO - Executor registered: executor_05 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:49,444 - models.manager - INFO - Executor executor_05 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:49,726 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:49,727 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,003 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,003 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,008 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:22:50,578 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,578 - models.manager - INFO - Executor executor_04 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,915 - models.mcp_protocol - INFO - Executor registered: executor_05 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:50,915 - models.manager - INFO - Executor executor_05 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:51,204 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:51,204 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:51,496 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:51,497 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:22:51,497 - experiments.qa_experiment - INFO - Initialized: 1 manager, 4 executors
+2025-07-04 14:22:51,499 - models.manager - INFO - Manager manager_01 starting task execution: Context: Artificial Intelligence (AI) is transforming healthcare through improved diagnostics and patient care.
+Q1: What is AI doing in healthcare?
+Q2: What are the main benefits?
+Q3: Are there any challenges?
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:23:08,846 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:23:08,858 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, so I need to help decompose a task into subtasks for AI in healthcare. The user provided two questions: what AI is doing in healthcare and its benefits, challenges.
+
+First, I'll think about each question separately. For Q1, it's asking how AI contributes to healthcare. So the subtask here would be researching and compiling examples of AI applications like diagnostics or treatment plans. That makes sense as a starting point because it directly answers the first question.
+
+Next, for Q2 on benefits, I need to list them without reasoning. Maybe including accuracy improvements, efficiency gains, cost reductions, better patient care, etc. This is straightforward once the data is gathered from Q1's subtask.
+
+Then, Q3 asks about challenges. The subtask here would be researching obstacles like data privacy, healthcare resistance, bias issues in AI models, and integration difficulties with existing systems. These are clear points that can be derived after understanding how AI is being used (Q1) and its benefits (Q2).
+
+Now, considering the executors: executor_04 does general research, so they're good for Q1 and all other subtasks needing data. Executor_05 handles compiling examples, perfect for Q1's subtask. Executor_06 is on statistics, which would help with Q2 by summarizing benefits like cost reduction percentages or efficiency gains. Executor_07 deals with challenges, so they're best suited for Q3.
+
+Dependencies: The order should start with Q1 since it provides the foundation needed for both Q2 and Q3. Then move to Q2 using data from Q1, followed by Q3 which depends on previous findings. Each subtask builds upon the prior ones without relying backward.
+
+Complexity-wise, compiling examples is moderate but requires attention to detail. Benefits analysis would involve interpreting data collected, so also moderate. Challenges are about synthesizing issues, making it slightly higher in complexity.
+
+Optimal assignments make sense as each executor has specific tasks they're best at. No conflicts here since executors have clear roles without overlapping responsibilities.
+
+So putting it all together, the subtasks and their dependencies form a logical flow from understanding AI's role to identifying its challenges.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "q1",
+            "description": "Extract specific factual information about how AI is being used in healthcare.",
+            "executor_requirements": ["executor_04"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 5
+        },
+        {
+            "task_id": "q2",
+            "description": "Compile and summarize the main benefits of AI in healthcare.",
+            "executor_requirements": ["executor_04", "executor_06"],
+            "estimated_complexity": 4,
+            "dependencies": ["q1"],
+            "priority": 4
+        },
+        {
+            "task_id": "q3",
+            "description": "Identify and document the challenges faced by AI in healthcare.",
+            "executor_requirements": ["executor_05", "executor_07"],
+            "estimated_complexity": 5,
+            "dependencies": ["q1", "q2"],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["q1", "q2", "q3"],
+    "overall_strategy": "Proceed sequentially from understanding AI's role in healthcare to assessing its benefits and challenges."
+}
+```
+2025-07-04 14:23:08,858 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:23:24,388 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:23:24,389 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, so I'm trying to figure out how to create a detailed execution plan for the given task. The task is about AI in healthcare, specifically looking at what AI is doing, the benefits, and challenges based on the context provided.
+
+First, I need to break down each part of Q1, Q2, and Q3 from the context:
+
+Q1: What is AI doing in healthcare?
+- From the context, it's stated that AI is transforming healthcare through improved diagnostics and patient care. So, AI applications are focused on these areas.
+
+Q2: What are the main benefits?
+- The benefits mentioned include accuracy, efficiency, personalization of treatment plans, reduced errors, cost savings, and better outcomes.
+
+Q3: Are there any challenges?
+- Challenges listed are ethical issues like bias in algorithms, lack of interpretability for non-experts, potential job displacement due to AI's automation capabilities, regulatory hurdles, and cybersecurity risks.
+
+Now, I need to structure this into an execution plan with the required components: task assignment strategy, resource allocation, timeline estimation, quality control measures, and contingency plans.
+
+For Task Assignment Strategy, since each question is separate (Q1, Q2, Q3), it makes sense to assign each to a different executor. So, AI Expert, Healthcare Professional, and IT Specialist would handle each respective question.
+
+Resource Allocation should include the executors' time and budget. Each task has an estimated 2 hours, so total time would be 6 hours. Budget is $100 for each person's time.
+
+Quality Control measures need to ensure accuracy. Checking the facts against known sources (e.g., AI in healthcare) and peer review are good steps.
+
+Contingency Plans cover unexpected issues like tech problems or delays. Having backup executors, communication plans, and a escalation protocol is necessary.
+
+Putting it all together, I structure each phase with tasks, durations, dependencies, quality gates, resources, costs, risks, mitigation strategies, and so on.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["task_Q1", "task_Q2", "task_Q3"],
+                "estimated_duration": "6 hours",
+                "dependencies": [],
+                "quality_gates": [
+                    {"check_id": "q1_check", "check_description": "Verify AI applications in healthcare"},
+                    {"check_id": "q2_check", "check_description": "Confirm benefits of AI in healthcare"},
+                    {"check_id": "q3_check", "check_description": "Assess challenges in implementing AI in healthcare"}
+                ]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Expert": ["task_Q1"],
+                "Healthcare_Professional": ["task_Q2"],
+                "IT_Specialist": ["task_Q3"]
+            },
+            "estimated_costs": {
+                "computational": "$0",
+                "time": "Total: $6"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Technical issues with AI implementation",
+                "mitigation": "Backup executors on standby"
+            },
+            {
+                "risk": " Delays in task completion",
+                "mitigation": "Detailed timeline and contingency plans"
+            },
+            {
+                "risk": "Insufficient budget for resources",
+                "mitigation": "Cost estimates provided to management"
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:23:24,401 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:23:24,401 - models.manager - INFO - Executing task main_task with executor executor_04
+2025-07-04 14:23:24,402 - models.executor - INFO - Executor executor_04 starting task: main_task
+2025-07-04 14:23:26,465 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-04 14:23:26,468 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:23:26,469 - models.executor - ERROR - Error executing task main_task: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:23:26,470 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:23:26,471 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:23:26,491 - experiments.qa_experiment - ERROR - Task execution failed: cannot access local variable 'Evaluator' where it is not associated with a value
+2025-07-04 14:23:26,504 - models.manager - INFO - Manager manager_01 starting task execution: Context: The Amazon rainforest is the largest tropical rainforest in the world and is home to a vast diversity of species.
+Q1: What is the Amazon rainforest?
+Q2: Why is it important?
+Q3: Name one threat to the Amazon rainforest.
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:23:37,097 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:23:37,098 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, I need to decompose this task into subtasks for the executors. The main tasks are Q1, Q2, and Q3 about the Amazon rainforest.
+
+First, starting with Q1: What is the Amazon rainforest? That's straightforward！just extract the definition from the context.
+
+Next, Q2: Why is it important? I'll need to get information on its ecological value. This depends on knowing what the Amazon is first.
+
+Then, Q3: Name one threat. I can directly extract a threat type here, so maybe it doesn't depend on previous tasks except for knowledge about rainforests in general.
+
+I should check which executors are best suited for each task based on their capabilities and priority. Executor 04 seems good for factual info due diligence, so Q1 is his first task. Then, executor 05 can handle the importance since it's ecological significance, building on Q1. For threat, perhaps another executor can do it without needing prior knowledge except knowing what a rainforest threat could be.
+
+Dependencies: Q2 depends on Q1, and Q3 doesn't really depend on others beyond general knowledge about rainforests, which might not be covered here. So maybe only Q2 has dependencies.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "q1",
+            "description": "Extract the definition of the Amazon rainforest from the context.",
+            "executor_requirements": ["executor_04"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 5
+        },
+        {
+            "task_id": "q2",
+            "description": "Extract information on why the Amazon rainforest is important.",
+            "executor_requirements": ["executor_05"],
+            "estimated_complexity": 4,
+            "dependencies": ["q1"],
+            "priority": 3
+        },
+        {
+            "task_id": "q3",
+            "description": "Extract a known threat to the Amazon rainforest.",
+            "executor_requirements": ["executor_06"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["q1", "q2", "q3"],
+    "overall_strategy": "Decompose each question into specific factual extraction tasks, assigning each to the most capable executor based on their skills and context."
+}
+```
+2025-07-04 14:23:37,108 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:23:50,699 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:23:50,700 - models.manager - ERROR - Failed to parse execution plan: <think>
+Alright, let me try to figure this out. The user is asking me to create a detailed execution plan for three questions about the Amazon rainforest using a JSON structure. They provided some specific instructions on what they want: task assignment strategy, resource allocation, timeline, quality control, and contingency plans.
+
+First, I need to understand each part of their request. They mentioned that I should extract only relevant facts from the given context without any reasoning or speculation. So, for Q1, the answer is straightforward: it's the largest tropical rainforest. For Q2, why it's important！probably biodiversity and climate regulation. And Q3, a threat could be deforestation.
+
+Next, they want me to structure this into phases with tasks, durations, resources, quality gates, and risk mitigation. I'll need to break down each question into separate phases since each is a distinct task that can be handled sequentially.
+
+I should assign the right executors or resources for each phase. Since these are factual questions, maybe one executor can handle all three without needing multiple people unless there's a specific resource constraint they have in mind.
+
+For timeline estimation, considering it's simple factual extraction, I'll allocate 1 hour per question. Adding some buffer time for review and quality checks, the total would be about 2 hours with a 30-minute buffer.
+
+Resource allocation-wise, if this is computational, maybe 50 CPU-hours are needed. Time-wise, as mentioned, around 2 hours including reviews.
+
+Quality control measures could involve peer reviews or automated checks to ensure accuracy. Since each question is straightforward, cross-referencing the context should suffice.
+
+Risk mitigation: potential issues like missing information can be mitigated by thorough data extraction from the context provided. No immediate threats since it's factual info, so maybe no specific risk plans are needed beyond ensuring accuracy during processing.
+
+Putting this all together into a JSON structure as per their example response makes sense. Each phase is separate with tasks, durations, resources, quality gates, and risks addressed.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["task_q1", "task_q2", "task_q3"],
+                "estimated_duration": "0:30",
+                "dependencies": [],
+                "quality_gates": ["check_fact Extraction"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": [],
+                "estimated_duration": "0:05",
+                "dependencies": ["phase_1"],
+                "quality_gates": []
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_1": ["task_q1", "task_q2", "task_q3"]
+            },
+            "estimated_costs": {
+                "computational": "50",
+                "time": "2"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Inaccurate factual information from the context.",
+                "mitigation": "Cross-verify each answer against the provided context to ensure accuracy."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:23:50,701 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:23:50,702 - models.manager - INFO - Executing task main_task with executor executor_05
+2025-07-04 14:23:50,702 - models.executor - INFO - Executor executor_05 starting task: main_task
+2025-07-04 14:23:50,707 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/chat "HTTP/1.1 404 Not Found"
+2025-07-04 14:23:50,707 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:23:50,707 - models.executor - ERROR - Error executing task main_task: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:23:50,708 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:23:50,708 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:23:50,710 - experiments.qa_experiment - ERROR - Task execution failed: cannot access local variable 'Evaluator' where it is not associated with a value
+2025-07-04 14:23:50,719 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:24:06,491 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:24:06,493 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, so I need to help decompose a task into subtasks for these executors. Let me start by understanding what's required here.
+
+The main task is about Python: answering two questions based on the provided context. The first question is what Python is, and the second is what it's known for. Each answer should be concise facts without any extra information or reasoning.
+
+Looking at the available executors！executor_04 to executor_07！I need to figure out which ones are best suited for each subtask. Let me think about their capabilities:
+
+- executor_04: Good with factual data and simple tasks.
+- executor_05: Skilled in technical explanations and can handle more complex questions.
+- executor_06: Strong in data analysis, so might not be the best fit here unless there's a numerical aspect, which there isn't.
+- executor_07: Can manage multiple tasks and has good organizational skills.
+
+For Q1: "What is Python?" This seems straightforward. It requires defining what Python is. Since it's factual, I think executor_04 can handle this because they're good with basic facts. The complexity here would be low since it just needs to extract the definition from the context.
+
+Q2: "What is Python known for?" This is a bit more involved because it needs to highlight its key features or uses. Executor_05 seems better suited here as they can handle explanations and details beyond simple facts, even if it's still factual information. The complexity might be medium since they need to process slightly more detailed data.
+
+Dependencies: I don't think these subtasks depend on each other because answering Q1 doesn't provide any additional info for Q2 and vice versa. So no dependencies are needed between them.
+
+Assignment-wise, executor_04 should handle Q1 due to their expertise in factual data extraction. Executor_05 can take care of Q2 as they can explain what Python is known for with more depth.
+
+Let me structure this:
+
+Subtask 1: Define Python (Q1)
+- Task ID: task_id1
+- Description: Explain what Python is based on the context.
+- Dependencies: None
+- Estimated complexity: 1 (simple)
+- Executor requirements: executor_04 since they handle factual extraction well.
+
+Subtask 2: Highlight Python's known features (Q2)
+- Task ID: task_id2
+- Description: Detail what Python is known for, using the context.
+- Dependencies: None
+- Estimated complexity: 2 (moderate)
+- Executor requirements: executor_05 as they handle explanations and can provide more detailed factual information.
+
+I don't need an execution order beyond these two since each subtask is independent. The overall strategy is to assign the simplest task to executor_04 and the slightly more complex one to executor_05.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "task_id1",
+            "description": "Explain what Python is based on the given context.",
+            "executor_requirements": ["executor_04"],
+            "estimated_complexity": 1,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "task_id2",
+            "description": "Detail what Python is known for using the provided information.",
+            "executor_requirements": ["executor_05"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        }
+    ],
+    "execution_order": [],
+    "overall_strategy": "Assign the simplest task to executor_04 and a slightly more complex factual explanation to executor_05."
+}
+```
+2025-07-04 14:24:06,493 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:24:17,868 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:24:17,869 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, I'm trying to create a detailed execution plan for answering two questions about Python based on the given context. Let me break it down step by step.
+
+First, understanding the task: The user wants to know what Python is and what it's known for. From the context, Python is described as a popular programming language known for its readability and versatility.
+
+So, I need to answer Q1: What is Python? It should be concise, extracting only that it's a programming language with those two qualities.
+
+For Q2: What is Python known for? Similarly, just mention its popularity, readability, and versatility.
+
+Now, considering the user wants an execution plan. They've specified phases, resource allocation, timeline, quality control, and contingency plans.
+
+Looking at Task Assignment Strategy: It seems like a single developer can handle both questions since they're straightforward. No need for multiple people unless you want to parallelize tasks, but that's not necessary here.
+
+Resource Allocation-wise, assuming one developer with typical costs！let's say $10/hour and 4 hours total would be $40.
+
+Timeline: Each question might take about an hour. So, two questions could take a couple of hours; let's estimate from start to finish as maybe 2-3 hours to account for setup and review.
+
+Quality Control: After writing the answers, proofreading is essential. Maybe another check by the same person or having someone else verify it quickly.
+
+Contingency Plans: If the user changes their mind later or if there are delays in getting the context, having a fallback like generic responses can help prevent major issues.
+
+Putting it all together, I structure the phases to cover each part of what's needed. The first phase is answering Q1 and Q2, then moving on to resource allocation details and quality control steps.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["q1", "q2"],
+                "estimated_duration": "2 hours",
+                "dependencies": [],
+                "quality_gates": ["answer_check"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_ids": ["dev1"]
+            },
+            "estimated_costs": {
+                "computational": "$0",
+                "time": "$40"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Missed deadline or scope changes",
+                "mitigation": "Adjust timeline if necessary, ensuring all questions are answered comprehensively."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:24:17,870 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:24:17,870 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:24:17,870 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:24:32,296 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:24:32,297 - models.executor - INFO - Task main_task completed successfully in 14.43s
+2025-07-04 14:24:32,298 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:24:32,298 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:24:32,313 - experiments.qa_experiment - ERROR - Task execution failed: cannot access local variable 'Evaluator' where it is not associated with a value
+2025-07-04 14:24:32,328 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:24:32,330 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 14:27:04,644 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:04,645 - models.manager - INFO - Executor executor_04 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,048 - models.mcp_protocol - INFO - Executor registered: executor_05 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,049 - models.manager - INFO - Executor executor_05 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,352 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,353 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,645 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,646 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:05,649 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:27:06,210 - models.mcp_protocol - INFO - Executor registered: executor_04 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:06,211 - models.manager - INFO - Executor executor_04 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:06,502 - models.mcp_protocol - INFO - Executor registered: executor_05 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:06,502 - models.manager - INFO - Executor executor_05 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:06,797 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:06,797 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:07,108 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:07,108 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:27:07,109 - experiments.qa_experiment - INFO - Initialized: 1 manager, 4 executors
+2025-07-04 14:27:07,110 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:27:23,768 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:27:23,769 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, so I need to figure out how to decompose this task into subtasks for the executors. Let's see, the main task is to answer Q1 and Q2 about Python based on the given context.
+
+First, Q1 asks what Python is. From the context, it says Python is a popular programming language known for its readability and versatility. So that's straightforward！Q1 should just extract those facts.
+
+Then, Q2 is about what Python is known for. Again, looking at the context, it mentions both readability and versatility. Maybe also other points like being widely used in various fields? Wait, no！the context only explicitly states "readability" and "versatility." So Q2 would focus on that.
+
+Now, considering the executors！executor_04 to executor_07 each have different capabilities. I need to assign tasks based on what they can do best. 
+
+Executor 04 handles definitions: explaining concepts clearly.
+Executor 05 deals with known features or uses.
+Executor 06 is for gathering facts from resources.
+Executor 07 is about compiling information into coherent answers.
+
+So, for Q1 (What is Python?), Executor 04 would be ideal since they handle definitions. They can simply state the basic info: popular, programming language, readability, versatility.
+
+For Q2 (What is Python known for?), Executor 05 fits better because they deal with features or uses. They know Python is often used in web development, data analysis, etc., but from the context, we only have "readability" and "versatility." So maybe focusing on those.
+
+ Executors 06 and 07 can work together to gather more details if needed, but since both Q1 and Q2 are answerable with what's provided in the context, perhaps they aren't necessary here. Alternatively, maybe the executors can handle other parts of Python that aren't covered yet, like syntax or libraries.
+
+But given the task is just these two questions, perhaps the decomposition doesn¨t need more subtasks beyond handling each question.
+
+Wait, but if I think deeper, to answer Q2, knowing what it's known for might require some research. Maybe looking up its main uses? But according to the context, it only says "readability and versatility," so maybe that's all they can provide without external resources.
+
+So, putting it all together, each question is a subtask with specific executors based on their capabilities.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "q1",
+            "description": "Extract basic information about Python: its popularity and key traits.",
+            "executor_requirements": ["executor_04"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "q2",
+            "description": "Identify what Python is known for, based on provided context.",
+            "executor_requirements": ["executor_05"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 5
+        }
+    ],
+    "execution_order": ["q1", "q2"],
+    "overall_strategy": "Decompose the questions into specific tasks that match each executor's capabilities, ensuring dependencies are handled and priorities are assigned based on complexity."
+}
+```
+2025-07-04 14:27:23,781 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:27:37,083 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:27:37,084 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, so I need to create a detailed execution plan for answering two questions about Python based on the provided context. Let me break this down step by step.
+
+First, understanding the task: The user is an expert project manager who needs to devise actionable execution plans using JSON. The main task involves decomposing a given task into specific phases and including various components like task assignment, resource allocation, timeline, quality control, and contingency plans.
+
+Looking at the decomposition provided, there are two questions:
+1. Q1: What is Python?
+2. Q2: What is Python known for?
+
+The context clearly states that Python is popular due to its readability and versatility.
+
+So, I need to structure this into a JSON response following the specified format. Let's go through each required part:
+
+1. **Task Assignment Strategy**: This involves assigning tasks (like answering Q1 and Q2) to specific executors. Since these are straightforward factual questions, two executors can handle them simultaneously without waiting for each other.
+
+2. **Resource Allocation**: I need to estimate the computational resources and time required. For this, assuming each answer takes about 5 minutes is reasonable. Computational cost might be low since it's text processing, so $1/hour makes sense. Time-wise, maybe an hour in total if done sequentially but could overlap.
+
+3. **Timeline Estimation**: Breaking down into phases, perhaps phase 1 can handle both questions as they are separate tasks and don't depend on each other. So the duration for Q1 & Q2 would be around 5-10 minutes per question, totaling about 10 minutes if done in parallel.
+
+4. **Quality Control Measures**: Ensuring accuracy by cross-verifying with reliable sources like official documentation or reputable articles is crucial here. This adds a check to confirm facts are correct.
+
+5. **Contingency Plans**: If an executor isn't available, having fallback executors ready can help prevent delays. Maybe setting up alternative executors who can handle these questions as backup.
+
+Putting it all together into the JSON structure with appropriate phases, resources, time estimates, quality checks, and contingency plans.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["q1", "q2"],
+                "estimated_duration": "5-10 minutes per question",
+                "dependencies": [],
+                "quality_gates": ["check_question1", "check_question2"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_1": ["q1", "q2"],
+                "executor_2": []
+            },
+            "estimated_costs": {
+                "computational": "$0.5",
+                "time": "1 hour"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Executor not available for task Q1",
+                "mitigation": "Assign alternative executor (executor_2)"
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:27:37,085 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:27:37,085 - models.manager - INFO - Executing task main_task with executor executor_04
+2025-07-04 14:27:37,085 - models.executor - INFO - Executor executor_04 starting task: main_task
+2025-07-04 14:27:39,141 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-04 14:27:39,144 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:27:39,146 - models.executor - ERROR - Error executing task main_task: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:27:39,147 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:27:39,148 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:27:39,159 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Question: What is Python?
+Please answer by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:27:50,345 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:27:50,347 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Alright, so I'm trying to figure out how to decompose this task into manageable subtasks. The main task is about Python: what it is and its key features. Since the user wants only factual information from the context provided, I need to break it down clearly.
+
+First, I'll identify that extracting the definition of Python is straightforward！executor_04 can handle that because they're good with data extraction. Then, finding the core features might require a bit more analysis, so executor_05 would be suitable for that. Next, highlighting its versatility and readability is another factual aspect, which executor_06 can tackle. Finally, distinguishing it from other languages like JavaScript makes sense for executor_07.
+
+I should check the dependencies to ensure each subtask logically follows the previous one. Since each step builds on extracting specific information without relying on others, they can be done in any order. Assigning them based on their complexity: extraction is easiest (1), features next (2), then versatility and readability (3), and finally comparison (4). This way, executors are optimally utilized.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "01",
+            "description": "Extract the definition of Python from the context.",
+            "executor_requirements": ["data_extraction_capability"],
+            "estimated_complexity": 1,
+            "dependencies": [],
+            "priority": 1
+        },
+        {
+            "task_id": "02",
+            "description": "Identify and extract key features of Python.",
+            "executor_requirements": ["feature_extraction_capability"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 2
+        },
+        {
+            "task_id": "03",
+            "description": "Highlight the main reason why Python is considered versatile and readable.",
+            "executor_requirements": ["versatility_and_readability_capability"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "04",
+            "description": "Differentiate Python from other popular languages like JavaScript, Ruby, etc.",
+            "executor_requirements": ["language_comparison_capability"],
+            "estimated_complexity": 4,
+            "dependencies": [],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["01", "02", "03", "04"],
+    "overall_strategy": "Sequential decomposition focusing on extracting factual information from the context."
+}
+```
+2025-07-04 14:27:50,348 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:28:01,489 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:28:01,490 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, so I need to figure out how Python is defined based on the given context. The user wants a detailed execution plan for this task, which includes several components: task assignment strategy, resource allocation, timeline estimation, quality control measures, and contingency plans.
+
+First, understanding the question is crucial. They want an extraction of facts from the provided context without any extra information. That means I should focus solely on what's given about Python being popular, readable, and versatile.
+
+For task assignment, it makes sense to break this down into two main phases. The first phase would involve extracting factual information, which seems straightforward since it's a simple extraction task. The second phase could be about refining the response for clarity and conciseness, ensuring the answer is precise and meets the user's requirements.
+
+Resource allocation-wise, I should consider who will handle each part of the task. Maybe one person can focus on extracting data, while another ensures quality control by verifying accuracy.
+
+Timeline estimation: The first phase could take about a week as it involves thorough extraction. The second phase might take an additional couple of days to refine it into a clear answer without any unnecessary details.
+
+Quality controls are important here to make sure the response is accurate and meets the user's needs. Checking for factuality, clarity, and conciseness will ensure the output is reliable.
+
+Contingency plans should address potential issues like resource unavailability or delays in data access. Having backups or alternative methods ready could help mitigate these risks.
+
+Putting it all together, I'll structure the execution plan with two phases, assign resources accordingly, estimate the timeline, include quality gates, and outline risk mitigation strategies.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["task_id_main_task"],
+                "estimated_duration": "7 days",
+                "dependencies": [],
+                "quality_gates": ["check_fact Extraction", "check_clarity"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_id_1": ["task_id_main_task"]
+            },
+            "estimated_costs": {
+                "computational": "$0",
+                "time": "7 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Potential delay in task completion due to unavailability of resources or data.",
+                "mitigation": "Ensure sufficient resources are allocated from the start and have contingency plans for delays."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:28:01,491 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:28:01,491 - models.manager - INFO - Executing task main_task with executor executor_05
+2025-07-04 14:28:01,491 - models.executor - INFO - Executor executor_05 starting task: main_task
+2025-07-04 14:28:01,495 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/chat "HTTP/1.1 404 Not Found"
+2025-07-04 14:28:01,496 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:28:01,496 - models.executor - ERROR - Error executing task main_task: model "llama2:7b" not found, try pulling it first (status code: 404)
+2025-07-04 14:28:01,497 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:28:01,497 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:28:01,497 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Question: What is Python known for?
+Please answer by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:28:10,766 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:28:10,767 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, I need to decompose this task into subtasks using the provided executors. The main task is to extract relevant factual information from a given context about Python.
+
+First, looking at the context: Python is known for its readability and versatility. But wait, that's only part of what it's known for. I should also think about other key points like dynamic typing or scripting language features.
+
+Next, each subtask needs to be specific. So maybe one subtask could be identifying key facts from the text. Another could focus on extracting those facts into a structured format.
+
+I need to assign these subtasks to executors based on their capabilities. Executor_04 handles information extraction and analysis, so that would fit for both tasks. Executor_05 is good with structuring data, which can take over after key facts are identified.
+
+Dependencies-wise, extracting key facts should come first because it's needed before restructuring them. So the order would be executor_04 for step 1, then executor_05 for step 2.
+
+Complexity: Both tasks are around a 3 on the scale since they're straightforward but require specific skills each has.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "executor_04",
+            "description": "Extract key facts about Python from the context.",
+            "executor_requirements": ["information_extraction", "text_analysis"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 5
+        },
+        {
+            "task_id": "executor_05",
+            "description": "Structure and format the extracted facts into a coherent answer.",
+            "executor_requirements": ["data structuring", "formatting"],
+            "estimated_complexity": 3,
+            "dependencies": ["executor_04"],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["executor_04", "executor_05"],
+    "overall_strategy": "First extract the relevant facts from the context, then format them into a clear answer."
+}
+```
+2025-07-04 14:28:10,767 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:28:22,440 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:28:22,442 - models.manager - ERROR - Failed to parse execution plan: <think>
+Alright, so I need to create a detailed execution plan for this task where the user wants me to answer what Python is known for. The context given is that Python is popular due to its readability and versatility. 
+
+First, looking at the task decomposition, it's broken down into several parts: assigning tasks, resource allocation, timeline estimation, quality control measures, and contingency plans.
+
+Starting with Task Assignment Strategy, I think assigning one person would be efficient since this is a straightforward question that doesn't require much collaboration or complex tools beyond basic research. So, assigning the primary executor to "executor_01" makes sense for task_id main_task.
+
+Next, Resource Allocation needs to include both the computational resources and time. Since this is about extracting information from a context, I don't think it requires significant computational power; maybe just a small amount of CPU time. For time, an hour seems reasonable given the limited scope！parsing a short paragraph and compiling concise facts.
+
+For the Timeline Estimation, breaking it down into phases would help manage progress. Maybe 20 minutes for understanding the context, another 15-20 minutes for extracting the relevant information, then a quick review phase to ensure accuracy before finalizing. That adds up to about an hour in total.
+
+Quality Control Measures are crucial here. The main check would be ensuring that the response directly answers the question without including extra information. Also, cross-verifying with external sources like official Python documentation or reliable articles could prevent mistakes.
+
+Risk Mitigation is another important aspect. A slight risk could be if I misunderstand what "readability" and "versatility" mean in context, so clarifying those aspects beforehand would help reduce errors.
+
+Putting it all together, the execution plan should be straightforward with clear phases, resource allocation, time estimates, quality checks, and contingency plans to ensure everything goes smoothly.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "30 minutes",
+                "dependencies": [],
+                "quality_gates": ["answer_check"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_01": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "$5",
+                "time": "1 hour"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Potential misunderstanding of 'readability' and 'versatility'.",
+                "mitigation": "Clarify the definitions with additional research or documentation."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:28:22,442 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:28:22,443 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:28:22,443 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:28:29,978 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:28:29,979 - models.executor - INFO - Task main_task completed successfully in 7.54s
+2025-07-04 14:28:29,979 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:28:29,979 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:28:30,000 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:28:30,003 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 14:38:02,700 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:02,700 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:03,640 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:03,640 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:03,644 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:38:05,223 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:05,223 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:06,068 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:06,069 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:38:06,069 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 14:38:06,070 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:38:21,956 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:38:21,958 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, I need to help decompose this task into manageable subtasks using the given context. Let me start by understanding the problem.
+
+The user has provided two questions related to Python and wants each answered with factual information from the context. They also have two executors available: executor_06 and executor_07. My goal is to break down these tasks so each subtask can be assigned effectively.
+
+First, I'll look at Q1: "What is Python?" From the context, it's a popular programming language known for readability and versatility. So this seems straightforward！define what Python is based on that info.
+
+Then, Q2: "What is Python known for?" The context mentions its popularity in software development, especially web frameworks like Django and Flask. It also values clean code. That gives the key points to include here.
+
+Next, I'll assign these tasks to the executors. Since both questions are simple factual extractions, either executor can handle them without much complexity. They don't require specific skills beyond understanding Python basics, so both are suitable for both subtasks.
+
+I need to ensure each subtask is specific and actionable. The dependencies here aren't extensive because each question can be addressed independently. There's no prior task needed before these; just extract the info from the given context.
+
+Now, considering complexity: both questions are on a 1-5 scale！probably around 2 for each since they involve straightforward extraction without analysis or synthesis.
+
+Since there are two subtasks and two executors, it makes sense to assign one question per executor. This way, each gets an equal workload without overlap unless the context changes, but here both are similar in effort.
+
+I should also think about execution order. It might not matter much since they can be done concurrently if executors are available at different times. But for a sequential approach, maybe handle them one after another to avoid conflicts.
+
+The overall strategy is straightforward: decompose each question into its own subtask with clear descriptions and assign each to an executor efficiently.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "q1",
+            "description": "Provide a concise factual description of what Python is.",
+            "executor_requirements": ["readability", "versatility"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "q2",
+            "description": "Explain the key features that Python is known for.",
+            "executor_requirements": ["popularity", "software development", "web frameworks"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["q1", "q2"],
+    "overall_strategy": "Each question is decomposed into a specific subtask that can be executed independently by the available executors based on their capabilities."
+}
+```
+2025-07-04 14:38:21,959 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:38:33,769 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:38:33,770 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, I need to create a detailed execution plan for answering the two questions about Python based on the provided context. The user wants me to break down each part step by step as if I'm an expert project manager.
+
+First, looking at task assignment strategy: since both Q1 and Q2 are straightforward factual questions from the same context, it makes sense to split them into separate tasks. Each question can be handled independently without depending on the other, so they can probably be assigned to different executors or done by the same one sequentially.
+
+For resource allocation, I assume we have access to a single developer with sufficient skills and tools. So the executor assignments would just be task_id Q1 and then Q2. As for costs, assuming it's a one-time effort, there might not be direct costs beyond the time investment.
+
+Timeline estimation: Each question is short, so maybe 30 minutes each? But since they're sequential, it could take up to an hour in total.
+
+Quality control measures are important here. After drafting answers, I should review them to ensure they directly extract facts without any extra info or reasoning. Maybe cross-checking with the context again would help catch any inaccuracies.
+
+Contingency plans: If there's a delay in getting the context or if the executor isn't available, having a fallback like looking up the information online is essential. Also, if the context changes later, updating the answers accordingly is necessary.
+
+Putting it all together, I'll structure the phases to handle each question one after another with proper reviews and updates.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["task_id_Q1", "task_id_Q2"],
+                "estimated_duration": "30 minutes",
+                "dependencies": [],
+                "quality_gates": ["check1"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["task_id_Q2"],
+                "estimated_duration": "30 minutes",
+                "dependencies": ["phase_id"],
+                "quality_gates": []
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_id_1": ["task_id_Q1", "task_id_Q2"]
+            },
+            "estimated_costs": {
+                "computational": 0,
+                "time": "30 minutes"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Delay in completing the initial task due to unexpected issues",
+                "mitigation": "Assign a secondary executor or provide additional time"
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:38:33,771 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:38:33,771 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:38:33,771 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:38:40,747 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:38:40,749 - models.executor - INFO - Task main_task completed successfully in 6.98s
+2025-07-04 14:38:40,749 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:38:40,749 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:38:40,775 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:38:40,777 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 14:48:49,016 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:49,017 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:49,902 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:49,903 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:49,906 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:48:51,645 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:51,645 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:52,594 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:52,595 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:48:52,595 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 14:48:52,597 - models.manager - INFO - Manager manager_01 starting task execution: [SYSTEM]
+You are a factual extraction assistant. You must answer ONLY using information from the provided context. If the answer is not present in the context, reply with 'No answer generated'. Do NOT include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+[CONTEXT]
+Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+[INSTRUCTIONS] Answer each question by extracting only the relevant factual information from the context above. If the answer is not present, reply with 'No answer generated'.
+2025-07-04 14:49:02,593 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:49:02,594 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, so I need to figure out how to decompose this task into subtasks that can be handled by the available executors. Let's start by understanding what's being asked here.
+
+First, there are two questions: Q1 is asking for the definition of Python, and Q2 is about its known attributes. Each needs to be answered using only the provided context.
+
+The context says Python is popular, readable, versatile. So for Q1, I should extract that it's a programming language known for readability and versatility. For Q2, since it already mentions popularity along with those two points, maybe just note that as well.
+
+Now, looking at the executors: executor_06 can handle factual extraction from context, while executor_07 is better at generating concise summaries based on extracted facts.
+
+I think I should create a subtask for each question. Each will require extracting information using executor_06 because they need to pull data directly from the given text. Then, another subtask would summarize these facts into clear answers suitable for Q1 and Q2, which executor_07 is suited for since it generates concise summaries.
+
+I should make sure there are no dependencies between these tasks since each just needs to process their own question independently. The complexity here might be low because the extraction is straightforward！just pulling out specific phrases from the context.
+
+So the subtasks would be:
+
+1. Extract Factual Information about Python (Q1 and Q2) using executor_06.
+2. Summarize the Extracted Information into Answers for Q1 and Q2 using executor_07.
+
+Each of these has low complexity since they involve simple extraction and summarization. Since there are no dependencies, I can assign them in parallel if possible but according to the given context, it seems each should be handled sequentially because we're dealing with two separate questions.
+
+I think assigning executor_06 first to get both facts is efficient, then using executor_07 for summarizing makes sense. This way, each subtask handles its specific part without overlap.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "executor_06",
+            "description": "Extract factual information about Python from the given context.",
+            "executor_requirements": ["ability to read and parse text", "ability to extract relevant data"],
+            "estimated_complexity": 1,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "executor_07",
+            "description": "Summarize the extracted facts into clear, concise answers for each question.",
+            "executor_requirements": ["ability to generate concise summaries", "ability to distill information"],
+            "estimated_complexity": 2,
+            "dependencies": ["executor_06"],
+            "priority": 3
+        }
+    ],
+    "execution_order": ["executor_06", "executor_07"],
+    "overall_strategy": "First extract the necessary facts from the context using executor_06, then summarize them into clear answers using executor_07."
+}
+```
+2025-07-04 14:49:02,595 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:49:08,990 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:49:08,991 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, so I'm trying to create a detailed execution plan for the given task decomposition. The user has asked me to act as a factual extraction assistant based on the provided context. My main goal is to extract only the relevant information from the context without adding any extra reasoning or speculation.
+
+First, looking at the task decomposition, there are two questions: Q1 asks what Python is, and Q2 asks what it's known for. The context provided clearly states that Python is a popular programming language known for its readability and versatility. So I need to answer both questions accurately based on this information.
+
+For Task Assignment Strategy, since both questions can be answered directly from the context without needing complex analysis or multiple resources, assigning each question to separate phases makes sense. This way, each task gets focused attention ensuring clarity and accuracy in responses.
+
+Resource Allocation-wise, since it's a factual extraction task that likely requires minimal resources like CPU time but doesn't involve any coding complexity, I can allocate negligible computational resources for both tasks without any issues.
+
+Timeline estimation is straightforward here too. Each question needs to be addressed once, so each phase will take about an hour to handle them sequentially.
+
+Quality control measures are essential. After extracting the information, I should compare it with the context again to ensure accuracy and completeness. Any discrepancies should prompt a review or correction before finalizing the responses.
+
+Regarding Contingency Plans, if there's any chance that the extraction process might not retrieve accurate information due to context changes or inaccuracies, having a backup plan is good. For example, if I can't find reliable external sources, using the context itself as the primary source ensures that the answers remain consistent and based on available data.
+
+Putting it all together, the execution plan should be structured into phases for each question, allocate resources minimally, estimate each phase's duration, include quality gates to review responses, and have a contingency plan in place if needed.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["Q1"],
+                "estimated_duration": "1 hour",
+                "dependencies": [],
+                "quality_gates": ["check1"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["Q2"],
+                "estimated_duration": "1 hour",
+                "dependencies": ["phase_1"],
+                "quality_gates": []
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_ids": ["executor_1"]
+            },
+            "estimated_costs": {
+                "computational": "Low",
+                "time": "1 hour"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Potential inaccuracy due to context changes or inaccuracies.",
+                "mitigation": "Review and validate each response against the context before finalizing."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:49:08,992 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:49:08,992 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:49:08,993 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:49:15,387 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:49:15,388 - models.executor - INFO - Task main_task completed successfully in 6.40s
+2025-07-04 14:49:15,388 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:49:15,388 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:49:15,391 - experiments.qa_experiment - ERROR - Task execution failed: 'QAExperiment' object has no attribute '_fallback_response'
+2025-07-04 14:49:15,391 - experiments.qa_experiment - ERROR - Task failed: qa_3 - 'QAExperiment' object has no attribute '_simple_generation'
+2025-07-04 14:49:15,405 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:49:15,406 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 14:51:00,616 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:00,617 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:01,819 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:01,819 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:01,827 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:51:04,310 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:04,310 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:05,664 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:05,664 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:51:05,665 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 14:51:05,668 - models.manager - INFO - Manager manager_01 starting task execution: [SYSTEM]
+You are a factual extraction assistant. You must answer ONLY using information from the provided context. If the answer is not present in the context, reply with 'No answer generated'. Do NOT include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+[CONTEXT]
+Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+[INSTRUCTIONS] Answer each question by extracting only the relevant factual information from the context above. If the answer is not present, reply with 'No answer generated'.
+2025-07-04 14:51:11,616 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:51:11,618 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, I need to help decompose a complex task into manageable subtasks using available executors. Let's see what the user is asking for.
+
+First, they provided two questions about Python: Q1 asks what Python is, and Q2 asks what it's known for. The context mentions that Python is popular, readable, versatile, etc.
+
+The goal is to create subtasks so each executor can handle them efficiently. Each subtask should be specific and actionable, considering dependencies, complexity, and executor capabilities.
+
+Looking at the available executors: "executor_06" and "executor_07". I don't know their capabilities yet, but for this task, they might need to do factual extraction based on context provided.
+
+For Q1, it's straightforward！extract the definition of Python. That seems simple enough, maybe level 2 complexity since just copying text from the context.
+
+Q2 requires extracting what Python is known for, which involves identifying keywords like readability and versatility. This also seems manageable with a similar complexity as Q1.
+
+Do these subtasks depend on each other? Probably not; they can be handled independently.
+
+So, I'll create two subtasks: extract_factuals_for_q1 and extract_factuals_for_q2. Each will have the same description but target different questions.
+
+I need to assign executors based on their capabilities. If both executors can handle factual extraction, perhaps distribute them equally or in a way that optimizes processing time.
+
+Priority might be equal since both subtasks are essential and of similar complexity.
+</think>
+
+Here's how I decomposed the task into subtasks:
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "extract_factuals_for_q1",
+            "description": "Extract factual information from the context about what Python is.",
+            "executor_requirements": ["can_extract_factuals"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "extract_factuals_for_q2",
+            "description": "Extract factual information from the context about what Python is known for.",
+            "executor_requirements": ["can_extract_factuals"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["extract_factuals_for_q1", "extract_factuals_for_q2"],
+    "overall_strategy": "Decompose the task into specific subtasks for factual extraction, assigning each to available executors based on their capabilities."
+}
+```
+2025-07-04 14:51:11,619 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:51:18,896 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:51:18,897 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, so I need to figure out how to create a detailed execution plan based on the user's task. The task is about creating an action plan for extracting facts from given context using Python as an example. Let me break this down step by step.
+
+First, looking at the task decomposition provided, there are four main parts: answering Q1 and Q2 about Python. Then, I need to create a detailed execution plan with five sections: Task assignment strategy, Resource allocation, Timeline estimation, Quality control measures, and Contingency plans.
+
+Starting with Task assignment strategy. I think this would involve assigning the right people or executors to handle each question. Since there are two questions here, Q1 and Q2, maybe assign different executors for each to cover all bases without overlap.
+
+Next is Resource allocation. The context mentions that the assistant must answer only using the provided info, so resources might just be the information itself. But in a real scenario, this could involve tools or computational resources if dealing with more complex tasks beyond simple extraction.
+
+For Timeline estimation, considering it's a straightforward factual extraction task from two short questions, I can allocate around 10-20 minutes since each question is brief and doesn't require deep analysis beyond reading the context. Maybe split into two phases: one for Q1 and another for Q2 to keep them separate but sequential.
+
+Quality control measures would involve cross-verifying the answers with the original context or having someone else check them. In this case, perhaps using a peer review method by comparing the responses against the given context again ensures accuracy.
+
+Risks include not finding enough information in the context or trying to answer beyond what's provided. Mitigation strategies here would be to clearly define the scope based on the context and ensure that no extra information is used without permission.
+
+Putting it all together, I'll structure each phase with tasks, durations, dependencies, quality gates, resource assignments, costs, risk points, etc., following the JSON format specified.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["Q1: What is Python?"],
+                "estimated_duration": "5 minutes",
+                "dependencies": [],
+                "quality_gates": ["check_question_1"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["Q2: What is Python known for?"],
+                "estimated_duration": "5 minutes",
+                "dependencies": ["phase_1"],
+                "quality_gates": ["check_question_2"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_id_1": ["Q1: What is Python?"],
+                "executor_id_2": ["Q2: What is Python known for?"]
+            },
+            "estimated_costs": {
+                "computational": "Low",
+                "time": "10 minutes"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Not finding enough information in the context.",
+                "mitigation": "Clearly define scope based on provided context."
+            },
+            {
+                "risk": "Attempting to answer beyond what's provided.",
+                "mitigation": "Ensure all answers are within the given context."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:51:18,898 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:51:18,898 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:51:18,898 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:51:23,990 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:51:23,991 - models.executor - INFO - Task main_task completed successfully in 5.09s
+2025-07-04 14:51:23,992 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:51:23,992 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:51:24,007 - experiments.qa_experiment - ERROR - Task failed: qa_3 - 'QAExperiment' object has no attribute '_display_task_result'
+2025-07-04 14:51:24,025 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:51:24,027 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 14:52:41,924 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:41,924 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:42,876 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:42,876 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:42,879 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 14:52:44,727 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:44,727 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:45,683 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:45,684 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 14:52:45,684 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 14:52:45,685 - models.manager - INFO - Manager manager_01 starting task execution: Context: Python is a popular programming language known for its readability and versatility.
+Q1: What is Python?
+Q2: What is Python known for?
+Please answer each question by extracting only the relevant factual information from the context above. Do not include any reasoning, speculation, or meta-cognitive statements. Respond with concise facts only.
+2025-07-04 14:52:50,678 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:52:50,679 - models.manager - ERROR - Failed to parse decomposition response: <think>
+Okay, so I need to decompose this task into manageable subtasks using executors. The user is asking about Python, specifically Q1 and Q2. Let's see.
+
+First, for Q1: What is Python? It's a popular programming language known for readability and versatility. So the subtask should be extracting only that definition. That seems straightforward.
+
+Next, Q2 asks what Python is known for. From the context, it's also mentioned as being popular for those reasons. So this task would extract exactly that info.
+
+Now, considering the executors: executor_06 can handle simple factual questions with clear definitions, so they're perfect for both Q1 and Q2. Executor_07 might take a bit longer since they need to parse slightly more complex sentences, but it's still doable without much delay.
+
+Dependencies-wise, these two are independent because each is just about extracting info from the same context. So no dependencies between them.
+
+In terms of complexity, both tasks are easy but Q2 has a slightly higher word count, so maybe 3 for executor_07 instead of 2. But since they're separate, it's manageable.
+
+Priority-wise, handling simpler questions first makes sense to maintain efficiency. So do Q1 before Q2.
+
+Putting this together, the subtasks will be clear and each assigned appropriately without any overlap or dependencies.
+</think>
+
+```json
+{
+    "subtasks": [
+        {
+            "task_id": "q1",
+            "description": "Extract definition of Python from context.",
+            "executor_requirements": ["executor_06", "executor_07"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 1
+        },
+        {
+            "task_id": "q2",
+            "description": "Extract known features of Python from context.",
+            "executor_requirements": ["executor_06", "executor_07"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 2
+        }
+    ],
+    "execution_order": ["q1", "q2"],
+    "overall_strategy": "Extract specific factual information from the given context about Python."
+}
+```
+2025-07-04 14:52:50,680 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-04 14:53:00,133 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:53:00,134 - models.manager - ERROR - Failed to parse execution plan: <think>
+Okay, I'm trying to figure out how to create a detailed execution plan for the given tasks about Python. The user wants me to extract factual information from the provided context and structure it into an action plan with specific components: task assignment strategy, resource allocation, timeline estimation, quality control measures, and contingency plans.
+
+First, let's look at what needs to be done. There are two questions: Q1 is asking "What is Python?" and Q2 is about "What is Python known for?" The context mentions that Python is a popular programming language known for its readability and versatility.
+
+Starting with the task decomposition, there's one main task covering both questions. It seems straightforward, but I need to break it down into phases. Maybe the first phase can cover understanding the basics of Python, which includes answering Q1 about what Python is. The second phase could delve deeper into its known attributes, addressing Q2.
+
+For task assignment strategy, since both questions are part of the same main task, maybe a single team member or a pair would suffice. They'll need to research and understand Python's basics first before moving on to its features.
+
+Resource allocation-wise, I should consider who will be handling this. Perhaps an IT professional with domain knowledge in programming languages can take care of both questions. Their estimated costs might include time for research and analysis plus any necessary tools or materials they might use during the process.
+
+Timeline estimation is next. If we assume each question takes about a day to research and answer, then perhaps 2 days total would be sufficient if done sequentially. But maybe it can be optimized by starting with Q1 on day one and using that knowledge for Q2 on day two without overlapping tasks too much.
+
+Quality control measures are important here. After the initial answers, I should ensure they're accurate and concise. Maybe cross-referencing with reliable sources or even having a peer review could help catch any errors or provide additional insights.
+
+Contingency plans might include unexpected delays in understanding Python's features or access issues to necessary resources like documentation. Having backup plans or fallback strategies can mitigate these risks, such as reassigning tasks if someone is unavailable and providing alternative materials for research.
+
+Putting it all together, I'll structure the phases with each question addressed sequentially, assign resources accordingly, estimate the timeline based on daily work, include quality checks through peer reviews or validation steps, and outline contingency plans to handle any unexpected issues.
+</think>
+
+```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["Q1: What is Python?"],
+                "estimated_duration": "1 day",
+                "dependencies": [],
+                "quality_gates": ["check_task_q1"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["Q2: What is Python known for?"],
+                "estimated_duration": "1 day",
+                "dependencies": ["phase_1"],
+                "quality_gates": ["check_task_q2"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "executor_id": [
+                    {
+                        "name": "IT_Professional",
+                        "role": "Python_expert"
+                    },
+                    {
+                        "name": "Researcher",
+                        "role": "Data_Analyst"
+                    }
+                ]
+            },
+            "estimated_costs": {
+                "computational": "$20/hour * 4 hours = $80",
+                "time": "2 days at $150/day = $300"
+            }
+        },
+        "quality_control_measures": [
+            {
+                "check_task_q1": "Review and validate Q1's factual information for accuracy.",
+                "status": "Pass"
+            },
+            {
+                "check_task_q2": "Verify Q2's factual information aligns with Python's known attributes.",
+                "status": "Pass"
+            }
+        ],
+        "risk_mitigation": [
+            {
+                "risk": "Delay in understanding Python features",
+                "mitigation": "Reassign tasks if needed, providing additional resources."
+            },
+            {
+                "risk": "Access to documentation issues",
+                "mitigation": "Have multiple sources and backup documents available."
+            }
+        ]
+    }
+}
+```
+2025-07-04 14:53:00,134 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-04 14:53:00,135 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-04 14:53:00,135 - models.executor - INFO - Executor executor_06 starting task: main_task
+2025-07-04 14:53:01,204 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 14:53:01,205 - models.executor - INFO - Task main_task completed successfully in 1.07s
+2025-07-04 14:53:01,205 - models.manager - INFO - Task main_task completed successfully
+2025-07-04 14:53:01,205 - models.manager - INFO - Task execution completed successfully
+2025-07-04 14:53:01,224 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 14:53:01,225 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 15:39:40,070 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:40,070 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:40,762 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:40,762 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:40,765 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 15:39:42,609 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:42,610 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:43,723 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:43,723 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 15:39:43,724 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 15:39:43,725 - experiments.qa_experiment - ERROR - Task execution failed: Manager.execute_task() got an unexpected keyword argument 'executor_id'
+2025-07-04 15:39:43,763 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 15:39:43,765 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:18:41,004 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:41,005 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:41,862 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:41,862 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:41,866 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:18:43,573 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:43,573 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:44,511 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:44,512 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:18:44,513 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:18:44,513 - experiments.qa_experiment - ERROR - Task execution failed: Executor.execute_task() got an unexpected keyword argument 'task_description'
+2025-07-04 16:18:44,544 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:18:44,547 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:20:34,750 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:34,751 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:35,689 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:35,690 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:35,696 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:20:37,359 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:37,360 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:38,262 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:38,262 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:20:38,263 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:20:38,263 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:20:46,610 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:20:46,611 - models.executor - INFO - Task qa_3_q1 completed successfully in 8.35s
+2025-07-04 16:20:46,611 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:20:53,006 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:20:53,007 - models.executor - INFO - Task qa_3_q2 completed successfully in 6.40s
+2025-07-04 16:20:53,034 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:20:53,037 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:23:25,803 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:25,803 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:26,699 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:26,700 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:26,703 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:23:28,532 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:28,532 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:29,504 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:29,504 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:23:29,504 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:23:29,508 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:23:36,145 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:23:36,146 - models.executor - INFO - Task qa_3_q1 completed successfully in 6.64s
+2025-07-04 16:23:36,151 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:23:41,074 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:23:41,075 - models.executor - INFO - Task qa_3_q2 completed successfully in 4.92s
+2025-07-04 16:23:41,102 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:23:41,104 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:30:37,181 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:37,182 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:38,118 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:38,119 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:38,124 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:30:39,604 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:39,605 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:40,477 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:40,477 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:30:40,478 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:30:40,480 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:30:42,932 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:30:42,933 - models.executor - INFO - Task qa_3_q1 completed successfully in 2.45s
+2025-07-04 16:30:42,936 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:30:55,842 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:30:55,844 - models.executor - INFO - Task qa_3_q2 completed successfully in 12.91s
+2025-07-04 16:30:55,877 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:30:55,882 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:33:42,330 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:42,331 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:43,286 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:43,287 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:43,290 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:33:45,040 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:45,041 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:46,069 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:46,069 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:33:46,070 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:33:46,072 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:33:55,740 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:33:55,741 - models.executor - INFO - Task qa_3_q1 completed successfully in 9.67s
+2025-07-04 16:33:55,750 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:33:58,947 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:33:58,949 - models.executor - INFO - Task qa_3_q2 completed successfully in 3.20s
+2025-07-04 16:33:58,981 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:33:58,983 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:35:03,991 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:03,991 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:04,808 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:04,808 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:04,812 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:35:06,520 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:06,521 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:07,397 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:07,398 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:07,398 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:35:07,398 - experiments.qa_experiment - ERROR - Task execution failed: cannot access local variable 'prompt' where it is not associated with a value
+2025-07-04 16:35:07,422 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:35:07,423 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:35:54,380 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:54,380 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:55,255 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:55,256 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:55,260 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:35:57,063 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:57,063 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:58,235 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:58,235 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:35:58,235 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:35:58,238 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:36:02,350 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:36:02,351 - models.executor - INFO - Task qa_3_q1 completed successfully in 4.11s
+2025-07-04 16:36:02,356 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:36:09,139 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:36:09,140 - models.executor - INFO - Task qa_3_q2 completed successfully in 6.78s
+2025-07-04 16:36:09,170 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:36:09,173 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:40:26,198 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:26,199 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:27,046 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:27,046 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:27,050 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:40:28,577 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:28,577 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:29,419 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:29,420 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:40:29,420 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:40:29,424 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:40:35,970 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:40:35,972 - models.executor - INFO - Task qa_3_q1 completed successfully in 6.55s
+2025-07-04 16:40:35,980 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:40:42,277 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:40:42,278 - models.executor - INFO - Task qa_3_q2 completed successfully in 6.30s
+2025-07-04 16:40:42,300 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:40:42,302 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:43:04,441 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:04,442 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:05,316 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:05,317 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:05,320 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:43:06,616 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:06,617 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:07,335 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:07,335 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:43:07,336 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:43:07,338 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:43:12,717 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:43:12,718 - models.executor - INFO - Task qa_3_q1 completed successfully in 5.38s
+2025-07-04 16:43:12,724 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:43:18,220 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:43:18,221 - models.executor - INFO - Task qa_3_q2 completed successfully in 5.50s
+2025-07-04 16:43:18,248 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:43:18,249 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 16:44:36,588 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:36,588 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:37,432 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:37,433 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:37,436 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 16:44:39,009 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:39,009 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:39,757 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:39,758 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 16:44:39,758 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 16:44:39,760 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 16:44:42,438 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:44:42,439 - models.executor - INFO - Task qa_3_q1 completed successfully in 2.68s
+2025-07-04 16:44:42,443 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 16:44:46,064 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 16:44:46,065 - models.executor - INFO - Task qa_3_q2 completed successfully in 3.62s
+2025-07-04 16:44:46,092 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 16:44:46,093 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:02:07,649 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:07,650 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:08,551 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:08,552 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:08,556 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:02:09,865 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:09,866 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:10,761 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:10,761 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:02:10,761 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:02:10,764 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:02:15,550 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:02:15,552 - models.executor - INFO - Task qa_3_q1 completed successfully in 4.79s
+2025-07-04 17:02:15,557 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:02:20,919 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:02:20,920 - models.executor - INFO - Task qa_3_q2 completed successfully in 5.36s
+2025-07-04 17:02:20,944 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:02:20,946 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:05:40,024 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:40,025 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:40,777 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:40,777 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:40,780 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:05:42,631 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:42,631 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:43,586 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:43,587 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:05:43,587 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:05:43,590 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:05:45,670 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:05:45,671 - models.executor - INFO - Task qa_3_q1 completed successfully in 2.08s
+2025-07-04 17:05:45,676 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:05:47,942 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:05:47,944 - models.executor - INFO - Task qa_3_q2 completed successfully in 2.27s
+2025-07-04 17:05:47,966 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:05:47,968 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:09:57,158 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:09:57,159 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:09:58,153 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:09:58,154 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:09:58,157 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:10:00,090 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:10:00,091 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:10:01,318 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:10:01,319 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:10:01,319 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:10:01,321 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:10:02,506 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:10:02,507 - models.executor - INFO - Task qa_3_q1 completed successfully in 1.19s
+2025-07-04 17:10:02,512 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:10:05,607 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:10:05,608 - models.executor - INFO - Task qa_3_q2 completed successfully in 3.10s
+2025-07-04 17:10:05,633 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:10:05,636 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:12:16,420 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:16,421 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:17,379 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:17,380 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:17,385 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:12:19,130 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:19,130 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:20,143 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:20,143 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:12:20,144 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:12:20,146 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:12:22,872 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:12:22,874 - models.executor - INFO - Task qa_3_q1 completed successfully in 2.73s
+2025-07-04 17:12:22,883 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:12:26,729 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:12:26,730 - models.executor - INFO - Task qa_3_q2 completed successfully in 3.85s
+2025-07-04 17:12:26,755 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:12:26,757 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:17:25,934 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:25,935 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:26,812 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:26,812 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:26,815 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:17:28,522 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:28,523 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:29,282 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:29,282 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:17:29,283 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:17:29,284 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:17:34,923 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:17:34,925 - models.executor - INFO - Task qa_3_q1 completed successfully in 5.64s
+2025-07-04 17:17:34,930 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:17:40,817 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:17:40,818 - models.executor - INFO - Task qa_3_q2 completed successfully in 5.89s
+2025-07-04 17:17:40,822 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-04 17:17:43,115 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:17:43,116 - models.executor - INFO - Task judge_1 completed successfully in 2.29s
+2025-07-04 17:17:43,116 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-04 17:17:45,811 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:17:45,812 - models.executor - INFO - Task judge_2 completed successfully in 2.70s
+2025-07-04 17:17:45,834 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:17:45,836 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:32:33,147 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:33,147 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:33,909 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:33,910 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:33,913 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:32:35,565 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:35,565 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:36,442 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:36,442 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:32:36,442 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:32:36,444 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:32:46,435 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:32:46,436 - models.executor - INFO - Task qa_3_q1 completed successfully in 9.99s
+2025-07-04 17:32:46,441 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:32:51,709 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:32:51,710 - models.executor - INFO - Task qa_3_q2 completed successfully in 5.27s
+2025-07-04 17:32:51,714 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-04 17:32:54,945 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:32:54,946 - models.executor - INFO - Task judge_1 completed successfully in 3.23s
+2025-07-04 17:32:54,947 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-04 17:33:00,453 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:33:00,455 - models.executor - INFO - Task judge_2 completed successfully in 5.51s
+2025-07-04 17:33:00,485 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:33:00,487 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:36:15,357 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:15,358 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:16,267 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:16,267 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:16,271 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:36:18,069 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:18,069 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:19,034 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:19,034 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:36:19,034 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:36:19,036 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:36:22,878 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:36:22,879 - models.executor - INFO - Task qa_3_q1 completed successfully in 3.84s
+2025-07-04 17:36:22,886 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:36:24,560 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:36:24,561 - models.executor - INFO - Task qa_3_q2 completed successfully in 1.67s
+2025-07-04 17:36:24,565 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-04 17:36:28,031 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:36:28,032 - models.executor - INFO - Task judge_1 completed successfully in 3.47s
+2025-07-04 17:36:28,033 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-04 17:36:30,778 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:36:30,779 - models.executor - INFO - Task judge_2 completed successfully in 2.75s
+2025-07-04 17:36:30,803 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:36:30,804 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-04 17:39:38,274 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:38,274 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:39,273 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:39,274 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:39,278 - utils.evaluation - INFO - Performance monitoring started
+2025-07-04 17:39:40,953 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:40,954 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:41,923 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:41,923 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-04 17:39:41,923 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-04 17:39:41,926 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-04 17:39:44,474 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:39:44,476 - models.executor - INFO - Task qa_3_q1 completed successfully in 2.55s
+2025-07-04 17:39:44,481 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-04 17:39:46,550 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:39:46,551 - models.executor - INFO - Task qa_3_q2 completed successfully in 2.07s
+2025-07-04 17:39:46,555 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-04 17:39:49,221 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:39:49,222 - models.executor - INFO - Task judge_1 completed successfully in 2.67s
+2025-07-04 17:39:49,223 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-04 17:39:50,654 - httpx - INFO - HTTP Request: POST http://localhost:11436/api/chat "HTTP/1.1 200 OK"
+2025-07-04 17:39:50,655 - models.executor - INFO - Task judge_2 completed successfully in 1.43s
+2025-07-04 17:39:50,678 - utils.evaluation - INFO - Metrics exported to results\qa_metrics.json
+2025-07-04 17:39:50,680 - utils.evaluation - INFO - Performance monitoring stopped
