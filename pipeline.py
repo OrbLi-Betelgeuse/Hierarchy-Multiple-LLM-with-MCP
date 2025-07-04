@@ -58,7 +58,7 @@ class ExperimentPipeline:
         return {
             "manager": {
                 "provider": "ollama",
-                "model": "deepseek-r1:7b",
+                "model": "qwen2.5:7b",
                 "manager_id": "manager_01",
                 "kwargs": {"base_url": "http://localhost:11434"},
             },
@@ -89,18 +89,19 @@ class ExperimentPipeline:
                 # },
                 {
                     "provider": "ollama",
-                    "model": "deepseekr1:1.5b",
+                    "model": "llama2:7b",
                     "executor_id": "executor_04",
                     "capabilities": ["question_answering", "general"],
                     "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11435"},
-                },{
+                    "kwargs": {"base_url": "http://localhost:11434"},
+                },
+                {
                     "provider": "ollama",
-                    "model": "deepseekr1:1.5b",
+                    "model": "llama2:7b",
                     "executor_id": "executor_05",
                     "capabilities": ["question_answering", "general"],
                     "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11436"},
+                    "kwargs": {"base_url": "http://localhost:11434"},
                 },
             ],
             "experiments": {

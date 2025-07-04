@@ -36,11 +36,13 @@ class SingleAgentPipeline:
         self.executor_llm = None
 
     async def setup(self):
-        console.print(Panel("[bold cyan]Initializing Single-Agent (Executor-Only) Pipeline"))
+        console.print(
+            Panel("[bold cyan]Initializing Single-Agent (Executor-Only) Pipeline")
+        )
         self.executor_llm = create_llm_interface(
             provider="ollama",
-            model_name=self.llm_model or "deepseek-r1:7b",
-            base_url="http://localhost:11434"
+            model_name=self.llm_model or "qwen2.5:7b",
+            base_url="http://localhost:11434",
         )
 
     async def run_task(self, task_name: str):
@@ -48,10 +50,10 @@ class SingleAgentPipeline:
 
         executor_config = {
             "provider": "ollama",
-            "model": self.llm_model or "deepseek-r1:7b",
+            "model": self.llm_model or "qwen2.5:7b",
             "executor_id": "solo_executor",
             "capabilities": ["summarization", "qa", "table_generation"],
-            "kwargs": {"base_url": "http://localhost:11434"}
+            "kwargs": {"base_url": "http://localhost:11434"},
         }
         manager_config = None  # No manager
 
@@ -73,7 +75,7 @@ class SingleAgentPipeline:
         # Convert result objects to dicts for evaluation
         results_dicts = []
         for r in results:
-            if hasattr(r, 'to_dict') and callable(getattr(r, 'to_dict')):
+            if hasattr(r, "to_dict") and callable(getattr(r, "to_dict")):
                 results_dicts.append(r.to_dict())
             else:
                 results_dicts.append(vars(r))
@@ -81,18 +83,18 @@ class SingleAgentPipeline:
         elapsed = time.time() - start_time
 
         metrics = self.evaluator.calculate_basic_metrics(results_dicts)
-        performance = {
-            "time_sec": round(elapsed, 2),
-            "metrics": metrics
-        }
+        performance = {"time_sec": round(elapsed, 2), "metrics": metrics}
 
         output_path = Path(f"{self.output_dir}/{task_name}/executor_only_output.json")
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump({"results": results_dicts, "performance": performance}, f, indent=2)
+            json.dump(
+                {"results": results_dicts, "performance": performance}, f, indent=2
+            )
 
         console.print(Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s"))
         return performance
+
 
 @click.command()
 @click.option(
@@ -112,11 +114,18 @@ def main(experiment_type, manager_model, output_dir):
         pipeline.llm_model = manager_model
     if output_dir:
         pipeline.output_dir = output_dir
+
     async def run():
-        tasks = ["summarization", "qa", "table_generation"] if experiment_type == "all" else [experiment_type]
+        tasks = (
+            ["summarization", "qa", "table_generation"]
+            if experiment_type == "all"
+            else [experiment_type]
+        )
         for task in tasks:
             await pipeline.run_task(task)
+
     asyncio.run(run())
+
 
 if __name__ == "__main__":
     main()

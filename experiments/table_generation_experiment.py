@@ -103,7 +103,8 @@ class TableGenerationExperiment:
                     **self.manager_config.get("kwargs", {}),
                 )
                 self.manager = Manager(
-                    manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
+                    manager_id=self.manager_config["manager_id"],
+                    llm_interface=manager_llm,
                 )
             else:
                 self.manager = None
@@ -133,7 +134,9 @@ class TableGenerationExperiment:
                         self.manager.executor_instances = {}
                     self.manager.executor_instances[config["executor_id"]] = executor
 
-            logger.info(f"Initialized: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors")
+            logger.info(
+                f"Initialized: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors"
+            )
 
         except Exception as e:
             logger.error(f"Setup failed: {e}")
@@ -263,6 +266,7 @@ class TableGenerationExperiment:
                 task_id=f"direct_{task.id}",
                 description=self._build_simplified_prompt(task),
                 parameters={},
+                task_type="table_generation",
             )
             result = await executor.execute_task(task_obj)
             # Handle different response formats

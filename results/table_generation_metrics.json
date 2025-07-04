@@ -1,0 +1,12 @@
+{
+  "experiment_type": "table_generation",
+  "total_tasks": 1,
+  "successful_tasks": 0,
+  "success_rate": 0.0,
+  "average_execution_time": 25.472588791977614,
+  "total_execution_time": 0.0,
+  "manager_performance": {},
+  "executor_performance": {},
+  "quality_metrics": {},
+  "resource_utilization": {}
+}

@@ -1,0 +1,12 @@
+{
+  "experiment_type": "qa",
+  "total_tasks": 3,
+  "successful_tasks": 0,
+  "success_rate": 0.0,
+  "average_execution_time": 19.12528879160527,
+  "total_execution_time": 0.0,
+  "manager_performance": {},
+  "executor_performance": {},
+  "quality_metrics": {},
+  "resource_utilization": {}
+}

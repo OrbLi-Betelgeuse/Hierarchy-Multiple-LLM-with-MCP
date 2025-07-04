@@ -3,9 +3,9 @@
     {
       "task_id": "doc_1",
       "original_length": 516,
-      "summary_length": 351,
-      "compression_ratio": 0.6802325581395349,
-      "execution_time": 4.383188199950382,
+      "summary_length": 34,
+      "compression_ratio": 0.06589147286821706,
+      "execution_time": 3.540737957926467,
       "manager_metrics": {},
       "executor_metrics": {
         "solo_executor": {
@@ -14,8 +14,8 @@
           "tasks_failed": 0,
           "total_tasks": 1,
           "success_rate": 1.0,
-          "average_execution_time": 4.382822399958968,
-          "total_tokens_used": 496,
+          "average_execution_time": 3.5406199159333482,
+          "total_tokens_used": 130,
           "current_load": 0,
           "capabilities": [
             "summarization",
@@ -24,15 +24,15 @@
           ]
         }
       },
-      "quality_score": 0.3,
+      "quality_score": 0.1,
       "rouge_scores": {}
     },
     {
       "task_id": "doc_2",
       "original_length": 717,
-      "summary_length": 340,
-      "compression_ratio": 0.47419804741980476,
-      "execution_time": 4.148329099989496,
+      "summary_length": 40,
+      "compression_ratio": 0.05578800557880056,
+      "execution_time": 0.5930058329831809,
       "manager_metrics": {},
       "executor_metrics": {
         "solo_executor": {
@@ -41,8 +41,8 @@
           "tasks_failed": 0,
           "total_tasks": 2,
           "success_rate": 1.0,
-          "average_execution_time": 4.265436099958606,
-          "total_tokens_used": 990,
+          "average_execution_time": 2.0667547494522296,
+          "total_tokens_used": 264,
           "current_load": 0,
           "capabilities": [
             "summarization",
@@ -51,20 +51,20 @@
           ]
         }
       },
-      "quality_score": 0.16666666666666666,
+      "quality_score": 0.125,
       "rouge_scores": {}
     }
   ],
   "performance": {
-    "time_sec": 9.38,
+    "time_sec": 4.14,
     "metrics": {
       "total_tasks": 2,
       "successful_tasks": 0,
       "success_rate": 0.0,
-      "average_execution_time": 4.265758649969939,
-      "total_execution_time": 8.531517299939878,
-      "min_execution_time": 4.148329099989496,
-      "max_execution_time": 4.383188199950382
+      "average_execution_time": 2.066871895454824,
+      "total_execution_time": 4.133743790909648,
+      "min_execution_time": 0.5930058329831809,
+      "max_execution_time": 3.540737957926467
     }
   }
 }
