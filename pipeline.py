@@ -17,6 +17,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.panel import Panel
+import dataclasses
 
 # Import our modules
 from models.manager import Manager
@@ -182,6 +183,13 @@ class ExperimentPipeline:
                     executor_id=config["executor_id"],
                     capabilities=config["capabilities"],
                 )
+                # 确保实例注册到同一个manager
+                if hasattr(self.manager, "add_executor_instance"):
+                    self.manager.add_executor_instance(executor)
+
+            # 调试：打印所有已注册的executor实例
+            if hasattr(self.manager, "print_executor_instances"):
+                self.manager.print_executor_instances()
 
             console.print(
                 f"✅ System setup complete: 1 manager, {len(self.executors)} executors"
@@ -508,9 +516,18 @@ class ExperimentPipeline:
             # Export individual experiment metrics
             for experiment_type, metrics in report["experiment_results"].items():
                 metrics_file = results_dir / f"{experiment_type}_metrics.json"
-                self.evaluator.export_metrics(metrics, str(metrics_file))
+                if experiment_type == "summarization":
+                    from dataclasses import is_dataclass, asdict
+                    metrics_to_dump = self.results["summarization"]
+                    if is_dataclass(metrics_to_dump):
+                        metrics_to_dump = asdict(metrics_to_dump)
+                    with open(metrics_file, "w", encoding="utf-8") as f:
+                        json.dump(metrics_to_dump, f, indent=2, ensure_ascii=False)
+                else:
+                    # For other types, use evaluator summary
+                    self.evaluator.export_metrics(metrics, str(metrics_file))
 
-            console.print(f"📁 Results exported to {results_dir}")
+        console.print(f"📁 Results exported to {results_dir}")
 
     async def cleanup(self):
         """Cleanup resources and stop executors."""

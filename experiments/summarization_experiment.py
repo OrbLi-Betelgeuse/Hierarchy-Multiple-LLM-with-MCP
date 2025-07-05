@@ -359,6 +359,10 @@ class SummarizationExperiment:
                     summary, task.expected_summary
                 )
 
+            # DEBUG: 打印生成的摘要和参考摘要
+            print(f"[DEBUG] Task {task.task_id} summary: {summary.strip()}")
+            print(f"[DEBUG] Task {task.task_id} expected_summary: {task.expected_summary}")
+
             return SummarizationResult(
                 task_id=task.task_id,
                 original_length=original_length,

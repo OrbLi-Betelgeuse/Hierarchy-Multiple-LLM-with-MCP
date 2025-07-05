@@ -107,6 +107,13 @@ class Evaluator:
             ),
         }
 
+    def calculate_memory_metrics(self, results: List[Dict[str, Any]]) -> Dict[str, float]:
+        """Calculate average memory usage if available."""
+        mems = [r.get("memory_usage", 0) for r in results if r.get("memory_usage") is not None]
+        if not mems:
+            return {"average_memory_usage": 0.0}
+        return {"average_memory_usage": sum(mems) / len(mems)}
+
     def _calculate_variance(self, values: List[float]) -> float:
         """Calculate variance of a list of values."""
         if len(values) < 2:
@@ -125,6 +132,7 @@ class Evaluator:
         basic_metrics = self.calculate_basic_metrics(results)
         quality_metrics = self.calculate_quality_metrics(results)
         efficiency_metrics = self.calculate_efficiency_metrics(results)
+        memory_metrics = self.calculate_memory_metrics(results)
 
         # Extract manager and executor performance
         manager_performance = experiment_results.get("manager_metrics", {})
@@ -133,7 +141,7 @@ class Evaluator:
         # Calculate resource utilization
         resource_utilization = {
             "cpu_usage": "estimated",
-            "memory_usage": "estimated",
+            "memory_usage": memory_metrics.get("average_memory_usage", "estimated"),
             "network_usage": "estimated",
             "storage_usage": "estimated",
         }
@@ -150,7 +158,8 @@ class Evaluator:
             quality_metrics=quality_metrics,
             resource_utilization=resource_utilization,
         )
-
+        # Attach for export
+        metrics.average_memory_usage = memory_metrics.get("average_memory_usage", 0.0)
         self.metrics_history.append(metrics)
         return metrics
 

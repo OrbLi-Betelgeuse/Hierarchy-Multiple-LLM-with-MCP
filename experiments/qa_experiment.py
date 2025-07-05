@@ -7,6 +7,9 @@ Evaluates the Manager-Executor collaboration model on multi-turn question answer
 import asyncio
 import json
 import logging
+import os
+import tracemalloc
+import time
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from rich.console import Console
@@ -39,6 +42,7 @@ class QAResult:
     answers: List[str]
     execution_time: float
     accuracy_score: Optional[float] = None
+    status: str = ""
 
 
 class QAExperiment:
@@ -209,19 +213,24 @@ class QAExperiment:
             answers = answers[:len(task.questions)]
             scores = scores[:len(task.questions)]
         exec_time = asyncio.get_event_loop().time() - start_time
+        status = "correct" if (accuracy is not None and accuracy >= 0.5) else "incorrect"
         result_obj = QAResult(
             task_id=task.task_id,
             questions=task.questions,
             answers=answers,
             execution_time=exec_time,
             accuracy_score=accuracy,
+            status=status,
         )
         result_obj.per_question_times = per_question_times
         result_obj.scores = scores  # Optionally store per-question scores
         return result_obj
 
-    async def run_experiment(self, tasks: Optional[List[QATask]] = None) -> List[QAResult]:
-        """Run the complete QA experiment using run_single_qa_task for each task."""
+    async def run_experiment(self, tasks: Optional[List[QATask]] = None, wall_time_holder: dict = None) -> List[QAResult]:
+        start_wall = time.time()
+        # 资源监控开始
+        tracemalloc.start()
+        cpu_start = os.times()
         if tasks is None:
             tasks = self.sample_tasks
         results = []
@@ -239,9 +248,37 @@ class QAExperiment:
                         answers=["" for _ in task.questions],
                         execution_time=0.0,
                         accuracy_score=0.0,
+                        status="incorrect",
                     )
                 )
         self.results = results
+        # 资源监控结束
+        cpu_end = os.times()
+        try:
+            cpu_user_time = cpu_end.user - cpu_start.user
+        except Exception:
+            import time as _time
+            cpu_user_time = _time.process_time()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        self.resource_utilization = {
+            "cpu_user_time": cpu_user_time,
+            "cpu_system_time": cpu_end.system - cpu_start.system if hasattr(cpu_end, 'system') else 0,
+            "memory_peak_bytes": peak
+        }
+        # 汇总token统计
+        token_total = 0
+        if hasattr(self, "manager") and hasattr(self.manager, "llm_interface"):
+            token_total += getattr(self.manager.llm_interface, "token_counter", 0)
+        if hasattr(self, "executors"):
+            for exe in self.executors:
+                if hasattr(exe, "llm_interface"):
+                    token_total += getattr(exe.llm_interface, "token_counter", 0)
+        duration = wall_time_holder["experiment_wall_time"] if wall_time_holder and "experiment_wall_time" in wall_time_holder else (time.time() - start_wall)
+        self.resource_utilization["token_total"] = token_total
+        self.resource_utilization["token_per_sec"] = token_total / duration if duration > 0 else 0
+        if wall_time_holder is not None:
+            wall_time_holder["experiment_wall_time"] = time.time() - start_wall
         return results
 
     def _is_float(self, s: str) -> bool:
@@ -371,18 +408,27 @@ class QAExperiment:
                 console.print(f"[cyan]Expected A{idx}:[/cyan] {ea}")
         console.print(f"[magenta]Accuracy: {result.accuracy_score:.2f} | Time: {result.execution_time:.2f}s[/magenta]")
 
-    def generate_report(self) -> Dict[str, Any]:
+    def generate_report(self, experiment_wall_time: float = None) -> Dict[str, Any]:
         if not self.results:
             return {"status": "no_results"}
-        successful = [r for r in self.results if r.accuracy_score and r.accuracy_score >0.5]
-        avg_accuracy = sum(r.accuracy_score or 0 for r in self.results) / len(self.results)
-        return {
+        ru = getattr(self, "resource_utilization", {})
+        resource_utilization = {
+            "cpu_user_time": ru.get("cpu_user_time", 0),
+            "cpu_system_time": ru.get("cpu_system_time", 0),
+            "memory_peak_bytes": ru.get("memory_peak_bytes", 0),
+            "token_total": ru.get("token_total", 0),
+            "token_per_sec": ru.get("token_per_sec", 0),
+        }
+        num_executors = max(1, len(getattr(self, 'executors', [])))
+        avg_exec_time = sum(r.execution_time for r in self.results) / num_executors if self.results else 0
+        report = {
             "experiment_type": "qa",
             "total_tasks": len(self.results),
-            "successful_tasks": len(successful),
-            "success_rate": len(successful) / len(self.results) if self.results else 0,
-            "average_accuracy": avg_accuracy,
-            "average_execution_time": sum(r.execution_time for r in self.results) / len(self.results),
+            "successful_tasks": sum(1 for r in self.results if r.status == "correct"),
+            "success_rate": sum(1 for r in self.results if r.status == "correct") / len(self.results) if self.results else 0,
+            "average_execution_time": avg_exec_time,
+            "experiment_wall_time": experiment_wall_time,
+            "resource_utilization": resource_utilization,
             "detailed_results": [
                 {
                     "task_id": r.task_id,
@@ -394,3 +440,4 @@ class QAExperiment:
                 for r in self.results
             ],
         }
+        return report

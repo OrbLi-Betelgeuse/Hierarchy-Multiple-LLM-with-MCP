@@ -1,0 +1,52 @@
+{
+  "experiment_type": "summarization",
+  "total_tasks": 2,
+  "successful_tasks": 2,
+  "success_rate": 1.0,
+  "average_execution_time": 23.14617950003594,
+  "experiment_wall_time": 24.108173608779907,
+  "average_compression_ratio": 1.1030496902468294,
+  "average_quality_score": 0.8166666666666667,
+  "average_rouge_scores": {
+    "rouge1": 0.09537176934866778,
+    "rouge2": 0.026164079089126917,
+    "rougeL": 0.09537176934866778
+  },
+  "resource_utilization": {
+    "cpu_user_time": 0.125,
+    "cpu_system_time": 0.03125,
+    "memory_peak_bytes": 1020108,
+    "token_total": 3577,
+    "token_per_sec": 153.71626402714884
+  },
+  "detailed_results": [
+    {
+      "task_id": "doc_1",
+      "execution_time": 7.654829500010237,
+      "compression_ratio": 0.8197674418604651,
+      "quality_score": 0.8,
+      "rouge_scores": {
+        "rouge1": 0.11149825654311696,
+        "rouge2": 0.03902438931588342,
+        "rougeL": 0.11149825654311696
+      },
+      "summary_length": 423,
+      "original_length": 516,
+      "status": "success"
+    },
+    {
+      "task_id": "doc_2",
+      "execution_time": 15.491350000025705,
+      "compression_ratio": 1.3863319386331938,
+      "quality_score": 0.8333333333333334,
+      "rouge_scores": {
+        "rouge1": 0.0792452821542186,
+        "rouge2": 0.013303768862370413,
+        "rougeL": 0.0792452821542186
+      },
+      "summary_length": 994,
+      "original_length": 717,
+      "status": "success"
+    }
+  ]
+}

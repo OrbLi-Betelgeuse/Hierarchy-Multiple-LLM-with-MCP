@@ -2,25 +2,39 @@
   "results": [
     {
       "task_id": "table_1",
-      "generated_table": "| Product | Price |\n|---------|-------|\n| Laptop | $999 |\n| Phone | $699 |\n| Tablet | $399 |",
-      "execution_time": 0.004266700008884072,
+      "generated_table": "| Product     | Price |\n|------------|-------|\n| Laptop      | $999  |\n| Phone       | $699  |\n| Tablet      | $399  |",
+      "execution_time": 5.5456296999473125,
       "structure_score": 1.0,
-      "content_accuracy": 0.9633507853403142,
-      "error_messages": [
-        "Execution error: Task.__init__() missing 1 required positional argument: 'task_type'"
-      ]
+      "content_accuracy": 0.9124423963133641,
+      "error_messages": []
+    },
+    {
+      "task_id": "table_2",
+      "generated_table": "| Item      | Type |\n|----------|------|\n| Apple    | Fruit |\n| Banana  | Fruit |\n| Carrot   | Vegetable |",
+      "execution_time": 5.329228300019167,
+      "structure_score": 1.0,
+      "content_accuracy": 0.8818181818181818,
+      "error_messages": []
+    },
+    {
+      "task_id": "table_3",
+      "generated_table": "| Language | Year |\n|----------|------|\n| Python  | 1991 |\n| Java     | 1995 |\n| JavaScript | 1995 |",
+      "execution_time": 5.464964400045574,
+      "structure_score": 1.0,
+      "content_accuracy": 0.9569377990430622,
+      "error_messages": []
     }
   ],
   "performance": {
-    "time_sec": 0.3,
+    "time_sec": 17.22,
     "metrics": {
-      "total_tasks": 1,
+      "total_tasks": 3,
       "successful_tasks": 0,
       "success_rate": 0.0,
-      "average_execution_time": 0.004266700008884072,
-      "total_execution_time": 0.004266700008884072,
-      "min_execution_time": 0.004266700008884072,
-      "max_execution_time": 0.004266700008884072
+      "average_execution_time": 5.4466074666706845,
+      "total_execution_time": 16.339822400012054,
+      "min_execution_time": 5.329228300019167,
+      "max_execution_time": 5.5456296999473125
     }
   }
 }

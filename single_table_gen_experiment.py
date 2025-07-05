@@ -1,5 +1,5 @@
 """
-Enhanced Table Generation Experiment with Robust Error Handling
+Single Agent Table Generation Experiment
 """
 
 import asyncio
@@ -7,21 +7,19 @@ import json
 import logging
 import os
 import time
-import tracemalloc
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 from rich.console import Console
 from rich.table import Table as RichTable
 from rich.box import SIMPLE
+import tracemalloc
 
 from models.executor import Executor
 from models.llm_interface import create_llm_interface
-from models.manager import Manager
 
 logger = logging.getLogger(__name__)
 console = Console()
-
 
 @dataclass
 class TableTask:
@@ -30,7 +28,6 @@ class TableTask:
     required_columns: List[str]
     format_type: str  # "markdown", "csv", "json"
     expected_table: Optional[str] = None
-
 
 @dataclass
 class TableResult:
@@ -41,18 +38,11 @@ class TableResult:
     content_accuracy: Optional[float] = None
     error_messages: Optional[List[str]] = None
 
-
-class TableGenerationExperiment:
-    def __init__(
-        self, manager_config: Dict[str, Any], executor_configs: List[Dict[str, Any]]
-    ):
-        self.manager_config = manager_config
-        self.executor_configs = executor_configs
-        self.manager = None
-        self.executors = []
+class SingleTableGenerationExperiment:
+    def __init__(self, executor_config: Dict[str, Any]):
+        self.executor_config = executor_config
+        self.executor = None
         self.results = []
-
-        # Enhanced sample task with simpler description
         self.sample_tasks = [
             {
                 "id": "table_1",
@@ -95,52 +85,20 @@ class TableGenerationExperiment:
             }
         ]
 
+
     async def setup(self):
-        """Enhanced setup with executor instance tracking, supports executor-only mode."""
         try:
-            # Only set up manager if manager_config is provided
-            if self.manager_config is not None:
-                manager_llm = create_llm_interface(
-                    provider=self.manager_config["provider"],
-                    model_name=self.manager_config["model"],
-                    **self.manager_config.get("kwargs", {}),
-                )
-                self.manager = Manager(
-                    manager_id=self.manager_config["manager_id"],
-                    llm_interface=manager_llm,
-                )
-            else:
-                self.manager = None
-
-            # Executors setup with instance tracking
-            for config in self.executor_configs:
-                executor_llm = create_llm_interface(
-                    provider=config["provider"],
-                    model_name=config["model"],
-                    **config.get("kwargs", {}),
-                )
-                executor = Executor(
-                    executor_id=config["executor_id"],
-                    llm_interface=executor_llm,
-                    capabilities=config["capabilities"],
-                )
-                self.executors.append(executor)
-
-                # Register with manager if present
-                if self.manager is not None:
-                    await self.manager.register_executor(
-                        executor_id=config["executor_id"],
-                        capabilities=config["capabilities"],
-                    )
-                    # Ensure executor instance is accessible to manager
-                    if not hasattr(self.manager, "executor_instances"):
-                        self.manager.executor_instances = {}
-                    self.manager.executor_instances[config["executor_id"]] = executor
-
-            logger.info(
-                f"Initialized: {('1 manager, ' if self.manager else '0 manager, ')}{len(self.executors)} executors"
+            executor_llm = create_llm_interface(
+                provider=self.executor_config["provider"],
+                model_name=self.executor_config["model"],
+                **self.executor_config.get("kwargs", {}),
             )
-
+            self.executor = Executor(
+                executor_id=self.executor_config["executor_id"],
+                llm_interface=executor_llm,
+                capabilities=self.executor_config["capabilities"],
+            )
+            logger.info(f"Initialized single executor: {self.executor_config['executor_id']}")
         except Exception as e:
             logger.error(f"Setup failed: {e}")
             raise
@@ -150,121 +108,72 @@ class TableGenerationExperiment:
         # 资源监控开始
         tracemalloc.start()
         cpu_start = os.times()
-        async def run_one(task_data):
+        results = []
+        for task_data in self.sample_tasks:
             task = TableTask(**task_data)
             try:
-                result = await self._execute_with_fallback(task)
+                result = await self._execute_task(task)
                 self._display_task_result(task, result)
-                return result
+                results.append(result)
             except Exception as e:
                 logger.error(f"Task failed: {task.id} - {e}")
-                return TableResult(
-                    task_id=task.id,
-                    generated_table="",
-                    execution_time=0,
-                    error_messages=[str(e)],
+                results.append(
+                    TableResult(
+                        task_id=task.id,
+                        generated_table="",
+                        execution_time=0,
+                        error_messages=[str(e)],
+                    )
                 )
-        results = await asyncio.gather(*(run_one(td) for td in self.sample_tasks))
         self.results = results
         # 资源监控结束
         cpu_end = os.times()
-        try:
-            cpu_user_time = cpu_end.user - cpu_start.user
-        except Exception:
-            import time as _time
-            cpu_user_time = _time.process_time()
         current, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
         self.resource_utilization = {
-            "cpu_user_time": cpu_user_time,
-            "cpu_system_time": cpu_end.system - cpu_start.system if hasattr(cpu_end, 'system') else 0,
+            "cpu_user_time": cpu_end.user - cpu_start.user,
+            "cpu_system_time": cpu_end.system - cpu_start.system,
             "memory_peak_bytes": peak
         }
-        # 汇总token统计
-        token_total = 0
-        if hasattr(self, "manager") and hasattr(self.manager, "llm_interface"):
-            token_total += getattr(self.manager.llm_interface, "token_counter", 0)
-        if hasattr(self, "executors"):
-            for exe in self.executors:
-                if hasattr(exe, "llm_interface"):
-                    token_total += getattr(exe.llm_interface, "token_counter", 0)
-        duration = wall_time_holder["experiment_wall_time"] if wall_time_holder and "experiment_wall_time" in wall_time_holder else (time.time() - start_wall)
-        self.resource_utilization["token_total"] = token_total
-        self.resource_utilization["token_per_sec"] = token_total / duration if duration > 0 else 0
         if wall_time_holder is not None:
             wall_time_holder["experiment_wall_time"] = time.time() - start_wall
         return results
 
-    async def _execute_with_fallback(self, task: TableTask) -> TableResult:
-        """Execute task with multiple fallback strategies, supporting executor-only mode."""
+    async def _execute_task(self, task: TableTask) -> TableResult:
+        from models.executor import Task
         start_time = asyncio.get_event_loop().time()
         generated = ""
         error_messages = []
-        exec_time = None  # Will be set from LLM/executor if available
-
         try:
             prompt = self._build_simplified_prompt(task)
             console.print(f"\n[yellow]DEBUG Prompt Sent:[/yellow]\n{prompt}")
-
-            if self.manager is None:
-                # Executor-only mode: send the whole task to the first executor
-                if not self.executors:
-                    raise RuntimeError("No executors available")
-                executor = self.executors[0]
-                from models.executor import Task
-
-                task_obj = Task(
-                    task_id=f"exec_{task.id}",
-                    description=prompt,
-                    parameters={},
-                )
-                result = await executor.execute_task(task_obj)
-                if hasattr(result, "result"):
-                    generated = result.result.get("output", "")
-                    exec_time = result.result.get("execution_time")
-                elif isinstance(result, dict):
-                    generated = result.get("output", "")
-                    exec_time = result.get("execution_time")
+            task_obj = Task(
+                task_id=f"exec_{task.id}",
+                description=prompt,
+                parameters={},
+                task_type="table_generation",
+            )
+            result = await self.executor.execute_task(task_obj)
+            # Debug: 打印所有原始返回
+            console.print(f"[bold cyan]Executor result (repr):[/bold cyan] {repr(result)}")
+            console.print(f"[bold cyan]Executor result (str):[/bold cyan] {str(result)}")
+            if hasattr(result, "result"):
+                console.print(f"[bold cyan]Executor result.result:[/bold cyan] {repr(result.result)}")
+                if isinstance(result.result, dict) and 'output' in result.result:
+                    console.print(f"[bold cyan]Executor result.result['output']:[/bold cyan] {result.result['output']}")
+                    raw_output = result.result.get("output", "")
                 else:
-                    generated = str(result) if result else ""
+                    raw_output = str(result.result)
+            elif isinstance(result, dict) and result.get("output"):
+                console.print(f"[bold cyan]Executor dict output:[/bold cyan] {result['output']}")
+                raw_output = result.get("output", "")
             else:
-                # Full manager-executor flow
-                response = await self.manager.execute_task(
-                    task_description=prompt,
-                    task_type="general",
-                )
-                console.print(
-                    f"[yellow]DEBUG Raw Response:[/yellow]\n{json.dumps(response, indent=2)}"
-                )
-                if response:
-                    if response.get("output"):
-                        generated = response["output"]
-                        exec_time = response.get("execution_time")
-                    elif response.get("task_results"):
-                        task_results = response["task_results"]
-                        if task_results:
-                            first_result = list(task_results.values())[0]
-                            generated = first_result.get("output", "")
-                            exec_time = first_result.get("execution_time")
-                        else:
-                            generated = ""
-                    elif response.get("summary"):
-                        generated = str(response.get("summary", ""))
-                    else:
-                        generated = str(response)
-                else:
-                    error_messages.append("Empty response from manager")
-                    logger.warning("Empty response from manager.execute_task()")
-                    generated = await self._direct_executor_execution(task)
-
+                raw_output = str(result) if result else ""
+            generated = self._clean_table_output(raw_output)
         except Exception as e:
             error_messages.append(f"Execution error: {str(e)}")
             logger.error(f"Task execution failed: {str(e)}")
             generated = await self._simple_generation(task)
-
-        # 清洗表格输出，确保只返回表格内容
-        generated = self._clean_table_output(generated)
-
         # Evaluation
         metrics = self._evaluate_table(
             generated=generated,
@@ -275,62 +184,20 @@ class TableGenerationExperiment:
         metrics["error_messages"] = error_messages + (
             metrics.get("error_messages") or []
         )
-        # Add status field for evaluator compatibility
         structure_score = metrics.get("structure_score", 0)
         status = "completed" if structure_score and structure_score > 0.5 else "failed"
         metrics["status"] = status
-
-        # Use LLM/executor-reported execution time if available, else fallback to wall time
-        if exec_time is not None:
-            try:
-                exec_time = float(exec_time)
-            except Exception:
-                exec_time = None
-        final_exec_time = exec_time if exec_time is not None else (asyncio.get_event_loop().time() - start_time)
-
         return TableResult(
             task_id=task.id,
             generated_table=generated,
-            execution_time=final_exec_time,
+            execution_time=asyncio.get_event_loop().time() - start_time,
             structure_score=metrics.get("structure_score"),
             content_accuracy=metrics.get("content_accuracy"),
             error_messages=metrics.get("error_messages"),
-            # status is not a dataclass field, but will be present in dict for evaluator
         )
-
-    async def _direct_executor_execution(self, task: TableTask) -> str:
-        """Direct executor fallback"""
-        if not self.executors:
-            raise RuntimeError("No executors available")
-
-        try:
-            executor = self.executors[0]
-            # Create a proper task object that matches the expected format
-            from models.executor import Task
-
-            task_obj = Task(
-                task_id=f"direct_{task.id}",
-                description=self._build_simplified_prompt(task),
-                parameters={},
-                task_type="table_generation",
-            )
-            result = await executor.execute_task(task_obj)
-            # Handle different response formats
-            if hasattr(result, "result"):
-                raw_output = result.result.get("output", "")
-            elif isinstance(result, dict):
-                raw_output = result.get("output", "")
-            else:
-                raw_output = str(result) if result else ""
-            # 只返回清洗后的表格
-            return self._clean_table_output(raw_output)
-        except Exception as e:
-            logger.error(f"Direct executor execution failed: {e}")
-            raise
 
     async def _simple_generation(self, task: TableTask) -> str:
         try:
-            # Basic markdown table generation
             header = f"| {' | '.join(task.required_columns)} |"
             separator = (
                 "|"
@@ -344,15 +211,12 @@ class TableGenerationExperiment:
                     product = item.split("(")[0].strip()
                     price = item.split("(")[1].split(")")[0].strip()
                     rows.append(f"| {product} | {price} |")
-            table = "\n".join([header, separator] + rows)
-            # 只返回清洗后的表格
-            return self._clean_table_output(table)
+            return "\n".join([header, separator] + rows)
         except Exception as e:
             logger.error(f"Simple generation failed: {e}")
             return "Table generation failed"
 
     def _build_simplified_prompt(self, task: TableTask) -> str:
-        """Simplified prompt for better parsing, force LLM to only output table."""
         return (
             f"Create a {task.format_type} table with columns: {', '.join(task.required_columns)}\n"
             f"Data: {task.input_text}\n"
@@ -361,47 +225,30 @@ class TableGenerationExperiment:
         )
 
     def _clean_table_output(self, text: str) -> str:
-        """Remove <think>...</think> and code block markers from LLM output. Extract table if present after <think>."""
         import re
-
-        # Remove code block markers (``` and ```markdown)
         text = re.sub(r"```[a-zA-Z]*", "", text)
         text = re.sub(r"```", "", text)
-        # If <think>...</think> present, extract content after it
         think_match = re.search(r"<think>[\s\S]*?</think>", text, flags=re.IGNORECASE)
         if think_match:
             after_think = text[think_match.end():].strip()
             if after_think:
                 text = after_think
             else:
-                # If nothing after <think>, fallback to removing <think>...</think>
                 text = re.sub(r"<think>[\s\S]*?</think>", "", text, flags=re.IGNORECASE).strip()
         else:
             text = re.sub(r"<think>[\s\S]*?</think>", "", text, flags=re.IGNORECASE).strip()
-        # Fallback: if still no table, try to extract the first markdown table
         table_match = re.search(r"(\|.+\|\n(\|[- :]+\|\n)?(\|.+\|\n?)+)", text)
         if table_match:
             return table_match.group(1).strip()
         return text.strip()
 
-    def _evaluate_table(
-        self,
-        generated: str,
-        expected: Optional[str],
-        columns: List[str],
-        format_type: str,
-    ) -> Dict[str, Any]:
-        """Enhanced evaluation with pipeline-compatible metrics. Expects markdown table format: | header | header | ... |"""
+    def _evaluate_table(self, generated: str, expected: Optional[str], columns: List[str], format_type: str) -> Dict[str, Any]:
         metrics = {
             "structure_score": 0.0,
             "content_accuracy": None,
             "error_messages": [],
         }
-
-        # Clean generated output and extract table
         generated = self._clean_table_output(generated)
-
-        # Structure evaluation
         headers = []
         try:
             if format_type == "markdown":
@@ -417,10 +264,7 @@ class TableGenerationExperiment:
                     )
         except Exception as e:
             metrics["error_messages"].append(str(e))
-
         print(f"DEBUG: headers={headers}, columns={columns}")
-
-        # Content evaluation
         if expected:
             try:
                 metrics["content_accuracy"] = SequenceMatcher(
@@ -430,30 +274,24 @@ class TableGenerationExperiment:
                 ).ratio()
             except Exception as e:
                 metrics["error_messages"].append(f"Content evaluation error: {e}")
-
         return metrics
 
     def _normalize_table(self, table: str) -> str:
-        """Normalization for comparison."""
         return " ".join(line.strip() for line in table.split("\n") if line.strip())
 
     def _display_task_result(self, task: TableTask, result: TableResult):
-        """Rich display of task results."""
         console.print(f"\n[bold]Task {task.id}[/bold]")
         console.print("[blue]Generated:[/blue]")
         self._visualize_table(result.generated_table, task.format_type)
-
         if task.expected_table:
             console.print("[green]Expected:[/green]")
             self._visualize_table(task.expected_table, task.format_type)
-
         console.print(
             f"[cyan]Structure Score: {result.structure_score:.2f}[/cyan] | "
             f"[magenta]Time: {result.execution_time:.2f}s[/magenta]"
         )
 
     def _visualize_table(self, table: str, format_type: str):
-        """Rich visualization for tables."""
         try:
             if format_type == "markdown":
                 lines = [line.strip() for line in table.split("\n") if line.strip()]
@@ -462,12 +300,10 @@ class TableGenerationExperiment:
                     headers = [h.strip() for h in lines[0].split("|") if h.strip()]
                     for header in headers:
                         rich_table.add_column(header)
-
                     for line in lines[2:]:
                         cells = [c.strip() for c in line.split("|") if c.strip()]
                         if len(cells) == len(headers):
                             rich_table.add_row(*cells)
-
                     console.print(rich_table)
         except Exception as e:
             console.print(f"[red]Visualization error: {e}[/red]")
@@ -487,9 +323,8 @@ class TableGenerationExperiment:
             "token_total": ru.get("token_total", 0),
             "token_per_sec": ru.get("token_per_sec", 0),
         }
-        # Collect all per-task execution times
-        execution_times = [r.execution_time for r in self.results]
-        avg_exec_time = sum(execution_times) / len(execution_times) if execution_times else 0
+        num_executors = max(1, len(getattr(self, 'executors', [])))
+        avg_exec_time = sum(r.execution_time for r in self.results) / num_executors if self.results else 0
         return {
             "experiment_type": "table_generation",
             "total_tasks": len(self.results),
@@ -497,7 +332,6 @@ class TableGenerationExperiment:
             "success_rate": len(successful) / len(self.results) if self.results else 0,
             "average_structure_score": avg_structure,
             "average_execution_time": avg_exec_time,
-            "execution_times": execution_times,
             "experiment_wall_time": experiment_wall_time,
             "resource_utilization": resource_utilization,
             "detailed_results": [

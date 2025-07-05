@@ -60,13 +60,46 @@ class SingleAgentPipeline:
         if task_name == "summarization":
             experiment = SummarizationExperiment(manager_config, [executor_config])
             await experiment.setup()
+            cpu_start = time.process_time()
             results = await experiment.run_experiment()
+            cpu_end = time.process_time()
+            cpu_user_time = cpu_end - cpu_start
+            # 强制覆盖resource_utilization
+            if not hasattr(experiment, "resource_utilization"):
+                experiment.resource_utilization = {}
+            experiment.resource_utilization["cpu_user_time"] = cpu_user_time
+            elapsed = time.time() - start_time
+            report = experiment.generate_report_with_status(experiment_wall_time=elapsed)
+            output_path = Path(f"{self.output_dir}/{task_name}/executor_only_output.json")
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            # 额外：写 metrics 文件，供对比表导出
+            metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            console.print(Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s"))
+            return report
         elif task_name == "qa":
             experiment = QAExperiment(manager_config, [executor_config])
             await experiment.setup()
+            cpu_start = time.process_time()
             results = await experiment.run_experiment()
+            cpu_end = time.process_time()
+            cpu_user_time = cpu_end - cpu_start
+            if not hasattr(experiment, "resource_utilization"):
+                experiment.resource_utilization = {}
+            experiment.resource_utilization["cpu_user_time"] = cpu_user_time
+            elapsed = time.time() - start_time
+            report = experiment.generate_report(experiment_wall_time=elapsed)
+            metrics_path = Path(f"{self.output_dir}/single_qa_metrics.json")
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            return report
         elif task_name == "table_generation":
-            experiment = TableGenerationExperiment(manager_config, [executor_config])
+            from single_table_gen_experiment import SingleTableGenerationExperiment
+
+            experiment = SingleTableGenerationExperiment(executor_config)
             await experiment.setup()
             results = await experiment.run_experiment()
         else:
@@ -81,6 +114,34 @@ class SingleAgentPipeline:
                 results_dicts.append(vars(r))
 
         elapsed = time.time() - start_time
+
+        # Summarization: 详细报告，包含 success/fail
+        if task_name == "summarization":
+            report = experiment.generate_report_with_status(experiment_wall_time=elapsed)
+            output_path = Path(f"{self.output_dir}/{task_name}/executor_only_output.json")
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            # 额外：写 metrics 文件，供对比表导出
+            metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            console.print(Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s"))
+            return report
+        # QA: 写 metrics 文件，保证 resource_utilization 输出
+        if task_name == "qa":
+            report = experiment.generate_report(experiment_wall_time=elapsed)
+            metrics_path = Path(f"{self.output_dir}/single_qa_metrics.json")
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            return report
+        # Table: 写 metrics 文件，保证 resource_utilization 输出
+        if task_name == "table_generation":
+            report = experiment.generate_report(experiment_wall_time=elapsed)
+            metrics_path = Path(f"{self.output_dir}/single_table_metrics.json")
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2)
+            return report
 
         metrics = self.evaluator.calculate_basic_metrics(results_dicts)
         performance = {"time_sec": round(elapsed, 2), "metrics": metrics}

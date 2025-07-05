@@ -1,0 +1,27 @@
+{
+  "experiment_type": "qa",
+  "total_tasks": 1,
+  "successful_tasks": 1,
+  "success_rate": 1.0,
+  "average_execution_time": 14.65792769996915,
+  "experiment_wall_time": 15.53053092956543,
+  "resource_utilization": {
+    "cpu_user_time": 0.09375,
+    "cpu_system_time": 0.046875,
+    "memory_peak_bytes": 334261,
+    "token_total": 1737,
+    "token_per_sec": 118.39682764694533
+  },
+  "detailed_results": [
+    {
+      "task_id": "qa_3",
+      "accuracy_score": 1.0,
+      "execution_time": 14.65792769996915,
+      "per_question_times": [
+        3.020852200104855,
+        2.9063667999580503
+      ],
+      "status": "success"
+    }
+  ]
+}

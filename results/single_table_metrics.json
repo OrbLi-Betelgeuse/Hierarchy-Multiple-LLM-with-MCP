@@ -1,0 +1,36 @@
+{
+  "experiment_type": "table_generation",
+  "total_tasks": 3,
+  "successful_tasks": 3,
+  "success_rate": 1.0,
+  "average_structure_score": 1.0,
+  "average_execution_time": 15.509904499864206,
+  "experiment_wall_time": 16.402865648269653,
+  "resource_utilization": {
+    "cpu_user_time": 0.21875,
+    "cpu_system_time": 0.0,
+    "memory_peak_bytes": 463137,
+    "token_total": 0,
+    "token_per_sec": 0
+  },
+  "detailed_results": [
+    {
+      "task_id": "table_1",
+      "structure_score": 1.0,
+      "execution_time": 6.636557699996047,
+      "status": "success"
+    },
+    {
+      "task_id": "table_2",
+      "structure_score": 1.0,
+      "execution_time": 4.322566099930555,
+      "status": "success"
+    },
+    {
+      "task_id": "table_3",
+      "structure_score": 1.0,
+      "execution_time": 4.550780699937604,
+      "status": "success"
+    }
+  ]
+}

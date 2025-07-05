@@ -35,6 +35,13 @@ class LLMInterface(ABC):
     def __init__(self, model_name: str, **kwargs):
         self.model_name = model_name
         self.kwargs = kwargs
+        self.token_counter = 0  # 累计本实例的token数
+
+    def add_tokens(self, n):
+        self.token_counter += n
+
+    def get_token_count(self):
+        return self.token_counter
 
     @abstractmethod
     async def generate(self, prompt: str, **kwargs) -> LLMResponse:
@@ -59,13 +66,15 @@ class MockInterface(LLMInterface):
         """Generate mock response."""
         await asyncio.sleep(0.1)  # Simulate processing time
 
-        return LLMResponse(
+        resp = LLMResponse(
             content=f"Mock response to: {prompt[:50]}...",
             model=self.model_name,
             tokens_used=len(prompt.split()) + 10,
             latency=0.1,
             metadata={"mock": True},
         )
+        self.add_tokens(resp.tokens_used or 0)
+        return resp
 
     async def generate_with_system_prompt(
         self, system_prompt: str, user_prompt: str, **kwargs
@@ -73,13 +82,15 @@ class MockInterface(LLMInterface):
         """Generate mock response with system prompt."""
         await asyncio.sleep(0.1)  # Simulate processing time
 
-        return LLMResponse(
+        resp = LLMResponse(
             content=f"Mock response (system: {system_prompt[:30]}...): {user_prompt[:50]}...",
             model=self.model_name,
             tokens_used=len(system_prompt.split()) + len(user_prompt.split()) + 10,
             latency=0.1,
             metadata={"mock": True},
         )
+        self.add_tokens(resp.tokens_used or 0)
+        return resp
 
 
 class OllamaInterface(LLMInterface):
@@ -110,7 +121,7 @@ class OllamaInterface(LLMInterface):
             end_time = asyncio.get_event_loop().time()
             latency = end_time - start_time
 
-            return LLMResponse(
+            resp = LLMResponse(
                 content=response["message"]["content"],
                 model=self.model_name,
                 tokens_used=response.get("prompt_eval_count", 0)
@@ -122,6 +133,8 @@ class OllamaInterface(LLMInterface):
                     "eval_duration": response.get("eval_duration"),
                 },
             )
+            self.add_tokens(resp.tokens_used or 0)
+            return resp
         except asyncio.TimeoutError:
             logger.error(f"Ollama request timed out after 120 seconds")
             raise Exception("LLM request timed out")
@@ -152,7 +165,7 @@ class OllamaInterface(LLMInterface):
             end_time = asyncio.get_event_loop().time()
             latency = end_time - start_time
 
-            return LLMResponse(
+            resp = LLMResponse(
                 content=response["message"]["content"],
                 model=self.model_name,
                 tokens_used=response.get("prompt_eval_count", 0)
@@ -164,6 +177,8 @@ class OllamaInterface(LLMInterface):
                     "eval_duration": response.get("eval_duration"),
                 },
             )
+            self.add_tokens(resp.tokens_used or 0)
+            return resp
         except asyncio.TimeoutError:
             logger.error(f"Ollama request timed out after 120 seconds")
             raise Exception("LLM request timed out")
@@ -198,7 +213,7 @@ class OpenAIInterface(LLMInterface):
             end_time = asyncio.get_event_loop().time()
             latency = end_time - start_time
 
-            return LLMResponse(
+            resp = LLMResponse(
                 content=response.choices[0].message.content,
                 model=self.model_name,
                 tokens_used=response.usage.total_tokens if response.usage else None,
@@ -208,6 +223,8 @@ class OpenAIInterface(LLMInterface):
                     "model": response.model,
                 },
             )
+            self.add_tokens(resp.tokens_used or 0)
+            return resp
         except Exception as e:
             logger.error(f"Error generating response with OpenAI: {e}")
             raise
@@ -231,7 +248,7 @@ class OpenAIInterface(LLMInterface):
             end_time = asyncio.get_event_loop().time()
             latency = end_time - start_time
 
-            return LLMResponse(
+            resp = LLMResponse(
                 content=response.choices[0].message.content,
                 model=self.model_name,
                 tokens_used=response.usage.total_tokens if response.usage else None,
@@ -241,6 +258,8 @@ class OpenAIInterface(LLMInterface):
                     "model": response.model,
                 },
             )
+            self.add_tokens(resp.tokens_used or 0)
+            return resp
         except Exception as e:
             logger.error(
                 f"Error generating response with system prompt using OpenAI: {e}"
