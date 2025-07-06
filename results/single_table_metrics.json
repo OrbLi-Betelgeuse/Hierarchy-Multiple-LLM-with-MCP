@@ -1,36 +1,36 @@
 {
   "experiment_type": "table_generation",
   "total_tasks": 3,
-  "successful_tasks": 3,
-  "success_rate": 1.0,
-  "average_structure_score": 1.0,
-  "average_execution_time": 15.509904499864206,
-  "experiment_wall_time": 16.402865648269653,
+  "successful_tasks": 0,
+  "success_rate": 0.0,
+  "average_structure_score": 0.0,
+  "average_execution_time": 0.032654957845807076,
+  "experiment_wall_time": 0.0536351203918457,
   "resource_utilization": {
-    "cpu_user_time": 0.21875,
+    "cpu_user_time": 0.04000000000000001,
     "cpu_system_time": 0.0,
-    "memory_peak_bytes": 463137,
+    "memory_peak_bytes": 276376,
     "token_total": 0,
     "token_per_sec": 0
   },
   "detailed_results": [
     {
       "task_id": "table_1",
-      "structure_score": 1.0,
-      "execution_time": 6.636557699996047,
-      "status": "success"
+      "structure_score": 0.0,
+      "execution_time": 0.018003332894295454,
+      "status": "failed"
     },
     {
       "task_id": "table_2",
-      "structure_score": 1.0,
-      "execution_time": 4.322566099930555,
-      "status": "success"
+      "structure_score": 0.0,
+      "execution_time": 0.007437542080879211,
+      "status": "failed"
     },
     {
       "task_id": "table_3",
-      "structure_score": 1.0,
-      "execution_time": 4.550780699937604,
-      "status": "success"
+      "structure_score": 0.0,
+      "execution_time": 0.00721408287063241,
+      "status": "failed"
     }
   ]
 }

@@ -35,6 +35,7 @@ class Manager:
         self.mcp_manager = MCPManager(manager_id)
         self.task_history: List[Dict[str, Any]] = []
         self.executor_registry: Dict[str, Dict[str, Any]] = {}
+        self.executor_instances: Dict[str, Any] = {}
 
         # Manager-specific prompts
         self.decomposition_prompt_template = """
@@ -463,3 +464,7 @@ Return your response as a JSON object with the following structure:
                 for executor_id, info in self.executor_registry.items()
             },
         }
+
+    def add_executor_instance(self, executor):
+        """注册executor实例，便于直接调用其execute_task方法"""
+        self.executor_instances[executor.executor_id] = executor

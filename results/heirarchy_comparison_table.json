@@ -1,68 +1,68 @@
 [
   {
     "Task": "Summarization (Quality)",
-    "Executor-Only (Single-Agent)": 0.8166666666666667,
-    "Manager–Executor with MCP": "N/A",
-    "Relative Improvement": "-100.0%"
+    "Executor-Only (Single-Agent)": 0.0,
+    "Manager–Executor with MCP": 0.0,
+    "Relative Improvement": "N/A"
   },
   {
     "Task": "QA (Accuracy)",
-    "Executor-Only (Single-Agent)": 1.0,
+    "Executor-Only (Single-Agent)": 0.0,
     "Manager–Executor with MCP": 1.0,
-    "Relative Improvement": "0.0%"
+    "Relative Improvement": "N/A"
   },
   {
     "Task": "Summarization Time (avg)",
-    "Executor-Only (Single-Agent)": 23.14617950003594,
-    "Manager–Executor with MCP": 23.337443900003564,
-    "Relative Improvement": "0.8%"
+    "Executor-Only (Single-Agent)": 0.003388811950571835,
+    "Manager–Executor with MCP": 20.315446250373498,
+    "Relative Improvement": "599385.8%"
   },
   {
     "Task": "QA Time (avg)",
-    "Executor-Only (Single-Agent)": 14.65792769996915,
-    "Manager–Executor with MCP": 4.1374899499933235,
-    "Relative Improvement": "-71.8%"
+    "Executor-Only (Single-Agent)": 0.029285917058587074,
+    "Manager–Executor with MCP": 0.7283530414570123,
+    "Relative Improvement": "2387.0%"
   },
   {
     "Task": "Table Time (avg)",
-    "Executor-Only (Single-Agent)": 15.509904499864206,
-    "Manager–Executor with MCP": 5.876216199947521,
-    "Relative Improvement": "-62.1%"
+    "Executor-Only (Single-Agent)": 0.032654957845807076,
+    "Manager–Executor with MCP": 5.863936458015814,
+    "Relative Improvement": "17857.3%"
   },
   {
     "Task": "Summarization Memory (peak)",
-    "Executor-Only (Single-Agent)": 1020108,
-    "Manager–Executor with MCP": 284006,
-    "Relative Improvement": "-72.2%"
+    "Executor-Only (Single-Agent)": "N/A",
+    "Manager–Executor with MCP": "N/A",
+    "Relative Improvement": "N/A"
   },
   {
     "Task": "QA Memory (peak)",
-    "Executor-Only (Single-Agent)": 334261,
-    "Manager–Executor with MCP": 302355,
-    "Relative Improvement": "-9.5%"
+    "Executor-Only (Single-Agent)": 283453,
+    "Manager–Executor with MCP": 243382,
+    "Relative Improvement": "-14.1%"
   },
   {
     "Task": "Table Memory (peak)",
-    "Executor-Only (Single-Agent)": 463137,
-    "Manager–Executor with MCP": 481756,
-    "Relative Improvement": "4.0%"
+    "Executor-Only (Single-Agent)": 276376,
+    "Manager–Executor with MCP": 567069,
+    "Relative Improvement": "105.2%"
   },
   {
     "Task": "Summarization CPU (user)",
-    "Executor-Only (Single-Agent)": 0.125,
-    "Manager–Executor with MCP": 0.046875,
-    "Relative Improvement": "-62.5%"
+    "Executor-Only (Single-Agent)": "N/A",
+    "Manager–Executor with MCP": "N/A",
+    "Relative Improvement": "N/A"
   },
   {
     "Task": "QA CPU (user)",
-    "Executor-Only (Single-Agent)": 0.09375,
-    "Manager–Executor with MCP": 0.015625,
-    "Relative Improvement": "-83.3%"
+    "Executor-Only (Single-Agent)": 0.029196,
+    "Manager–Executor with MCP": 0.03,
+    "Relative Improvement": "2.8%"
   },
   {
     "Task": "Table CPU (user)",
-    "Executor-Only (Single-Agent)": 0.21875,
-    "Manager–Executor with MCP": 0.109375,
-    "Relative Improvement": "-50.0%"
+    "Executor-Only (Single-Agent)": 0.04000000000000001,
+    "Manager–Executor with MCP": 0.13000000000000003,
+    "Relative Improvement": "225.0%"
   }
 ]

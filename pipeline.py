@@ -59,7 +59,7 @@ class ExperimentPipeline:
         return {
             "manager": {
                 "provider": "ollama",
-                "model": "deepseek-r1:7b",
+                "model": "qwen2.5:7b",
                 "manager_id": "manager_01",
                 "kwargs": {"base_url": "http://localhost:11434"},
             },
@@ -106,17 +106,17 @@ class ExperimentPipeline:
                 # },
                 {
                     "provider": "ollama",
-                    "model": "deepseek-r1:7b",
+                    "model": "qwen2.5:7b",
                     "executor_id": "executor_06",
-                    "capabilities": ["question_answering", "general"],
+                    "capabilities": ["summarization", "question_answering", "general"],
                     "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11436"},
+                    "kwargs": {"base_url": "http://localhost:11434"},
                 },
                 {
                     "provider": "ollama",
-                    "model": "deepseek-r1:7b",
+                    "model": "llama2:7b",
                     "executor_id": "executor_07",
-                    "capabilities": ["question_answering", "general"],
+                    "capabilities": ["summarization", "question_answering", "general"],
                     "specialized": False,
                     "kwargs": {"base_url": "http://localhost:11434"},
                 },
@@ -518,6 +518,7 @@ class ExperimentPipeline:
                 metrics_file = results_dir / f"{experiment_type}_metrics.json"
                 if experiment_type == "summarization":
                     from dataclasses import is_dataclass, asdict
+
                     metrics_to_dump = self.results["summarization"]
                     if is_dataclass(metrics_to_dump):
                         metrics_to_dump = asdict(metrics_to_dump)

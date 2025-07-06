@@ -1,18 +1,18 @@
 {
   "experiment_type": "table_generation",
   "total_tasks": 3,
-  "successful_tasks": 3,
-  "success_rate": 1.0,
-  "average_execution_time": 5.876216199947521,
+  "successful_tasks": 2,
+  "success_rate": 0.6666666666666666,
+  "average_execution_time": 5.863936458015814,
   "total_execution_time": 0.0,
   "manager_performance": {},
   "executor_performance": {},
   "quality_metrics": {},
   "resource_utilization": {
-    "cpu_user_time": 0.109375,
-    "cpu_system_time": 0.046875,
-    "memory_peak_bytes": 481756,
-    "token_total": 7473,
-    "token_per_sec": 157.31346489433912
+    "cpu_user_time": 0.13000000000000003,
+    "cpu_system_time": 0.010000000000000002,
+    "memory_peak_bytes": 567069,
+    "token_total": 6981,
+    "token_per_sec": 159.27854630072682
   }
 }

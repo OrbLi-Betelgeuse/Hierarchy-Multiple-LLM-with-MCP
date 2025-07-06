@@ -1,13 +1,13 @@
 | Task | Executor-Only (Single-Agent) | Manager–Executor with MCP | Relative Improvement |
 |---|---|---|---|
-| Summarization (Quality) | 0.8166666666666667 | N/A | -100.0% |
-| QA (Accuracy) | 1.0 | 1.0 | 0.0% |
-| Summarization Time (avg) | 23.14617950003594 | 23.337443900003564 | 0.8% |
-| QA Time (avg) | 14.65792769996915 | 4.1374899499933235 | -71.8% |
-| Table Time (avg) | 15.509904499864206 | 5.876216199947521 | -62.1% |
-| Summarization Memory (peak) | 1020108 | 284006 | -72.2% |
-| QA Memory (peak) | 334261 | 302355 | -9.5% |
-| Table Memory (peak) | 463137 | 481756 | 4.0% |
-| Summarization CPU (user) | 0.125 | 0.046875 | -62.5% |
-| QA CPU (user) | 0.09375 | 0.015625 | -83.3% |
-| Table CPU (user) | 0.21875 | 0.109375 | -50.0% |
+| Summarization (Quality) | 0.0 | 0.0 | N/A |
+| QA (Accuracy) | 0.0 | 1.0 | N/A |
+| Summarization Time (avg) | 0.003388811950571835 | 20.315446250373498 | 599385.8% |
+| QA Time (avg) | 0.029285917058587074 | 0.7283530414570123 | 2387.0% |
+| Table Time (avg) | 0.032654957845807076 | 5.863936458015814 | 17857.3% |
+| Summarization Memory (peak) | N/A | N/A | N/A |
+| QA Memory (peak) | 283453 | 243382 | -14.1% |
+| Table Memory (peak) | 276376 | 567069 | 105.2% |
+| Summarization CPU (user) | N/A | N/A | N/A |
+| QA CPU (user) | 0.029196 | 0.03 | 2.8% |
+| Table CPU (user) | 0.04000000000000001 | 0.13000000000000003 | 225.0% |

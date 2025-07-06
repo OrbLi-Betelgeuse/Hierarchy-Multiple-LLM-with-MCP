@@ -3,50 +3,36 @@
   "total_tasks": 2,
   "successful_tasks": 2,
   "success_rate": 1.0,
-  "average_execution_time": 20.56831499992404,
-  "experiment_wall_time": 21.646697759628296,
-  "average_compression_ratio": 1.0305252829943887,
-  "average_quality_score": 0.75,
+  "average_execution_time": 0.003388811950571835,
+  "average_compression_ratio": 0.0,
+  "average_quality_score": 0.0,
   "average_rouge_scores": {
-    "rouge1": 0.08608379152279211,
-    "rouge2": 0.01831653570542951,
-    "rougeL": 0.0784682434122694
-  },
-  "resource_utilization": {
-    "cpu_user_time": 0.109375,
-    "cpu_system_time": 0.015625,
-    "memory_peak_bytes": 1034103,
-    "token_total": 3419,
-    "token_per_sec": 165.46662289708405
+    "rouge1": 0.0,
+    "rouge2": 0.0,
+    "rougeL": 0.0
   },
   "detailed_results": [
     {
       "task_id": "doc_1",
-      "execution_time": 6.9834952999372035,
-      "compression_ratio": 0.8197674418604651,
-      "quality_score": 0.75,
+      "execution_time": 0.0039000411052256823,
+      "compression_ratio": 0.0,
+      "quality_score": 0.0,
       "rouge_scores": {
-        "rouge1": 0.0982456127300708,
-        "rouge2": 0.01955990127031765,
-        "rougeL": 0.09122806887042169
-      },
-      "summary_length": 423,
-      "original_length": 516,
-      "status": "success"
+        "rouge1": 0.0,
+        "rouge2": 0.0,
+        "rougeL": 0
+      }
     },
     {
       "task_id": "doc_2",
-      "execution_time": 13.584819699986838,
-      "compression_ratio": 1.2412831241283124,
-      "quality_score": 0.75,
+      "execution_time": 0.002877582795917988,
+      "compression_ratio": 0.0,
+      "quality_score": 0.0,
       "rouge_scores": {
-        "rouge1": 0.07392197031551341,
-        "rouge2": 0.017073170140541365,
-        "rougeL": 0.06570841795411712
-      },
-      "summary_length": 890,
-      "original_length": 717,
-      "status": "success"
+        "rouge1": 0.0,
+        "rouge2": 0.0,
+        "rougeL": 0
+      }
     }
   ]
 }

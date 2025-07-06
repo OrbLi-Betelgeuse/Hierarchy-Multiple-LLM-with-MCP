@@ -3,16 +3,36 @@
   "total_tasks": 2,
   "successful_tasks": 2,
   "success_rate": 1.0,
-  "average_execution_time": 23.337443900003564,
-  "total_execution_time": 0.0,
-  "manager_performance": {},
-  "executor_performance": {},
-  "quality_metrics": {},
-  "resource_utilization": {
-    "cpu_user_time": 0.046875,
-    "cpu_system_time": 0.0,
-    "memory_peak_bytes": 284006,
-    "token_total": 10702,
-    "token_per_sec": 229.26219148974673
-  }
+  "average_execution_time": 20.315446250373498,
+  "average_compression_ratio": 0.030918555998832344,
+  "average_quality_score": 0.0,
+  "average_rouge_scores": {
+    "rouge1": 0.0,
+    "rouge2": 0.0,
+    "rougeL": 0.0
+  },
+  "detailed_results": [
+    {
+      "task_id": "doc_1",
+      "execution_time": 21.50262795877643,
+      "compression_ratio": 0.011627906976744186,
+      "quality_score": 0.0,
+      "rouge_scores": {
+        "rouge1": 0.0,
+        "rouge2": 0.0,
+        "rougeL": 0.0
+      }
+    },
+    {
+      "task_id": "doc_2",
+      "execution_time": 19.128264541970566,
+      "compression_ratio": 0.0502092050209205,
+      "quality_score": 0.0,
+      "rouge_scores": {
+        "rouge1": 0.0,
+        "rouge2": 0.0,
+        "rougeL": 0.0
+      }
+    }
+  ]
 }

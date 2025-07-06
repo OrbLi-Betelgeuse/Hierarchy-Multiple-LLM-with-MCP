@@ -46441,3 +46441,2114 @@ Putting all this together, I think the execution plan is structured well with cl
 2025-07-05 20:09:12,705 - experiments.summarization_experiment - WARNING - rouge-score not available, skipping ROUGE calculation
 2025-07-05 20:09:12,705 - experiments.summarization_experiment - INFO - Completed task doc_2
 2025-07-05 20:09:12,724 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:51:17,563 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,563 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,568 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,568 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,569 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:51:17,580 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,580 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,587 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,588 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:17,588 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 2 executors
+2025-07-06 14:51:17,588 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-07-06 14:51:17,596 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-06 14:51:17,596 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,596 - models.manager - ERROR - Error in task decomposition: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,596 - models.manager - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,596 - experiments.summarization_experiment - ERROR - Error running task doc_1: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,596 - experiments.summarization_experiment - ERROR - Failed to complete task doc_1: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,596 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-07-06 14:51:17,598 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-07-06 14:51:17,598 - models.llm_interface - ERROR - Error generating response with system prompt using Ollama: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,598 - models.manager - ERROR - Error in task decomposition: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,598 - models.manager - ERROR - Task execution failed: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,598 - experiments.summarization_experiment - ERROR - Error running task doc_2: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,598 - experiments.summarization_experiment - ERROR - Failed to complete task doc_2: model "deepseek-r1:7b" not found, try pulling it first (status code: 404)
+2025-07-06 14:51:17,601 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:51:40,955 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,955 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,960 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,960 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,961 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:51:40,972 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,972 - models.manager - INFO - Executor executor_06 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,977 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,977 - models.manager - INFO - Executor executor_07 registered with capabilities: ['question_answering', 'general']
+2025-07-06 14:51:40,977 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 2 executors
+2025-07-06 14:51:40,977 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-07-06 14:51:49,277 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:51:49,279 - models.manager - INFO - Task decomposed into 3 subtasks
+2025-07-06 14:52:00,580 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:52:00,581 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["T001", "T002"],
+                "estimated_duration": "5 days",
+                "dependencies": [],
+                "quality_gates": ["check_key_points_extraction", "check_main_arguments_extraction"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "Executor_A": ["T001"],
+                "Executor_B": ["T002"],
+                "Writer_C": ["T003"]
+            },
+            "estimated_costs": {
+                "computational": "$500",
+                "time": "40 hours"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Insufficient understanding of key points and main arguments may lead to a poor summary.",
+                "mitigation": "Ensure that the executors have relevant experience in text analysis and academic writing. Conduct regular check-ins with the team to ensure clarity."
+            },
+            {
+                "risk": "Delays in task completion due to unforeseen issues.",
+                "mitigation": "Set clear deadlines for each task and provide sufficient buffer time. Have backup resources ready if primary executors are unavailable."
+            }
+        ]
+    }
+}
+```
+
+### Execution Plan Breakdown:
+
+#### Phase 1
+- **Phase ID**: phase_1
+- **Tasks**:
+  - Task T001: Identify and extract key points from the document.
+  - Task T002: Extract main arguments and their supporting evidence from the document.
+- **Estimated Duration**: 5 days (assuming an average of one day per task with some overlap)
+- **Dependencies**: None
+- **Quality Gates**:
+  - check_key_points_extraction: Ensure that all key points are accurately identified.
+  - check_main_arguments_extraction: Verify that main arguments and their supporting evidence are correctly extracted.
+
+#### Resource Allocation
+- **Executor Assignments**:
+  - Executor_A is assigned to Task T001 for identifying and extracting key points.
+  - Executor_B is assigned to Task T002 for extracting main arguments and their supporting evidence.
+  - Writer_C will combine the output from Executors A and B to create a medium-length academic summary in Task T003.
+- **Estimated Costs**:
+  - Computational: $500 (assuming standard costs for software tools if needed).
+  - Time: 40 hours (split across three tasks, with an average of approximately 13.33 hours per task).
+
+#### Risk Mitigation
+- **Risk**: Insufficient understanding of key points and main arguments may lead to a poor summary.
+  - **Mitigation Strategy**: Ensure that the executors have relevant experience in text analysis and academic writing. Conduct regular check-ins with the team to ensure clarity.
+- **Risk**: Delays in task completion due to unforeseen issues.
+  - **Mitigation Strategy**: Set clear deadlines for each task and provide sufficient buffer time. Have backup resources ready if primary executors are unavailable.
+
+This plan ensures that all necessary tasks are completed efficiently, with quality control measures in place to ensure the accuracy of the summary.
+2025-07-06 14:52:00,582 - models.mcp_protocol - INFO - Task registered: T001
+2025-07-06 14:52:00,582 - models.mcp_protocol - INFO - Task registered: T002
+2025-07-06 14:52:00,582 - models.mcp_protocol - INFO - Task registered: T003
+2025-07-06 14:52:00,582 - models.manager - INFO - Executing task T001 with executor executor_06
+2025-07-06 14:52:00,582 - models.manager - WARNING - No executor instance found for task T001
+2025-07-06 14:52:00,582 - models.manager - INFO - Executing task T002 with executor executor_07
+2025-07-06 14:52:00,582 - models.manager - WARNING - No executor instance found for task T002
+2025-07-06 14:52:00,582 - models.manager - INFO - Executing task T003 with executor executor_06
+2025-07-06 14:52:00,582 - models.manager - WARNING - No executor instance found for task T003
+2025-07-06 14:52:00,582 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:52:01,250 - absl - INFO - Using default tokenizer.
+2025-07-06 14:52:01,250 - experiments.summarization_experiment - INFO - Completed task doc_1
+2025-07-06 14:52:01,250 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-07-06 14:52:13,133 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:52:13,134 - models.manager - INFO - Task decomposed into 8 subtasks
+2025-07-06 14:52:23,432 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:52:23,434 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["001", "002"],
+                "estimated_duration": "4 days",
+                "dependencies": [],
+                "quality_gates": ["key_points_extraction_complete"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["003", "004"],
+                "estimated_duration": "4 days",
+                "dependencies": ["phase_1"],
+                "quality_gates": ["challenges_and_policies_summary_complete"]
+            },
+            {
+                "phase_id": "phase_3",
+                "tasks": ["005", "006"],
+                "estimated_duration": "4 days",
+                "dependencies": ["phase_2"],
+                "quality_gates": ["technological_innovation_and_consumer_behavior_summary_complete"]
+            },
+            {
+                "phase_id": "phase_4",
+                "tasks": ["007", "008"],
+                "estimated_duration": "5 days",
+                "dependencies": ["phase_3"],
+                "quality_gates": ["international_cooperation_and_synthesis_complete"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "exec_1": ["001", "002"],
+                "exec_2": ["003", "004"],
+                "exec_3": ["005", "006"],
+                "exec_4": ["007", "008"]
+            },
+            "estimated_costs": {
+                "computational": "1,500 USD",
+                "time": "25 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Inadequate understanding of the document's content",
+                "mitigation": "Provide additional training and resources for executors to enhance their analytical and reading comprehension skills."
+            },
+            {
+                "risk": "Late completion of tasks",
+                "mitigation": "Implement a strict timeline with regular check-ins and set milestones. Provide timely feedback and support to maintain progress."
+            },
+            {
+                "risk": "Inaccurate or incomplete synthesis of key points",
+                "mitigation": "Conduct peer reviews for each phase before moving on to the next. Ensure that all key points are clearly articulated and well-supported."
+            }
+        ]
+    }
+}
+```
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 004
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 005
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 006
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 007
+2025-07-06 14:52:23,435 - models.mcp_protocol - INFO - Task registered: 008
+2025-07-06 14:52:23,435 - models.manager - INFO - Executing task 001 with executor executor_07
+2025-07-06 14:52:23,435 - models.manager - WARNING - No executor instance found for task 001
+2025-07-06 14:52:23,435 - models.manager - INFO - Executing task 002 with executor executor_06
+2025-07-06 14:52:23,435 - models.manager - WARNING - No executor instance found for task 002
+2025-07-06 14:52:23,435 - models.manager - INFO - Executing task 003 with executor executor_07
+2025-07-06 14:52:23,435 - models.manager - WARNING - No executor instance found for task 003
+2025-07-06 14:52:23,435 - models.manager - INFO - Executing task 004 with executor executor_06
+2025-07-06 14:52:23,436 - models.manager - WARNING - No executor instance found for task 004
+2025-07-06 14:52:23,436 - models.manager - INFO - Executing task 005 with executor executor_07
+2025-07-06 14:52:23,436 - models.manager - WARNING - No executor instance found for task 005
+2025-07-06 14:52:23,436 - models.manager - INFO - Executing task 006 with executor executor_06
+2025-07-06 14:52:23,436 - models.manager - WARNING - No executor instance found for task 006
+2025-07-06 14:52:23,436 - models.manager - INFO - Executing task 007 with executor executor_07
+2025-07-06 14:52:23,436 - models.manager - WARNING - No executor instance found for task 007
+2025-07-06 14:52:23,436 - models.manager - INFO - Executing task 008 with executor executor_06
+2025-07-06 14:52:23,436 - models.manager - WARNING - No executor instance found for task 008
+2025-07-06 14:52:23,436 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:52:23,436 - absl - INFO - Using default tokenizer.
+2025-07-06 14:52:23,438 - experiments.summarization_experiment - INFO - Completed task doc_2
+2025-07-06 14:52:23,444 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:53:26,995 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:26,995 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,000 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,000 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,001 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:53:27,011 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,011 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,017 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,017 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:53:27,017 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 2 executors
+2025-07-06 14:53:27,017 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-07-06 14:53:33,634 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:53:33,636 - models.manager - ERROR - Failed to parse decomposition response: ```json
+{
+    "subtasks": [
+        {
+            "task_id": "001",
+            "description": "Identify and extract key points from the document, focusing on AI applications in healthcare.",
+            "executor_requirements": ["analytical_reading", "content_extraction"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 2
+        },
+        {
+            "task_id": "002",
+            "description": "Summarize the main arguments and challenges discussed in the document, maintaining an academic style.",
+            "executor_requirements": ["academic_writing", "summary_crafting"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 2
+        },
+        {
+            "task_id": "003",
+            "description": "Combine the key points and main arguments into a cohesive summary with a medium length.",
+            "executor_requirements": ["cohesive_summary", "length_control"],
+            "estimated_complexity": 4,
+            "dependencies": ["001", "002"],
+            "priority": 3
+        },
+        {
+            "task_id": "004",
+            "description": "Review the summary to ensure it meets the required academic style and target length.",
+            "executor_requirements": ["academic_style_review", "length_check"],
+            "estimated_complexity": 2,
+            "dependencies": ["003"],
+            "priority": 1
+        }
+    ],
+    "execution_order": ["001", "002", "003", "004"],
+    "overall_strategy": "The task will be divided into identifying key points, summarizing main arguments, combining them for a cohesive summary, and finally reviewing the draft to ensure it meets all requirements."
+}
+```
+2025-07-06 14:53:33,636 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:53:45,173 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:53:45,175 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "2 days",
+                "dependencies": [],
+                "quality_gates": ["check_summary_accuracy", "check_coverage"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Summarization_Manager": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "$100",
+                "time": "$50"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Inadequate understanding of key points and main arguments",
+                "mitigation": "Conduct a pre-task review meeting with the executor to ensure clear understanding of focus areas. Provide detailed instructions on the target length, style, and document analysis."
+            },
+            {
+                "risk": "Failure to meet quality standards",
+                "mitigation": "Implement regular checkpoints for reviewing progress against the summary's accuracy and coverage. Use a peer review process where another team member checks the draft before finalization."
+            },
+            {
+                "risk": "Late delivery of the summary",
+                "mitigation": "Allocate buffer time in the project timeline to account for unforeseen delays. Monitor task progress closely and adjust as necessary."
+            }
+        ]
+    }
+}
+```
+
+### Detailed Explanation:
+
+1. **Execution Plan Phases:**
+   - **Phase 1 (phase_1):** 
+     - **Tasks:** Only one main task (`main_task`) is assigned to this phase.
+     - **Estimated Duration:** 2 days, which should be sufficient for the summarization of a comprehensive document.
+     - **Dependencies:** No dependencies are identified for this phase.
+     - **Quality Gates:** Two quality gates are set: `check_summary_accuracy` and `check_coverage`. These ensure that the summary is both accurate in its key points and covers all main arguments effectively.
+
+2. **Resource Allocation:**
+   - The task is assigned to an "AI_Summarization_Manager." This role will be responsible for summarizing the document according to the specified criteria.
+   - Estimated costs include a computational cost of $100 (which might cover software tools or any specialized services needed) and a time-based cost of $50, reflecting the labor hours required.
+
+3. **Risk Mitigation:**
+   - **Inadequate Understanding Risk:** A pre-task review meeting will be conducted to ensure that the executor has a clear understanding of the key points and main arguments to focus on.
+   - **Quality Standards Risk:** Regular checkpoints and peer reviews will help maintain quality standards, ensuring both accuracy and comprehensive coverage.
+   - **Late Delivery Risk:** Buffer time is included in the timeline to manage potential delays.
+
+This structured approach ensures that all aspects of the task are well-managed from start to finish.
+2025-07-06 14:53:45,175 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-06 14:53:45,175 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-06 14:53:45,175 - models.manager - WARNING - No executor instance found for task main_task
+2025-07-06 14:53:45,176 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:53:45,294 - absl - INFO - Using default tokenizer.
+2025-07-06 14:53:45,294 - experiments.summarization_experiment - INFO - Completed task doc_1
+2025-07-06 14:53:45,294 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-07-06 14:53:56,951 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:53:56,952 - models.manager - ERROR - Failed to parse decomposition response: ```json
+{
+    "subtasks": [
+        {
+            "task_id": "T001",
+            "description": "Identify key points and main arguments related to climate change and its impacts.",
+            "executor_requirements": ["analytical_skills", "knowledge_of_climate_change"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "T002",
+            "description": "Summarize the key points and main arguments, ensuring an academic style.",
+            "executor_requirements": ["writing_skills", "academic_writing"],
+            "estimated_complexity": 3,
+            "dependencies": ["T001"],
+            "priority": 3
+        },
+        {
+            "task_id": "T003",
+            "description": "Outline the structure of the summary document, including introduction, main body, and conclusion.",
+            "executor_requirements": ["organizational_skills", "writing_skills"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 2
+        },
+        {
+            "task_id": "T004",
+            "description": "Draft the introduction of the summary, setting the context and importance of climate change.",
+            "executor_requirements": ["writing_skills", "knowledge_of_climate_change"],
+            "estimated_complexity": 3,
+            "dependencies": ["T001", "T002", "T003"],
+            "priority": 4
+        },
+        {
+            "task_id": "T005",
+            "description": "Draft the main body of the summary, focusing on key points and arguments related to climate change impacts.",
+            "executor_requirements": ["writing_skills", "knowledge_of_climate_change"],
+            "estimated_complexity": 4,
+            "dependencies": ["T001", "T002", "T003"],
+            "priority": 5
+        },
+        {
+            "task_id": "T006",
+            "description": "Draft the conclusion of the summary, emphasizing the urgency and benefits of renewable energy.",
+            "executor_requirements": ["writing_skills", "knowledge_of_climate_change"],
+            "estimated_complexity": 3,
+            "dependencies": ["T002", "T005"],
+            "priority": 4
+        },
+        {
+            "task_id": "T007",
+            "description": "Finalize the summary by integrating feedback and ensuring coherence, flow, and academic tone.",
+            "executor_requirements": ["writing_skills", "academic_writing"],
+            "estimated_complexity": 3,
+            "dependencies": ["T004", "T005", "T006"],
+            "priority": 3
+        }
+    ],
+    "execution_order": ["T001", "T002", "T003", "T004", "T005", "T006", "T007"],
+    "overall_strategy": "The overall approach involves first identifying and organizing the key points, then drafting and structuring the summary document. This is followed by finalizing the content to ensure coherence and academic tone."
+}
+```
+2025-07-06 14:53:56,953 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:54:07,808 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:54:07,809 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "2 days",
+                "dependencies": [],
+                "quality_gates": ["summary_quality_check"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Manager": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "Low",
+                "time": "2 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Insufficient understanding of the document by the AI",
+                "mitigation": "Ensure multiple rounds of review and validation with domain experts."
+            },
+            {
+                "risk": "Inadequate focus on key points and main arguments",
+                "mitigation": "Use a structured approach to extract key points and main arguments from the document."
+            },
+            {
+                "risk": "Lack of academic style adherence",
+                "mitigation": "Utilize predefined templates or guidelines for maintaining an academic tone."
+            }
+        ]
+    }
+}
+```
+
+### Explanation:
+
+1. **Execution Plan Phases:**
+   - **Phase 1 (phase_1):** This phase focuses on summarizing the given document. The task ID (`main_task`) is assigned to this phase, which will take approximately 2 days.
+
+2. **Resource Allocation:**
+   - The AI_Manager role is responsible for executing the main_task.
+   - Estimated computational and time costs are kept low since this is a relatively straightforward task involving text processing and summarization.
+
+3. **Quality Control Measures:**
+   - A quality check (`summary_quality_check`) will be performed to ensure that key points, main arguments, and an academic style are accurately reflected in the summary.
+
+4. **Contingency Plans (Risk Mitigation):**
+   - **Insufficient Understanding of Document:** This risk is mitigated by involving domain experts for a thorough review.
+   - **Inadequate Focus on Key Points and Main Arguments:** A structured approach ensures that critical elements are not overlooked.
+   - **Lack of Academic Style Adherence:** Predefined templates or guidelines ensure consistency in style.
+
+This detailed execution plan provides a clear roadmap for the task, ensuring all necessary aspects are covered to deliver an effective summary.
+2025-07-06 14:54:07,809 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-06 14:54:07,809 - models.manager - INFO - Executing task main_task with executor executor_07
+2025-07-06 14:54:07,809 - models.manager - WARNING - No executor instance found for task main_task
+2025-07-06 14:54:07,809 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:54:07,810 - absl - INFO - Using default tokenizer.
+2025-07-06 14:54:07,810 - experiments.summarization_experiment - INFO - Completed task doc_2
+2025-07-06 14:54:07,819 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:55:58,280 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,280 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,285 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,285 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,286 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:55:58,296 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,297 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,302 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,302 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:55:58,302 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 2 executors
+2025-07-06 14:55:58,302 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-07-06 14:56:07,999 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:08,000 - models.manager - ERROR - Failed to parse decomposition response: ```json
+{
+    "subtasks": [
+        {
+            "task_id": "001",
+            "description": "Identify and list key points in the document related to AI applications in healthcare.",
+            "executor_requirements": ["analytical_skill", "attention_to_detail"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "002",
+            "description": "Summarize the main arguments about AI's current state in healthcare, including diagnostic imaging and drug discovery.",
+            "executor_requirements": ["writing_skill", "understanding_of_AI"],
+            "estimated_complexity": 3,
+            "dependencies": ["001"],
+            "priority": 4
+        },
+        {
+            "task_id": "003",
+            "description": "Summarize the discussion on AI's impact in patient monitoring and predictive analytics.",
+            "executor_requirements": ["writing_skill", "understanding_of_AI"],
+            "estimated_complexity": 2,
+            "dependencies": ["001"],
+            "priority": 4
+        },
+        {
+            "task_id": "004",
+            "description": "Identify and list the challenges associated with AI implementation in healthcare, focusing on data privacy and security.",
+            "executor_requirements": ["analytical_skill", "attention_to_detail"],
+            "estimated_complexity": 2,
+            "dependencies": ["001"],
+            "priority": 3
+        },
+        {
+            "task_id": "005",
+            "description": "Identify and list the challenges associated with AI validation, regulatory approval, and ethical considerations.",
+            "executor_requirements": ["analytical_skill", "attention_to_detail"],
+            "estimated_complexity": 2,
+            "dependencies": ["001"],
+            "priority": 3
+        },
+        {
+            "task_id": "006",
+            "description": "Summarize the overall perspective on AI in healthcare, emphasizing collaboration and balanced integration.",
+            "executor_requirements": ["writing_skill", "understanding_of_AI"],
+            "estimated_complexity": 2,
+            "dependencies": ["001", "002", "003", "004", "005"],
+            "priority": 4
+        }
+    ],
+    "execution_order": ["001", "002", "003", "004", "005", "006"],
+    "overall_strategy": "This strategy involves breaking down the task into identifying key points, summarizing main arguments and challenges separately, and then synthesizing these elements into a coherent summary. Each subtask builds upon the previous ones to ensure comprehensive coverage of the document."
+}
+```
+2025-07-06 14:56:08,000 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:56:18,969 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:18,970 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "2 days",
+                "dependencies": [],
+                "quality_gates": ["review_summary"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Manager": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "$100 (for computational resources if needed)",
+                "time": "2 person-days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Lack of detailed knowledge about the domain",
+                "mitigation": "Assign a subject matter expert to review and provide input during the summary creation process."
+            },
+            {
+                "risk": "Inadequate quality control measures",
+                "mitigation": "Implement a peer-review system for the summary, involving additional team members or external experts in healthcare AI."
+            },
+            {
+                "risk": "Missed focus areas",
+                "mitigation": "Define clear key points and main arguments beforehand to ensure they are covered. Use checklists during the summarization process."
+            }
+        ]
+    }
+}
+```
+
+### Explanation:
+
+1. **Phase Breakdown:**
+   - **Phase 1:** This phase focuses on the main task of summarizing the document.
+     - Tasks: The main_task is assigned to a single executor, AI_Manager.
+     - Duration: Estimated at 2 days for the summary creation.
+     - Dependencies: None.
+
+2. **Resource Allocation:**
+   - Executor Assignments:
+     - AI_Manager is responsible for executing the task_id "main_task".
+   - Cost Estimates:
+     - Computational costs are minimal and estimated at $100, assuming any required computational resources are readily available or not significant.
+     - Time estimate of 2 person-days.
+
+3. **Quality Control Measures:**
+   - A quality gate "review_summary" is set to ensure the summary meets the academic style requirements, covers key points and main arguments effectively.
+
+4. **Risk Mitigation Strategies:**
+   - **Risk:** Lack of detailed knowledge about the domain.
+     - Strategy: Involve a subject matter expert (SME) in reviewing and providing input during the summarization process.
+   - **Risk:** Inadequate quality control measures.
+     - Strategy: Implement a peer-review system involving additional team members or external experts to ensure thoroughness.
+   - **Risk:** Missed focus areas.
+     - Strategy: Use checklists and predefined key points to ensure all aspects are covered.
+
+This execution plan ensures that the summarization task is completed efficiently, effectively, and with high quality while addressing potential risks.
+2025-07-06 14:56:18,971 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-06 14:56:18,971 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-06 14:56:18,971 - models.manager - WARNING - No executor instance found for task main_task
+2025-07-06 14:56:18,971 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:56:19,089 - absl - INFO - Using default tokenizer.
+2025-07-06 14:56:19,089 - experiments.summarization_experiment - INFO - Completed task doc_1
+2025-07-06 14:56:19,089 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-07-06 14:56:31,808 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:31,809 - models.manager - ERROR - Failed to parse decomposition response: ```json
+{
+    "subtasks": [
+        {
+            "task_id": "001",
+            "description": "Identify and summarize key points related to climate change impacts.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "002",
+            "description": "Summarize the main arguments for urgent and comprehensive action on climate change.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "003",
+            "description": "Summarize the focus areas of renewable energy sources and their importance.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "004",
+            "description": "Summarize the challenges in transitioning to renewable energy.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 3,
+            "dependencies": ["003"],
+            "priority": 3
+        },
+        {
+            "task_id": "005",
+            "description": "Summarize the role of policy support in renewable energy development.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "006",
+            "description": "Summarize the role of technological innovation in reducing costs and improving performance.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "007",
+            "description": "Summarize the need for changes in consumer behavior and business practices.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "008",
+            "description": "Summarize the importance of international cooperation in addressing climate change.",
+            "executor_requirements": ["reading", "analytical"],
+            "estimated_complexity": 2,
+            "dependencies": [],
+            "priority": 3
+        },
+        {
+            "task_id": "009",
+            "description": "Combine all summarized sections into a cohesive medium-length summary in an academic style.",
+            "executor_requirements": ["writing", "analytical"],
+            "estimated_complexity": 4,
+            "dependencies": ["001", "002", "003", "004", "005", "006", "007", "008"],
+            "priority": 5
+        }
+    ],
+    "execution_order": ["001", "002", "003", "004", "005", "006", "007", "008", "009"],
+    "overall_strategy": "Break down the task into specific sections focusing on key points, main arguments, and support materials. Each section will be summarized individually before combining them to form a cohesive summary."
+}
+```
+2025-07-06 14:56:31,809 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:56:42,023 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:42,023 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "2 days",
+                "dependencies": [],
+                "quality_gates": ["review"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Mgr_01": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "Low",
+                "time": "2 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Inadequate understanding of the document",
+                "mitigation": "Provide background reading materials and ensure a clear understanding before starting the task."
+            },
+            {
+                "risk": "Insufficient time for quality checks",
+                "mitigation": "Schedule regular check-ins to ensure that quality gates are met without compromising on time."
+            }
+        ]
+    }
+}
+```
+
+### Detailed Execution Plan
+
+#### Phases
+1. **Phase 1: Summary Creation**
+   - **Tasks**: 
+     - `main_task`: Summarize the document as per the specified criteria.
+   - **Estimated Duration**: 2 days (from start to completion)
+   - **Dependencies**: None
+   - **Quality Gates**:
+     - Review by a peer or senior colleague for accuracy and clarity.
+
+#### Resource Allocation
+- **Executor Assignments**:
+  - `AI_Mgr_01` is assigned the task of summarizing the document.
+- **Estimated Costs**:
+  - Computational: Low (primarily cognitive effort)
+  - Time: 2 days
+
+#### Risk Mitigation
+1. **Risk**: Inadequate understanding of the document.
+   - **Mitigation Strategy**: Provide background reading materials and ensure a clear understanding before starting the task.
+2. **Risk**: Insufficient time for quality checks.
+   - **Mitigation Strategy**: Schedule regular check-ins to ensure that quality gates are met without compromising on time.
+
+This plan ensures that the summary is completed within the allocated timeframe while maintaining high-quality standards through structured review processes and mitigating potential risks effectively.
+2025-07-06 14:56:42,023 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-06 14:56:42,023 - models.manager - INFO - Executing task main_task with executor executor_07
+2025-07-06 14:56:42,023 - models.manager - WARNING - No executor instance found for task main_task
+2025-07-06 14:56:42,023 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:56:42,024 - absl - INFO - Using default tokenizer.
+2025-07-06 14:56:42,024 - experiments.summarization_experiment - INFO - Completed task doc_2
+2025-07-06 14:56:42,027 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:56:42,327 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,327 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,332 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,332 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,334 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:56:42,344 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,344 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,349 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,349 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:42,349 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-06 14:56:42,350 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-06 14:56:42,684 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:42,685 - models.executor - INFO - Task qa_3_q1 completed successfully in 0.33s
+2025-07-06 14:56:42,692 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-06 14:56:45,787 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:45,789 - models.executor - INFO - Task qa_3_q2 completed successfully in 3.10s
+2025-07-06 14:56:45,797 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-06 14:56:46,179 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:46,179 - models.executor - INFO - Task judge_1 completed successfully in 0.38s
+2025-07-06 14:56:46,179 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-06 14:56:46,340 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:46,341 - models.executor - INFO - Task judge_2 completed successfully in 0.16s
+2025-07-06 14:56:46,354 - utils.evaluation - INFO - Metrics exported to results/qa_metrics.json
+2025-07-06 14:56:46,354 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:56:46,638 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,638 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,642 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,642 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,644 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:56:46,654 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,654 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,659 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,659 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:56:46,659 - experiments.table_generation_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-06 14:56:46,661 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Product, Price
+Data: Laptop ($999), Phone ($699), Tablet ($399)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:56:46,664 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Item, Type
+Data: Apple (Fruit), Banana (Fruit), Carrot (Vegetable)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:56:46,666 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Language, Year
+Data: Python (1991), Java (1995), JavaScript (1995)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:56:49,648 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:49,650 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:56:55,738 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:55,740 - models.manager - INFO - Task decomposed into 4 subtasks
+2025-07-06 14:56:57,728 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:56:57,729 - models.manager - INFO - Task decomposed into 3 subtasks
+2025-07-06 14:57:00,540 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:00,541 - models.mcp_protocol - INFO - Task registered: format_table
+2025-07-06 14:57:00,541 - models.manager - INFO - Executing task format_table with executor executor_06
+2025-07-06 14:57:00,542 - models.executor - INFO - Executor executor_06 starting task: format_table
+2025-07-06 14:57:05,717 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:05,717 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:57:05,717 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:57:05,718 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:57:05,718 - models.manager - INFO - Executing task 001 with executor executor_07
+2025-07-06 14:57:05,718 - models.executor - INFO - Executor executor_07 starting task: 001
+2025-07-06 14:57:06,402 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:06,404 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:57:06,405 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:57:06,405 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:57:06,405 - models.mcp_protocol - INFO - Task registered: 004
+2025-07-06 14:57:06,405 - models.manager - INFO - Executing task 001 with executor executor_06
+2025-07-06 14:57:06,406 - models.executor - INFO - Executor executor_06 starting task: 001
+2025-07-06 14:57:07,565 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:07,567 - models.executor - INFO - Task format_table completed successfully in 7.03s
+2025-07-06 14:57:07,567 - models.manager - INFO - Task format_table completed successfully
+2025-07-06 14:57:07,567 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:57:07,911 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:07,912 - models.executor - INFO - Task 001 completed successfully in 1.51s
+2025-07-06 14:57:07,912 - models.manager - INFO - Task 001 completed successfully
+2025-07-06 14:57:07,912 - models.manager - INFO - Executing task 002 with executor executor_07
+2025-07-06 14:57:07,912 - models.executor - INFO - Executor executor_07 starting task: 002
+2025-07-06 14:57:09,682 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:09,684 - models.executor - INFO - Task 002 completed successfully in 1.77s
+2025-07-06 14:57:09,685 - models.manager - INFO - Task 002 completed successfully
+2025-07-06 14:57:09,685 - models.manager - INFO - Executing task 003 with executor executor_06
+2025-07-06 14:57:09,685 - models.executor - INFO - Executor executor_06 starting task: 003
+2025-07-06 14:57:10,453 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:10,455 - models.executor - INFO - Task 003 completed successfully in 0.77s
+2025-07-06 14:57:10,456 - models.manager - INFO - Task 003 completed successfully
+2025-07-06 14:57:10,456 - models.manager - INFO - Executing task 004 with executor executor_07
+2025-07-06 14:57:10,457 - models.executor - INFO - Executor executor_07 starting task: 004
+2025-07-06 14:57:12,218 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:12,220 - models.executor - INFO - Task 004 completed successfully in 1.76s
+2025-07-06 14:57:12,220 - models.manager - INFO - Task 004 completed successfully
+2025-07-06 14:57:12,220 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:57:15,332 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:15,333 - models.executor - INFO - Task 001 completed successfully in 9.62s
+2025-07-06 14:57:15,333 - models.manager - INFO - Task 001 completed successfully
+2025-07-06 14:57:15,334 - models.manager - INFO - Executing task 002 with executor executor_06
+2025-07-06 14:57:15,334 - models.executor - INFO - Executor executor_06 starting task: 002
+2025-07-06 14:57:15,735 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:15,736 - models.executor - INFO - Task 002 completed successfully in 0.40s
+2025-07-06 14:57:15,736 - models.manager - INFO - Task 002 completed successfully
+2025-07-06 14:57:15,736 - models.manager - INFO - Executing task 003 with executor executor_07
+2025-07-06 14:57:15,736 - models.executor - INFO - Executor executor_07 starting task: 003
+2025-07-06 14:57:18,072 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:18,073 - models.executor - INFO - Task 003 completed successfully in 2.34s
+2025-07-06 14:57:18,076 - models.manager - INFO - Task 003 completed successfully
+2025-07-06 14:57:18,077 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:57:18,128 - utils.evaluation - INFO - Metrics exported to results/table_metrics.json
+2025-07-06 14:57:18,129 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:57:33,526 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,526 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,531 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,531 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,533 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:57:33,543 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,543 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,548 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,548 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:57:33,548 - experiments.summarization_experiment - INFO - Experiment setup complete: 1 manager, 2 executors
+2025-07-06 14:57:33,549 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_1
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Artificial Intelligence (AI) has emerged as a transformative force in healthcare, 
+                offering unprecedented opportunities to improve patient outcomes, enhance diagnostic 
+                accuracy, and streamline healthcare delivery. This comprehensive analysis explores 
+                the current state of AI applications in healthcare, examining both the remarkable 
+                advances and the significant challenges that lie ahead.
+
+                The integration of AI in healthcare spans multiple domains, from diagnostic imaging 
+                to drug discovery, from patient monitoring to administrative efficiency. Machine 
+                learning algorithms, particularly deep learning models, have demonstrated remarkable 
+                capabilities in analyzing medical images, detecting patterns that might elude human 
+                observers, and providing quantitative assessments of disease progression.
+
+                In diagnostic imaging, AI systems have achieved performance levels comparable to 
+                or exceeding those of human radiologists in detecting various conditions, including 
+                breast cancer, lung nodules, and retinal diseases. These systems can process vast 
+                amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
+                might be missed in routine clinical practice.
+
+                Beyond imaging, AI is revolutionizing drug discovery and development. Traditional 
+                drug discovery processes are notoriously time-consuming and expensive, often taking 
+                over a decade and costing billions of dollars. AI-powered approaches are accelerating 
+                this process by predicting molecular interactions, identifying potential drug targets, 
+                and optimizing drug candidates through virtual screening and molecular modeling.
+
+                Patient monitoring and predictive analytics represent another critical application 
+                area. AI systems can continuously monitor patient vital signs, detect early warning 
+                signs of deterioration, and predict adverse events before they occur. This proactive 
+                approach to patient care has the potential to significantly reduce mortality rates 
+                and improve overall healthcare outcomes.
+
+                However, the implementation of AI in healthcare is not without challenges. Data 
+                privacy and security concerns remain paramount, as healthcare data is among the 
+                most sensitive personal information. Ensuring compliance with regulations such as 
+                HIPAA while maintaining the utility of AI systems requires careful consideration 
+                of data handling practices and security measures.
+
+                Another significant challenge is the need for robust validation and regulatory 
+                approval processes. AI systems must demonstrate not only technical accuracy but 
+                also clinical utility and safety. The regulatory landscape for AI in healthcare 
+                is still evolving, requiring ongoing collaboration between developers, healthcare 
+                providers, and regulatory bodies.
+
+                Ethical considerations also play a crucial role in the adoption of AI in healthcare. 
+                Issues of algorithmic bias, transparency in decision-making, and the potential 
+                for automation to replace human judgment must be carefully addressed. Ensuring 
+                that AI systems are fair, interpretable, and accountable is essential for building 
+                trust among healthcare providers and patients.
+
+                The future of AI in healthcare holds immense promise, but realizing this potential 
+                requires addressing these challenges systematically. Collaboration between technology 
+                developers, healthcare professionals, policymakers, and patients will be essential 
+                for creating AI systems that truly enhance healthcare delivery while maintaining 
+                the highest standards of safety, efficacy, and ethical practice.
+
+                As we move forward, it is crucial to maintain a balanced perspective that recognizes 
+                both the transformative potential of AI and the importance of human expertise and 
+                judgment in healthcare. The most successful implementations of AI in healthcare 
+                will be those that augment rather than replace human capabilities, creating 
+                collaborative systems that leverage the strengths of both artificial and human 
+                intelligence.
+                
+            
+2025-07-06 14:57:43,112 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:43,114 - models.manager - ERROR - Failed to parse decomposition response: ```json
+{
+    "subtasks": [
+        {
+            "task_id": "001",
+            "description": "Identify and extract key points from the document.",
+            "executor_requirements": ["text_analysis", "content_extraction"],
+            "estimated_complexity": 3,
+            "dependencies": [],
+            "priority": 4
+        },
+        {
+            "task_id": "002",
+            "description": "Extract main arguments supporting the key points.",
+            "executor_requirements": ["logical_reasoning", "text_analysis"],
+            "estimated_complexity": 3,
+            "dependencies": ["001"],
+            "priority": 4
+        },
+        {
+            "task_id": "003",
+            "description": "Summarize the current state of AI applications in healthcare.",
+            "executor_requirements": ["writing", "content_synthesis"],
+            "estimated_complexity": 4,
+            "dependencies": ["001", "002"],
+            "priority": 5
+        },
+        {
+            "task_id": "004",
+            "description": "Summarize the challenges and issues in implementing AI in healthcare.",
+            "executor_requirements": ["writing", "content_synthesis"],
+            "estimated_complexity": 3,
+            "dependencies": ["001", "002"],
+            "priority": 4
+        },
+        {
+            "task_id": "005",
+            "description": "Summarize the future outlook and potential of AI in healthcare.",
+            "executor_requirements": ["writing", "content_synthesis"],
+            "estimated_complexity": 3,
+            "dependencies": ["001", "002"],
+            "priority": 4
+        },
+        {
+            "task_id": "006",
+            "description": "Combine the summaries of key points, main arguments, current state, challenges, and future outlook into a cohesive medium-length academic summary.",
+            "executor_requirements": ["writing", "content_integration"],
+            "estimated_complexity": 4,
+            "dependencies": ["003", "004", "005"],
+            "priority": 5
+        }
+    ],
+    "execution_order": ["001", "002", "003", "004", "005", "006"],
+    "overall_strategy": "The overall approach involves breaking down the document into its core components (key points, main arguments), summarizing specific sections (current state, challenges, future outlook) and then integrating these summaries to form a cohesive final summary. Each step builds on the previous ones, ensuring that all important aspects of the document are covered."
+}
+```
+2025-07-06 14:57:43,114 - models.manager - INFO - Task decomposed into 1 subtasks
+2025-07-06 14:57:55,048 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:57:55,050 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["main_task"],
+                "estimated_duration": "2 days",
+                "dependencies": [],
+                "quality_gates": ["summary_quality_check"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "AI_Mgr01": ["main_task"]
+            },
+            "estimated_costs": {
+                "computational": "Low to Medium",
+                "time": "2 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Insufficient understanding of the document by the executor",
+                "mitigation": "Ensure the executor has a clear and detailed briefing on the task requirements, including key points and main arguments."
+            },
+            {
+                "risk": "Lack of academic writing skills",
+                "mitigation": "Assign an academic editor or supervisor to review and refine the summary for style and accuracy."
+            },
+            {
+                "risk": "Time constraints",
+                "mitigation": "Provide a buffer in the timeline to allow for revisions and unexpected delays."
+            }
+        ]
+    }
+}
+```
+
+### Detailed Execution Plan
+
+#### Phases
+1. **Phase 1**
+   - **Tasks**: Main task (Summarize the document)
+   - **Estimated Duration**: 2 days
+   - **Dependencies**: None
+   - **Quality Gates**:
+     - `summary_quality_check`: Ensure that the summary captures key points, main arguments, and adheres to an academic style.
+
+#### Resource Allocation
+- **Executor Assignments**:
+  - AI_Mgr01: Responsible for executing all tasks in phase 1.
+- **Estimated Costs**:
+  - Computational: Low to Medium (depending on access to necessary tools or software)
+  - Time: 2 days
+
+#### Risk Mitigation
+1. **Risk**: Insufficient understanding of the document by the executor.
+   - **Mitigation Strategy**: Provide a clear and detailed briefing on the task requirements, including key points and main arguments. This ensures that AI_Mgr01 has all necessary information to complete the summary effectively.
+
+2. **Risk**: Lack of academic writing skills.
+   - **Mitigation Strategy**: Assign an academic editor or supervisor to review and refine the summary for style and accuracy. This step helps maintain the required academic standard throughout the execution process.
+
+3. **Risk**: Time constraints.
+   - **Mitigation Strategy**: Provide a buffer in the timeline to allow for revisions and unexpected delays. This buffer ensures that there is enough time to address any issues that may arise during the summary creation process, ensuring high-quality output.
+
+### Additional Notes
+- Ensure regular communication with the executor to monitor progress and provide feedback.
+- Use a template or structured approach for summarizing the document to guide the execution effectively.
+- Consider involving subject matter experts (SMEs) in healthcare AI if necessary to validate key points and arguments.
+2025-07-06 14:57:55,050 - models.mcp_protocol - INFO - Task registered: main_task
+2025-07-06 14:57:55,050 - models.manager - INFO - Executing task main_task with executor executor_06
+2025-07-06 14:57:55,050 - models.manager - WARNING - No executor instance found for task main_task
+2025-07-06 14:57:55,051 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:57:55,174 - absl - INFO - Using default tokenizer.
+2025-07-06 14:57:55,174 - experiments.summarization_experiment - INFO - Completed task doc_1
+2025-07-06 14:57:55,174 - models.manager - INFO - Manager manager_01 starting task execution: 
+            Summarize the following document:
+            
+            Title: doc_2
+            Target Length: medium
+            Focus Areas: key_points, main_arguments
+            Style: academic
+            
+            Document:
+            
+                Climate change represents one of the most pressing challenges of our time, 
+                requiring urgent and comprehensive action across all sectors of society. The 
+                scientific consensus is clear: human activities, particularly the burning of 
+                fossil fuels, are driving unprecedented changes in Earth's climate system, 
+                with far-reaching consequences for ecosystems, economies, and human well-being.
+
+                The evidence of climate change is overwhelming and continues to mount. Global 
+                temperatures have risen by approximately 1.1°C since pre-industrial times, 
+                with the rate of warming accelerating in recent decades. This warming is 
+                causing widespread and rapid changes in the natural world, including melting 
+                glaciers and ice sheets, rising sea levels, and shifts in weather patterns.
+
+                The impacts of climate change are already being felt around the world. Extreme 
+                weather events, including hurricanes, droughts, floods, and heatwaves, are 
+                becoming more frequent and intense. These events cause significant damage to 
+                infrastructure, agriculture, and human settlements, resulting in economic 
+                losses and human suffering.
+
+                Rising sea levels threaten coastal communities and island nations, while 
+                ocean acidification endangers marine ecosystems and the livelihoods that 
+                depend on them. Changes in precipitation patterns affect water availability 
+                and agricultural productivity, with implications for food security and 
+                economic stability.
+
+                Addressing climate change requires a fundamental transformation of our energy 
+                systems, moving away from fossil fuels toward renewable energy sources. 
+                Renewable energy technologies, including solar, wind, hydroelectric, and 
+                geothermal power, offer clean, sustainable alternatives to fossil fuels.
+
+                Solar energy has experienced remarkable growth in recent years, with costs 
+                falling dramatically and efficiency improving steadily. Photovoltaic panels 
+                can now generate electricity at costs competitive with or lower than fossil 
+                fuel sources in many regions. Solar energy is particularly well-suited for 
+                distributed generation, allowing homes and businesses to produce their own 
+                electricity.
+
+                Wind energy has also become a major contributor to global electricity 
+                generation. Modern wind turbines are highly efficient and can operate in 
+                a wide range of conditions. Offshore wind farms, in particular, offer 
+                significant potential for large-scale electricity generation with minimal 
+                land use requirements.
+
+                Hydroelectric power remains the largest renewable energy source globally, 
+                providing reliable, dispatchable electricity generation. While large-scale 
+                hydroelectric projects can have significant environmental and social impacts, 
+                small-scale hydroelectric systems offer opportunities for sustainable energy 
+                generation with minimal environmental disruption.
+
+                Geothermal energy, which harnesses heat from Earth's interior, provides 
+                a constant, reliable source of energy that can be used for both electricity 
+                generation and direct heating applications. While currently limited to 
+                specific geographic regions, advances in technology may expand the potential 
+                for geothermal energy development.
+
+                The transition to renewable energy is not only necessary for addressing 
+                climate change but also offers significant economic opportunities. The 
+                renewable energy sector has become a major driver of job creation and 
+                economic growth, with employment in renewable energy industries growing 
+                rapidly worldwide.
+
+                However, the transition to renewable energy faces several challenges. 
+                Renewable energy sources are often intermittent, requiring advances in 
+                energy storage technology and grid management to ensure reliable electricity 
+                supply. The existing energy infrastructure, built around centralized fossil 
+                fuel generation, must be adapted to accommodate distributed renewable energy 
+                systems.
+
+                Policy support is crucial for accelerating the transition to renewable energy. 
+                Governments around the world have implemented various policies to support 
+                renewable energy development, including feed-in tariffs, renewable portfolio 
+                standards, and carbon pricing mechanisms. These policies have been instrumental 
+                in driving the growth of renewable energy markets.
+
+                Technological innovation continues to drive down costs and improve the 
+                performance of renewable energy technologies. Research and development 
+                efforts focus on improving efficiency, reducing costs, and developing 
+                new applications for renewable energy technologies.
+
+                The transition to renewable energy also requires changes in consumer behavior 
+                and business practices. Energy efficiency measures, such as improved building 
+                insulation and energy-efficient appliances, can significantly reduce energy 
+                demand and complement renewable energy deployment.
+
+                International cooperation is essential for addressing climate change and 
+                promoting renewable energy development. The Paris Agreement, adopted in 2015, 
+                provides a framework for global action on climate change, with countries 
+                committing to reduce greenhouse gas emissions and support renewable energy 
+                development.
+
+                The urgency of addressing climate change requires immediate and sustained 
+                action. While the challenges are significant, the benefits of transitioning 
+                to renewable energy are clear: reduced greenhouse gas emissions, improved 
+                air quality, enhanced energy security, and economic opportunities. The 
+                transition to renewable energy represents not just a challenge but an 
+                opportunity to create a more sustainable, equitable, and prosperous future.
+                
+            
+2025-07-06 14:58:04,685 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:04,687 - models.manager - INFO - Task decomposed into 6 subtasks
+2025-07-06 14:58:14,300 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:14,300 - models.manager - ERROR - Failed to parse execution plan: ```json
+{
+    "execution_plan": {
+        "phases": [
+            {
+                "phase_id": "phase_1",
+                "tasks": ["001", "002"],
+                "estimated_duration": "5 days",
+                "dependencies": [],
+                "quality_gates": ["key_points_extraction", "main_arguments_extraction"]
+            },
+            {
+                "phase_id": "phase_2",
+                "tasks": ["003", "004"],
+                "estimated_duration": "4 days",
+                "dependencies": ["phase_1"],
+                "quality_gates": ["coherent_key_points_summary", "coherent_main_arguments_summary"]
+            },
+            {
+                "phase_id": "phase_3",
+                "tasks": ["005"],
+                "estimated_duration": "3 days",
+                "dependencies": ["phase_2"],
+                "quality_gates": ["combined_summary_creation"]
+            },
+            {
+                "phase_id": "phase_4",
+                "tasks": ["006"],
+                "estimated_duration": "2 days",
+                "dependencies": ["phase_3"],
+                "quality_gates": ["academic_style_and_length_compliance"]
+            }
+        ],
+        "resource_allocation": {
+            "executor_assignments": {
+                "Executor1": ["001", "003", "005"],
+                "Executor2": ["002", "004", "006"]
+            },
+            "estimated_costs": {
+                "computational": "$2,000",
+                "time": "14 days"
+            }
+        },
+        "risk_mitigation": [
+            {
+                "risk": "Insufficient understanding of the document content",
+                "mitigation": "Conduct a pre-assessment training session with executors to ensure they have the necessary comprehension and extraction skills."
+            },
+            {
+                "risk": "Inadequate coherence in summaries",
+                "mitigation": "Implement peer review sessions where each executor reviews and provides feedback on another's work before finalizing summaries."
+            },
+            {
+                "risk": "Timeline delays due to unforeseen complexities",
+                "mitigation": "Schedule regular progress meetings every 3 days to monitor progress, address any issues promptly, and reallocate resources if necessary."
+            }
+        ]
+    }
+}
+```
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 004
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 005
+2025-07-06 14:58:14,301 - models.mcp_protocol - INFO - Task registered: 006
+2025-07-06 14:58:14,301 - models.manager - INFO - Executing task 001 with executor executor_07
+2025-07-06 14:58:14,301 - models.manager - WARNING - No executor instance found for task 001
+2025-07-06 14:58:14,301 - models.manager - INFO - Executing task 002 with executor executor_06
+2025-07-06 14:58:14,301 - models.manager - WARNING - No executor instance found for task 002
+2025-07-06 14:58:14,301 - models.manager - INFO - Executing task 003 with executor executor_07
+2025-07-06 14:58:14,301 - models.manager - WARNING - No executor instance found for task 003
+2025-07-06 14:58:14,301 - models.manager - INFO - Executing task 004 with executor executor_06
+2025-07-06 14:58:14,302 - models.manager - WARNING - No executor instance found for task 004
+2025-07-06 14:58:14,302 - models.manager - INFO - Executing task 005 with executor executor_07
+2025-07-06 14:58:14,302 - models.manager - WARNING - No executor instance found for task 005
+2025-07-06 14:58:14,302 - models.manager - INFO - Executing task 006 with executor executor_06
+2025-07-06 14:58:14,302 - models.manager - WARNING - No executor instance found for task 006
+2025-07-06 14:58:14,302 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:58:14,302 - absl - INFO - Using default tokenizer.
+2025-07-06 14:58:14,304 - experiments.summarization_experiment - INFO - Completed task doc_2
+2025-07-06 14:58:14,312 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:58:14,626 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,626 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,631 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,631 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,632 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:58:14,642 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,642 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,648 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,648 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:14,648 - experiments.qa_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-06 14:58:14,650 - models.executor - INFO - Executor executor_06 starting task: qa_3_q1
+2025-07-06 14:58:14,998 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:14,999 - models.executor - INFO - Task qa_3_q1 completed successfully in 0.35s
+2025-07-06 14:58:15,004 - models.executor - INFO - Executor executor_07 starting task: qa_3_q2
+2025-07-06 14:58:15,707 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:15,709 - models.executor - INFO - Task qa_3_q2 completed successfully in 0.71s
+2025-07-06 14:58:15,715 - models.executor - INFO - Executor executor_06 starting task: judge_1
+2025-07-06 14:58:15,908 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:15,910 - models.executor - INFO - Task judge_1 completed successfully in 0.20s
+2025-07-06 14:58:15,911 - models.executor - INFO - Executor executor_06 starting task: judge_2
+2025-07-06 14:58:16,104 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:16,104 - models.executor - INFO - Task judge_2 completed successfully in 0.19s
+2025-07-06 14:58:16,116 - utils.evaluation - INFO - Metrics exported to results/qa_metrics.json
+2025-07-06 14:58:16,117 - utils.evaluation - INFO - Performance monitoring stopped
+2025-07-06 14:58:16,405 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,405 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,410 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,410 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,411 - utils.evaluation - INFO - Performance monitoring started
+2025-07-06 14:58:16,421 - models.mcp_protocol - INFO - Executor registered: executor_06 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,422 - models.manager - INFO - Executor executor_06 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,427 - models.mcp_protocol - INFO - Executor registered: executor_07 with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,427 - models.manager - INFO - Executor executor_07 registered with capabilities: ['summarization', 'question_answering', 'general']
+2025-07-06 14:58:16,427 - experiments.table_generation_experiment - INFO - Initialized: 1 manager, 2 executors
+2025-07-06 14:58:16,428 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Product, Price
+Data: Laptop ($999), Phone ($699), Tablet ($399)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:58:16,431 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Item, Type
+Data: Apple (Fruit), Banana (Fruit), Carrot (Vegetable)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:58:16,433 - models.manager - INFO - Manager manager_01 starting task execution: Create a markdown table with columns: Language, Year
+Data: Python (1991), Java (1995), JavaScript (1995)
+Format: Use proper markdown table syntax.
+Only output the table itself, do not include any explanations, code block markers, or extra text.
+2025-07-06 14:58:23,369 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:23,370 - models.manager - INFO - Task decomposed into 3 subtasks
+2025-07-06 14:58:26,631 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:26,632 - models.manager - INFO - Task decomposed into 5 subtasks
+2025-07-06 14:58:32,417 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:32,418 - models.manager - INFO - Task decomposed into 4 subtasks
+2025-07-06 14:58:33,503 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:33,503 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:58:33,504 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:58:33,504 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:58:33,504 - models.manager - INFO - Executing task 001 with executor executor_06
+2025-07-06 14:58:33,504 - models.executor - INFO - Executor executor_06 starting task: 001
+2025-07-06 14:58:40,940 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:40,942 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:58:40,942 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:58:40,942 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:58:40,942 - models.mcp_protocol - INFO - Task registered: 004
+2025-07-06 14:58:40,943 - models.manager - INFO - Executing task 001 with executor executor_07
+2025-07-06 14:58:40,943 - models.executor - INFO - Executor executor_07 starting task: 001
+2025-07-06 14:58:43,650 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:43,651 - models.executor - INFO - Task 001 completed successfully in 2.71s
+2025-07-06 14:58:43,652 - models.manager - INFO - Task 001 completed successfully
+2025-07-06 14:58:43,652 - models.manager - INFO - Executing task 002 with executor executor_06
+2025-07-06 14:58:43,652 - models.executor - INFO - Executor executor_06 starting task: 002
+2025-07-06 14:58:43,855 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:43,857 - models.mcp_protocol - INFO - Task registered: 001
+2025-07-06 14:58:43,857 - models.mcp_protocol - INFO - Task registered: 002
+2025-07-06 14:58:43,858 - models.mcp_protocol - INFO - Task registered: 003
+2025-07-06 14:58:43,858 - models.mcp_protocol - INFO - Task registered: 004
+2025-07-06 14:58:43,858 - models.mcp_protocol - INFO - Task registered: 005
+2025-07-06 14:58:43,858 - models.manager - INFO - Executing task 001 with executor executor_07
+2025-07-06 14:58:43,858 - models.executor - INFO - Executor executor_07 starting task: 001
+2025-07-06 14:58:44,197 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:44,198 - models.executor - INFO - Task 001 completed successfully in 0.34s
+2025-07-06 14:58:44,198 - models.manager - INFO - Task 001 completed successfully
+2025-07-06 14:58:44,198 - models.manager - INFO - Executing task 002 with executor executor_06
+2025-07-06 14:58:44,198 - models.executor - INFO - Executor executor_06 starting task: 002
+2025-07-06 14:58:46,858 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:46,859 - models.executor - INFO - Task 002 completed successfully in 3.21s
+2025-07-06 14:58:46,860 - models.manager - INFO - Task 002 completed successfully
+2025-07-06 14:58:46,860 - models.manager - INFO - Executing task 003 with executor executor_07
+2025-07-06 14:58:46,860 - models.executor - INFO - Executor executor_07 starting task: 003
+2025-07-06 14:58:48,046 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:48,047 - models.executor - INFO - Task 001 completed successfully in 14.54s
+2025-07-06 14:58:48,048 - models.manager - INFO - Task 001 completed successfully
+2025-07-06 14:58:48,048 - models.manager - INFO - Executing task 002 with executor executor_07
+2025-07-06 14:58:48,048 - models.executor - INFO - Executor executor_07 starting task: 002
+2025-07-06 14:58:48,361 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:48,363 - models.executor - INFO - Task 002 completed successfully in 4.16s
+2025-07-06 14:58:48,363 - models.manager - INFO - Task 002 completed successfully
+2025-07-06 14:58:48,363 - models.manager - INFO - Executing task 003 with executor executor_07
+2025-07-06 14:58:48,363 - models.executor - INFO - Executor executor_07 starting task: 003
+2025-07-06 14:58:49,571 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:49,572 - models.executor - INFO - Task 003 completed successfully in 2.71s
+2025-07-06 14:58:49,572 - models.manager - INFO - Task 003 completed successfully
+2025-07-06 14:58:49,572 - models.manager - INFO - Executing task 004 with executor executor_06
+2025-07-06 14:58:49,572 - models.executor - INFO - Executor executor_06 starting task: 004
+2025-07-06 14:58:50,985 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:50,986 - models.executor - INFO - Task 002 completed successfully in 2.94s
+2025-07-06 14:58:50,987 - models.manager - INFO - Task 002 completed successfully
+2025-07-06 14:58:50,987 - models.manager - INFO - Executing task 003 with executor executor_06
+2025-07-06 14:58:50,987 - models.executor - INFO - Executor executor_06 starting task: 003
+2025-07-06 14:58:51,853 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:51,854 - models.executor - INFO - Task 004 completed successfully in 2.28s
+2025-07-06 14:58:51,855 - models.manager - INFO - Task 004 completed successfully
+2025-07-06 14:58:51,855 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:58:52,278 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:52,280 - models.executor - INFO - Task 003 completed successfully in 1.29s
+2025-07-06 14:58:52,280 - models.manager - INFO - Task 003 completed successfully
+2025-07-06 14:58:52,280 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:58:53,199 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:53,200 - models.executor - INFO - Task 003 completed successfully in 4.84s
+2025-07-06 14:58:53,200 - models.manager - INFO - Task 003 completed successfully
+2025-07-06 14:58:53,201 - models.manager - INFO - Executing task 004 with executor executor_06
+2025-07-06 14:58:53,201 - models.executor - INFO - Executor executor_06 starting task: 004
+2025-07-06 14:58:55,175 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:58:55,178 - models.executor - INFO - Task 004 completed successfully in 1.98s
+2025-07-06 14:58:55,179 - models.manager - INFO - Task 004 completed successfully
+2025-07-06 14:58:55,179 - models.manager - INFO - Executing task 005 with executor executor_07
+2025-07-06 14:58:55,179 - models.executor - INFO - Executor executor_07 starting task: 005
+2025-07-06 14:59:00,231 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-07-06 14:59:00,232 - models.executor - INFO - Task 005 completed successfully in 5.05s
+2025-07-06 14:59:00,232 - models.manager - INFO - Task 005 completed successfully
+2025-07-06 14:59:00,232 - models.manager - INFO - Task execution completed successfully
+2025-07-06 14:59:00,260 - utils.evaluation - INFO - Metrics exported to results/table_metrics.json
+2025-07-06 14:59:00,260 - utils.evaluation - INFO - Performance monitoring stopped

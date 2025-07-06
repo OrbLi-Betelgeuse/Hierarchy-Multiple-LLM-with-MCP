@@ -69,8 +69,10 @@ class SingleAgentPipeline:
                 experiment.resource_utilization = {}
             experiment.resource_utilization["cpu_user_time"] = cpu_user_time
             elapsed = time.time() - start_time
-            report = experiment.generate_report_with_status(experiment_wall_time=elapsed)
-            output_path = Path(f"{self.output_dir}/{task_name}/executor_only_output.json")
+            report = experiment.generate_report()
+            output_path = Path(
+                f"{self.output_dir}/{task_name}/executor_only_output.json"
+            )
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
@@ -78,7 +80,9 @@ class SingleAgentPipeline:
             metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
             with open(metrics_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
-            console.print(Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s"))
+            console.print(
+                Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s")
+            )
             return report
         elif task_name == "qa":
             experiment = QAExperiment(manager_config, [executor_config])
@@ -117,8 +121,10 @@ class SingleAgentPipeline:
 
         # Summarization: 详细报告，包含 success/fail
         if task_name == "summarization":
-            report = experiment.generate_report_with_status(experiment_wall_time=elapsed)
-            output_path = Path(f"{self.output_dir}/{task_name}/executor_only_output.json")
+            report = experiment.generate_report()
+            output_path = Path(
+                f"{self.output_dir}/{task_name}/executor_only_output.json"
+            )
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
@@ -126,7 +132,9 @@ class SingleAgentPipeline:
             metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
             with open(metrics_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
-            console.print(Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s"))
+            console.print(
+                Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s")
+            )
             return report
         # QA: 写 metrics 文件，保证 resource_utilization 输出
         if task_name == "qa":

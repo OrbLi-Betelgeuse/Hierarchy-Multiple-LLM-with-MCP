@@ -42,4 +42,4 @@ markdown>=3.4.0
 # ragflow-client
 # sentence-transformers
 # faiss-cpu
-# rouge-score 
+rouge-score 
