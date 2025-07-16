@@ -338,17 +338,18 @@ Return your response as a JSON object with the following structure:
                     f"Executing task {task.task_id} with executor {task.assigned_executor}"
                 )
 
-                # Get the executor instance directly
-                executor = getattr(self, "executor_instances", {}).get(
-                    task.assigned_executor
-                )
+                # Get the executor instance directly (强制用str类型查找)
+                executor_id_str = str(task.assigned_executor)
+                executor = getattr(self, "executor_instances", {}).get(executor_id_str)
 
                 if executor:
                     try:
                         # Execute the task directly
                         result = await executor.execute_task(task)
+                        summary = result.result.get("output", "") if hasattr(result, "result") else str(result)
+                        logger.info(f"[DEBUG] Task {task.task_id} summary from executor: {summary}")
                         execution_results[task.task_id] = {
-                            "output": result.result.get("output", ""),
+                            "output": summary,
                             "status": result.status.value,
                             "executor_id": task.assigned_executor,
                             "execution_time": result.execution_time,
@@ -363,9 +364,9 @@ Return your response as a JSON object with the following structure:
                             "executor_id": task.assigned_executor,
                         }
                 else:
-                    logger.warning(
-                        f"No executor instance found for task {task.task_id}"
-                    )
+                    print(f"[DEBUG] assigned_executor_id: {executor_id_str}")
+                    print(f"[DEBUG] manager.executor_instances keys: {list(self.executor_instances.keys())}")
+                    print(f"[ERROR] No executor instance found for task {task.task_id} (executor_id={executor_id_str})")
                     execution_results[task.task_id] = {
                         "output": f"Task {task.task_id} failed - no executor",
                         "status": "failed",
@@ -467,4 +468,11 @@ Return your response as a JSON object with the following structure:
 
     def add_executor_instance(self, executor):
         """注册executor实例，便于直接调用其execute_task方法"""
-        self.executor_instances[executor.executor_id] = executor
+        eid = str(getattr(executor, "executor_id", executor))
+        self.executor_instances[eid] = executor
+        logger.info(f"Executor instance registered: {eid}")
+
+    def print_executor_instances(self):
+        """打印所有已注册的executor实例id"""
+        logger.info(f"Registered executor instances: {list(self.executor_instances.keys())}")
+        print(f"[Manager] Registered executor instances: {list(self.executor_instances.keys())}")

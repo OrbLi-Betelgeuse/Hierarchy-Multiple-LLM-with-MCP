@@ -23,6 +23,7 @@ import dataclasses
 from models.manager import Manager
 from models.executor import Executor, SpecializedExecutor
 from models.llm_interface import create_llm_interface
+# from experiments.hierarchy_summarization_experiment import HierarchySummarizationExperiment as SummarizationExperiment
 from experiments.summarization_experiment import SummarizationExperiment
 from experiments.qa_experiment import QAExperiment
 from experiments.table_generation_experiment import TableGenerationExperiment
@@ -59,7 +60,7 @@ class ExperimentPipeline:
         return {
             "manager": {
                 "provider": "ollama",
-                "model": "qwen2.5:7b",
+                "model": "deepseek-r1:7b",
                 "manager_id": "manager_01",
                 "kwargs": {"base_url": "http://localhost:11434"},
             },
@@ -106,15 +107,15 @@ class ExperimentPipeline:
                 # },
                 {
                     "provider": "ollama",
-                    "model": "qwen2.5:7b",
+                    "model": "deepseek-r1:7b",
                     "executor_id": "executor_06",
                     "capabilities": ["summarization", "question_answering", "general"],
                     "specialized": False,
-                    "kwargs": {"base_url": "http://localhost:11434"},
+                    "kwargs": {"base_url": "http://localhost:11436"},
                 },
                 {
                     "provider": "ollama",
-                    "model": "llama2:7b",
+                    "model": "deepseek-r1:7b",
                     "executor_id": "executor_07",
                     "capabilities": ["summarization", "question_answering", "general"],
                     "specialized": False,
@@ -180,16 +181,17 @@ class ExperimentPipeline:
 
                 # Register executor with manager
                 await self.manager.register_executor(
-                    executor_id=config["executor_id"],
+                    executor_id=str(config["executor_id"]),
                     capabilities=config["capabilities"],
                 )
-                # 确保实例注册到同一个manager
+                # 确保实例注册到同一个manager，强制用str类型
                 if hasattr(self.manager, "add_executor_instance"):
                     self.manager.add_executor_instance(executor)
 
             # 调试：打印所有已注册的executor实例
             if hasattr(self.manager, "print_executor_instances"):
                 self.manager.print_executor_instances()
+            print("Executors in pipeline:", [str(e.executor_id) for e in self.executors])
 
             console.print(
                 f"✅ System setup complete: 1 manager, {len(self.executors)} executors"
@@ -203,15 +205,22 @@ class ExperimentPipeline:
         """Run the summarization experiment."""
         console.print(Panel.fit("Running Summarization Experiment", style="bold green"))
 
+        # 传递Manager实例而不是manager_config
         experiment = SummarizationExperiment(
-            manager_config=self.config["manager"],
+            manager=self.manager,
             executor_configs=self.config["executors"],
         )
 
         await experiment.setup()
         results = await experiment.run_experiment()
+        exec_times = {r.task_id: getattr(r, 'execution_time', None) for r in results}
+        print("[Summarization] Execution times (seconds):", exec_times)
         report = experiment.generate_report()
-
+        # Output report to a separate file for comparison
+        output_path = Path("results/summarization_metrics.json")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
         console.print(f"✅ Summarization experiment completed: {len(results)} tasks")
         return report
 

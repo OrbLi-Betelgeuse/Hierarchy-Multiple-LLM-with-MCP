@@ -1,0 +1,18 @@
+[
+  {
+    "task_id": "doc_1",
+    "rouge_scores": {
+      "rouge1": 0.0,
+      "rouge2": 0.0,
+      "rougeL": 0.0
+    }
+  },
+  {
+    "task_id": "doc_2",
+    "rouge_scores": {
+      "rouge1": 0.0,
+      "rouge2": 0.0,
+      "rougeL": 0.0
+    }
+  }
+]

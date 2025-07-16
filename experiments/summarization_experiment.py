@@ -47,11 +47,10 @@ class SummarizationExperiment:
     """Experiment class for long document summarization."""
 
     def __init__(
-        self, manager_config: Dict[str, Any], executor_configs: List[Dict[str, Any]]
+        self, manager: Manager, executor_configs: List[Dict[str, Any]]
     ):
-        self.manager_config = manager_config
+        self.manager = manager
         self.executor_configs = executor_configs
-        self.manager = None
         self.executors = []
         self.results = []
 
@@ -74,7 +73,7 @@ class SummarizationExperiment:
                 observers, and providing quantitative assessments of disease progression.
 
                 In diagnostic imaging, AI systems have achieved performance levels comparable to 
-                or exceeding those of human radiologists in detecting various conditions, including 
+                or exceeding those of human radiologists in detecting various conditions, including generate sample documentgenerate sample document
                 breast cancer, lung nodules, and retinal diseases. These systems can process vast 
                 amounts of imaging data rapidly, identifying subtle patterns and anomalies that 
                 might be missed in routine clinical practice.
@@ -226,23 +225,42 @@ class SummarizationExperiment:
                 """,
                 "expected_summary": "Climate change requires urgent action through renewable energy transition, with solar, wind, and other technologies offering economic and environmental benefits despite challenges in storage and infrastructure.",
             },
+            {
+            "id": "doc_3",
+            "title": "Artificial Intelligence Applications",
+            "content": (
+                "Artificial intelligence (AI) is a transformative technology that is reshaping industries and societies worldwide. Its applications span natural language processing, computer vision, decision support, and more. "
+                "In healthcare, AI analyzes vast medical datasets, assists doctors in diagnosis and treatment planning, and improves efficiency and accuracy. "
+                "Education benefits from intelligent teaching systems that personalize content based on student habits and abilities, enhancing learning outcomes. "
+                "Transportation is revolutionized by AI through autonomous driving and smart scheduling, reducing accidents and optimizing resources. "
+                "AI also shows great potential in finance, manufacturing, and agriculture. "
+                "However, widespread AI adoption brings challenges such as data privacy, algorithmic bias, and changes in employment structures. "
+                "Future AI development must balance technological innovation with ethical standards to ensure greater benefits for society. "
+                "Interdisciplinary collaboration and international cooperation will further promote healthy AI development. "
+                "Moreover, AI is increasingly used in environmental monitoring, helping track climate change, predict natural disasters, and optimize resource management. "
+                "In the legal sector, AI assists in document review, case prediction, and even supports judicial decision-making. "
+                "Retail and e-commerce leverage AI for personalized recommendations, inventory management, and customer service automation. "
+                "In entertainment, AI generates music, art, and interactive experiences, pushing creative boundaries. "
+                "The integration of AI in smart cities enables efficient energy use, traffic management, and public safety. "
+                "Despite these advances, concerns about transparency, accountability, and the societal impact of automation persist. "
+                "Governments and organizations are working to establish guidelines and regulations to ensure responsible AI deployment. "
+                "Continuous research is needed to address technical limitations, such as explainability and robustness. "
+                "As AI systems become more autonomous, the importance of human oversight and ethical considerations grows. "
+                "Ultimately, the success of AI will depend on its ability to augment human capabilities, foster trust, and deliver equitable benefits across all sectors. "
+                "The next decade will likely see AI embedded in every aspect of daily life, from healthcare and education to entertainment and governance, making it essential to prepare for both opportunities and challenges ahead. "
+                "Collaboration between technologists, policymakers, and the public will be key to shaping an AI-powered future that is safe, fair, and beneficial for all. "
+                "As AI continues to evolve, ongoing dialogue and adaptive strategies will help society harness its full potential while mitigating risks. "
+                "The journey of AI is just beginning, and its impact will be felt for generations to come. "
+                "(This document is intentionally long for benchmarking summarization performance on extended texts.)"
+            ),
+            "expected_summary": "AI transforms many sectors, but responsible development and collaboration are needed to maximize benefits and address risks."
+        }
         ]
+
 
     async def setup(self):
         """Setup the experiment with manager and executors. Supports executor-only mode."""
         try:
-            # Only set up manager if manager_config is provided
-            if self.manager_config is not None:
-                manager_llm = create_llm_interface(
-                    provider=self.manager_config["provider"],
-                    model_name=self.manager_config["model"],
-                    **self.manager_config.get("kwargs", {}),
-                )
-                self.manager = Manager(
-                    manager_id=self.manager_config["manager_id"], llm_interface=manager_llm
-                )
-            else:
-                self.manager = None
 
             # Create executors
             for config in self.executor_configs:
@@ -341,6 +359,13 @@ class SummarizationExperiment:
             end_time = asyncio.get_event_loop().time()
             execution_time = end_time - start_time
 
+            # DEBUG: 打印生成的摘要和参考摘要
+            print(f"[DEBUG] Task {task.task_id} summary: {summary.strip()}")
+            print(f"[DEBUG] Task {task.task_id} expected_summary: {task.expected_summary}")
+            if not summary.strip():
+                print(f"[ERROR] No summary generated for {task.task_id}. Check LLM/executor output.")
+                summary = "[ERROR] No summary generated. Check LLM/executor output."
+
             # Calculate metrics
             original_length = len(task.document.split())
             summary_length = len(summary.split())
@@ -358,10 +383,8 @@ class SummarizationExperiment:
                 rouge_scores = self._calculate_rouge_scores(
                     summary, task.expected_summary
                 )
-
-            # DEBUG: 打印生成的摘要和参考摘要
-            print(f"[DEBUG] Task {task.task_id} summary: {summary.strip()}")
-            print(f"[DEBUG] Task {task.task_id} expected_summary: {task.expected_summary}")
+                print(f"[DEBUG] Task {task.task_id} quality_score: {quality_score}")
+                print(f"[DEBUG] Task {task.task_id} rouge_scores: {rouge_scores}")
 
             return SummarizationResult(
                 task_id=task.task_id,
@@ -372,7 +395,7 @@ class SummarizationExperiment:
                 manager_metrics=manager_metrics,
                 executor_metrics=executor_metrics,
                 quality_score=quality_score,
-                rouge_scores=rouge_scores,
+                rouge_scores=rouge_scores if rouge_scores else {"rouge1": 0.0, "rouge2": 0.0, "rougeL": 0.0},
             )
 
         except Exception as e:
@@ -382,9 +405,8 @@ class SummarizationExperiment:
     async def run_experiment(
         self, tasks: Optional[List[SummarizationTask]] = None
     ) -> List[SummarizationResult]:
-        """Run the complete summarization experiment."""
+        """Run the complete summarization experiment for short, medium, long documents."""
         if tasks is None:
-            # Create tasks from sample documents
             tasks = []
             for doc in self.sample_documents:
                 task = SummarizationTask(
@@ -399,10 +421,14 @@ class SummarizationExperiment:
 
         results = []
         for task in tasks:
+            import time
+            start_time = time.time()
             try:
                 result = await self.run_single_task(task)
+                exec_time = time.time() - start_time
+                result.execution_time = exec_time
                 results.append(result)
-                logger.info(f"Completed task {task.task_id}")
+                logger.info(f"Completed task {task.task_id} in {exec_time:.2f}s")
             except Exception as e:
                 logger.error(f"Failed to complete task {task.task_id}: {e}")
 
@@ -410,18 +436,54 @@ class SummarizationExperiment:
         return results
 
     def _calculate_quality_score(
-        self, generated_summary: str, expected_summary: str
+        self, generated_summary: str, expected_summary: str, context: Optional[str] = None
     ) -> float:
-        """Calculate a simple quality score based on content overlap."""
-        # Simple implementation - in practice, this could use more sophisticated metrics
-        generated_words = set(generated_summary.lower().split())
-        expected_words = set(expected_summary.lower().split())
-
-        if not expected_words:
-            return 0.0
-
-        overlap = len(generated_words.intersection(expected_words))
-        return overlap / len(expected_words)
+        """Use LLM to rate the quality of the generated summary compared to the expected summary and context."""
+        # This process does NOT count towards task execution time
+        try:
+            # Use the manager's LLM interface if available, else fallback to first executor's LLM
+            llm = None
+            if self.manager and hasattr(self.manager, 'llm_interface'):
+                llm = self.manager.llm_interface
+            elif self.executors and hasattr(self.executors[0], 'llm_interface'):
+                llm = self.executors[0].llm_interface
+            if llm is None:
+                # Fallback: use word overlap as before
+                generated_words = set(generated_summary.lower().split())
+                expected_words = set(expected_summary.lower().split())
+                if not expected_words:
+                    return 0.0
+                overlap = len(generated_words.intersection(expected_words))
+                return overlap / len(expected_words)
+            # Construct prompt for LLM scoring
+            prompt = (
+                "You are an expert evaluator. Given the following context, expected summary, and generated summary, "
+                "rate the quality of the generated summary on a scale from 0 (poor) to 1 (perfect match). "
+                "Consider coverage, accuracy, and relevance.\n"
+                f"Context:\n{context if context else '[No context provided]'}\n"
+                f"Expected Summary:\n{expected_summary}\n"
+                f"Generated Summary:\n{generated_summary}\n"
+                "Score (float between 0 and 1):"
+            )
+            # Query LLM for score
+            response = llm(prompt)
+            # Extract score from response
+            import re
+            match = re.search(r"([01](?:\.\d+)?)", str(response))
+            if match:
+                score = float(match.group(1))
+                return max(0.0, min(1.0, score))
+            else:
+                return 0.0
+        except Exception as e:
+            logger.warning(f"LLM quality score failed: {e}")
+            # Fallback: word overlap
+            generated_words = set(generated_summary.lower().split())
+            expected_words = set(expected_summary.lower().split())
+            if not expected_words:
+                return 0.0
+            overlap = len(generated_words.intersection(expected_words))
+            return overlap / len(expected_words)
 
     def _calculate_rouge_scores(
         self, generated_summary: str, expected_summary: str
@@ -445,22 +507,30 @@ class SummarizationExperiment:
             return {}
 
     def generate_report(self) -> Dict[str, Any]:
-        """Generate a comprehensive report of the experiment results."""
+        """Generate a comprehensive report of the experiment results, with execution times for short, medium, long docs."""
         if not self.results:
             return {"error": "No results available"}
+
+        # Map doc_id to type
+        doc_type_map = {
+            "doc_1": "medium",   # medium length
+            "doc_2": "long",     # long length
+            "doc_3": "short"     # short length
+        }
+        exec_time_by_type = {"short": None, "medium": None, "long": None}
+        for r in self.results:
+            doc_type = doc_type_map.get(r.task_id, r.task_id)
+            exec_time_by_type[doc_type] = r.execution_time
 
         # Calculate aggregate metrics
         total_tasks = len(self.results)
         successful_tasks = len([r for r in self.results if r.quality_score is not None])
-
-        avg_execution_time = sum(r.execution_time for r in self.results) / total_tasks
+        avg_execution_time = sum(r.execution_time for r in self.results) / total_tasks if total_tasks > 0 else 0.0
         avg_compression_ratio = (
-            sum(r.compression_ratio for r in self.results) / total_tasks
+            sum(r.compression_ratio for r in self.results) / total_tasks if total_tasks > 0 else 0.0
         )
-
         avg_quality_score = 0.0
         avg_rouge_scores = {"rouge1": 0.0, "rouge2": 0.0, "rougeL": 0.0}
-
         if successful_tasks > 0:
             avg_quality_score = (
                 sum(
@@ -468,7 +538,6 @@ class SummarizationExperiment:
                 )
                 / successful_tasks
             )
-
             # Calculate average ROUGE scores
             rouge_counts = {"rouge1": 0, "rouge2": 0, "rougeL": 0}
             for result in self.results:
@@ -477,7 +546,6 @@ class SummarizationExperiment:
                         if metric in result.rouge_scores:
                             avg_rouge_scores[metric] += result.rouge_scores[metric]
                             rouge_counts[metric] += 1
-
             for metric in avg_rouge_scores:
                 if rouge_counts[metric] > 0:
                     avg_rouge_scores[metric] /= rouge_counts[metric]
@@ -486,14 +554,18 @@ class SummarizationExperiment:
             "experiment_type": "summarization",
             "total_tasks": total_tasks,
             "successful_tasks": successful_tasks,
-            "success_rate": successful_tasks / total_tasks,
+            "success_rate": successful_tasks / total_tasks if total_tasks > 0 else 0.0,
             "average_execution_time": avg_execution_time,
             "average_compression_ratio": avg_compression_ratio,
             "average_quality_score": avg_quality_score,
             "average_rouge_scores": avg_rouge_scores,
+            "short_doc_time": exec_time_by_type["short"],
+            "medium_doc_time": exec_time_by_type["medium"],
+            "long_doc_time": exec_time_by_type["long"],
             "detailed_results": [
                 {
                     "task_id": r.task_id,
+                    "doc_type": doc_type_map.get(r.task_id, r.task_id),
                     "execution_time": r.execution_time,
                     "compression_ratio": r.compression_ratio,
                     "quality_score": r.quality_score,

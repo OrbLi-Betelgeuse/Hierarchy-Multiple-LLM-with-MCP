@@ -1,37 +1,54 @@
 {
   "experiment_type": "summarization",
-  "total_tasks": 2,
-  "successful_tasks": 2,
+  "total_tasks": 3,
+  "successful_tasks": 3,
   "success_rate": 1.0,
-  "average_execution_time": 20.315446250373498,
-  "average_compression_ratio": 0.030918555998832344,
-  "average_quality_score": 0.0,
+  "average_execution_time": 28.55309271812439,
+  "average_compression_ratio": 0.8589479026969477,
+  "average_quality_score": 0.7625000000000001,
   "average_rouge_scores": {
-    "rouge1": 0.0,
-    "rouge2": 0.0,
-    "rougeL": 0.0
+    "rouge1": 0.08139178196706699,
+    "rouge2": 0.02434782957132024,
+    "rougeL": 0.0656660187345048
   },
+  "short_doc_time": 25.84144687652588,
+  "medium_doc_time": 30.06345558166504,
+  "long_doc_time": 29.75437569618225,
   "detailed_results": [
     {
       "task_id": "doc_1",
-      "execution_time": 21.50262795877643,
-      "compression_ratio": 0.011627906976744186,
-      "quality_score": 0.0,
+      "doc_type": "medium",
+      "execution_time": 30.06345558166504,
+      "compression_ratio": 1.0153550863723608,
+      "quality_score": 0.85,
       "rouge_scores": {
-        "rouge1": 0.0,
-        "rouge2": 0.0,
-        "rougeL": 0.0
+        "rouge1": 0.07636363636363637,
+        "rouge2": 0.032846715328467155,
+        "rougeL": 0.06545454545454546
       }
     },
     {
       "task_id": "doc_2",
-      "execution_time": 19.128264541970566,
-      "compression_ratio": 0.0502092050209205,
-      "quality_score": 0.0,
+      "doc_type": "long",
+      "execution_time": 29.75437569618225,
+      "compression_ratio": 0.596931659693166,
+      "quality_score": 0.75,
       "rouge_scores": {
-        "rouge1": 0.0,
-        "rouge2": 0.0,
-        "rougeL": 0.0
+        "rouge1": 0.09935205183585313,
+        "rouge2": 0.030368763557483733,
+        "rougeL": 0.07775377969762419
+      }
+    },
+    {
+      "task_id": "doc_3",
+      "doc_type": "short",
+      "execution_time": 25.84144687652588,
+      "compression_ratio": 0.9645569620253165,
+      "quality_score": 0.6875,
+      "rouge_scores": {
+        "rouge1": 0.06845965770171149,
+        "rouge2": 0.009828009828009828,
+        "rougeL": 0.053789731051344755
       }
     }
   ]

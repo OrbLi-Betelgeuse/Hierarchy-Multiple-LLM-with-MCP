@@ -62,13 +62,9 @@ class SingleAgentPipeline:
             await experiment.setup()
             cpu_start = time.process_time()
             results = await experiment.run_experiment()
-            cpu_end = time.process_time()
-            cpu_user_time = cpu_end - cpu_start
-            # 强制覆盖resource_utilization
-            if not hasattr(experiment, "resource_utilization"):
-                experiment.resource_utilization = {}
-            experiment.resource_utilization["cpu_user_time"] = cpu_user_time
-            elapsed = time.time() - start_time
+            # 输出三种长度 summary 的执行时间
+            exec_times = {r.task_id: getattr(r, 'execution_time', None) for r in results}
+            print("[Single-Agent Summarization] Execution times (seconds):", exec_times)
             report = experiment.generate_report()
             output_path = Path(
                 f"{self.output_dir}/{task_name}/executor_only_output.json"
@@ -76,10 +72,10 @@ class SingleAgentPipeline:
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
-            # 额外：写 metrics 文件，供对比表导出
             metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
             with open(metrics_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
+            elapsed = time.time() - start_time
             console.print(
                 Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s")
             )
@@ -132,6 +128,7 @@ class SingleAgentPipeline:
             metrics_path = Path(f"{self.output_dir}/single_summarization_metrics.json")
             with open(metrics_path, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
+            elapsed = time.time() - start_time
             console.print(
                 Panel(f"[green]Task '{task_name}' completed in {elapsed:.2f}s")
             )

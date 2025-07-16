@@ -1,37 +1,54 @@
 {
   "experiment_type": "summarization",
-  "total_tasks": 2,
-  "successful_tasks": 2,
+  "total_tasks": 3,
+  "successful_tasks": 3,
   "success_rate": 1.0,
-  "average_execution_time": 0.003388811950571835,
-  "average_compression_ratio": 0.0,
-  "average_quality_score": 0.0,
+  "average_execution_time": 13.749636014302572,
+  "average_compression_ratio": 1.01704846606987,
+  "average_quality_score": 0.6666666666666666,
   "average_rouge_scores": {
-    "rouge1": 0.0,
-    "rouge2": 0.0,
-    "rougeL": 0.0
+    "rouge1": 0.06870615076194055,
+    "rouge2": 0.02077166811940879,
+    "rougeL": 0.05685540628055057
   },
+  "short_doc_time": 8.477401971817017,
+  "medium_doc_time": 10.482970952987671,
+  "long_doc_time": 22.288535118103027,
   "detailed_results": [
     {
       "task_id": "doc_1",
-      "execution_time": 0.0039000411052256823,
-      "compression_ratio": 0.0,
-      "quality_score": 0.0,
+      "doc_type": "medium",
+      "execution_time": 10.482970952987671,
+      "compression_ratio": 0.7600767754318618,
+      "quality_score": 0.75,
       "rouge_scores": {
-        "rouge1": 0.0,
-        "rouge2": 0.0,
-        "rougeL": 0
+        "rouge1": 0.09569377990430622,
+        "rouge2": 0.038461538461538464,
+        "rougeL": 0.08612440191387559
       }
     },
     {
       "task_id": "doc_2",
-      "execution_time": 0.002877582795917988,
-      "compression_ratio": 0.0,
-      "quality_score": 0.0,
+      "doc_type": "long",
+      "execution_time": 22.288535118103027,
+      "compression_ratio": 1.3417015341701535,
+      "quality_score": 0.75,
       "rouge_scores": {
-        "rouge1": 0.0,
-        "rouge2": 0.0,
-        "rougeL": 0
+        "rouge1": 0.045098039215686274,
+        "rouge2": 0.0137524557956778,
+        "rougeL": 0.0392156862745098
+      }
+    },
+    {
+      "task_id": "doc_3",
+      "doc_type": "short",
+      "execution_time": 8.477401971817017,
+      "compression_ratio": 0.9493670886075949,
+      "quality_score": 0.5,
+      "rouge_scores": {
+        "rouge1": 0.06532663316582914,
+        "rouge2": 0.010101010101010102,
+        "rougeL": 0.04522613065326633
       }
     }
   ]

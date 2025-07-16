@@ -3,16 +3,16 @@
   "total_tasks": 1,
   "successful_tasks": 1,
   "success_rate": 1.0,
-  "average_execution_time": 0.7283530414570123,
+  "average_execution_time": 4.350450599999931,
   "total_execution_time": 0.0,
   "manager_performance": {},
   "executor_performance": {},
   "quality_metrics": {},
   "resource_utilization": {
-    "cpu_user_time": 0.03,
-    "cpu_system_time": 0.0,
-    "memory_peak_bytes": 243382,
-    "token_total": 515,
-    "token_per_sec": 352.12117289904654
+    "cpu_user_time": 0.03125,
+    "cpu_system_time": 0.046875,
+    "memory_peak_bytes": 286295,
+    "token_total": 1144,
+    "token_per_sec": 131.2560517620493
   }
 }
