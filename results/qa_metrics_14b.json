@@ -1,0 +1,18 @@
+{
+  "experiment_type": "qa",
+  "total_tasks": 1,
+  "successful_tasks": 0,
+  "success_rate": 0.0,
+  "average_execution_time": 0.009590792004019022,
+  "total_execution_time": 0.0,
+  "manager_performance": {},
+  "executor_performance": {},
+  "quality_metrics": {},
+  "resource_utilization": {
+    "cpu_user_time": 0.010000000000000009,
+    "cpu_system_time": 0.0,
+    "memory_peak_bytes": 209803,
+    "token_total": 0,
+    "token_per_sec": 0.0
+  }
+}
