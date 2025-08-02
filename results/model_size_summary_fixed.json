@@ -1,0 +1,26 @@
+[
+  {
+    "Task": "qa",
+    "1.5B Success Rate": "33.3%",
+    "1.5B Avg Time": "6.2955s",
+    "1.5B Memory (MB)": "0.20",
+    "7B Success Rate": "33.3%",
+    "7B Avg Time": "6.2955s",
+    "7B Memory (MB)": "0.20",
+    "14B Success Rate": "33.3%",
+    "14B Avg Time": "6.2955s",
+    "14B Memory (MB)": "0.20"
+  },
+  {
+    "Task": "table",
+    "1.5B Success Rate": "100.00%",
+    "1.5B Avg Time": "0.0179s",
+    "1.5B Memory (MB)": "0.35",
+    "7B Success Rate": "100.00%",
+    "7B Avg Time": "0.0169s",
+    "7B Memory (MB)": "0.35",
+    "14B Success Rate": "100.00%",
+    "14B Avg Time": "0.0168s",
+    "14B Memory (MB)": "0.35"
+  }
+]

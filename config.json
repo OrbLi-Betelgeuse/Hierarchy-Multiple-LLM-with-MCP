@@ -10,7 +10,7 @@
   "executors": [
     {
       "provider": "ollama",
-      "model": "llama2:14b",
+      "model": "llama2:7b",
       "executor_id": "executor_01",
       "capabilities": ["summarization", "general"],
       "specialized": false,
@@ -20,7 +20,7 @@
     },
     {
       "provider": "ollama",
-      "model": "llama2:14b",
+      "model": "llama2:7b",
       "executor_id": "executor_02",
       "capabilities": ["question_answering", "general"],
       "specialized": false,
@@ -30,7 +30,7 @@
     },
     {
       "provider": "ollama",
-      "model": "llama2:14b",
+      "model": "llama2:7b",
       "executor_id": "executor_03",
       "capabilities": ["table_generation", "general"],
       "specialized": false,

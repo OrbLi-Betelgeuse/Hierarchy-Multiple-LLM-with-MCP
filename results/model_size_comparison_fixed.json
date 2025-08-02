@@ -1,0 +1,50 @@
+[
+  {
+    "Task": "qa",
+    "1.5B Success Rate": "33.3%",
+    "1.5B Avg Time": "6.2955s",
+    "1.5B Total Tasks": 3,
+    "1.5B Successful Tasks": 1,
+    "1.5B Memory (MB)": "0.20",
+    "1.5B CPU Time": "0.020s",
+    "7B Success Rate": "33.3%",
+    "7B Avg Time": "6.2955s",
+    "7B Total Tasks": 3,
+    "7B Successful Tasks": 1,
+    "7B Memory (MB)": "0.20",
+    "7B CPU Time": "0.020s",
+    "14B Success Rate": "33.3%",
+    "14B Avg Time": "6.2955s",
+    "14B Total Tasks": 3,
+    "14B Successful Tasks": 1,
+    "14B Memory (MB)": "0.20",
+    "14B CPU Time": "0.020s"
+  },
+  {
+    "Task": "summarization",
+    "1.5B Status": "Error",
+    "7B Status": "Error",
+    "14B Status": "Error"
+  },
+  {
+    "Task": "table",
+    "1.5B Success Rate": "100.00%",
+    "1.5B Avg Time": "0.0179s",
+    "1.5B Total Tasks": 3,
+    "1.5B Successful Tasks": 3,
+    "1.5B Memory (MB)": "0.35",
+    "1.5B CPU Time": "0.030s",
+    "7B Success Rate": "100.00%",
+    "7B Avg Time": "0.0169s",
+    "7B Total Tasks": 3,
+    "7B Successful Tasks": 3,
+    "7B Memory (MB)": "0.35",
+    "7B CPU Time": "0.030s",
+    "14B Success Rate": "100.00%",
+    "14B Avg Time": "0.0168s",
+    "14B Total Tasks": 3,
+    "14B Successful Tasks": 3,
+    "14B Memory (MB)": "0.35",
+    "14B CPU Time": "0.030s"
+  }
+]

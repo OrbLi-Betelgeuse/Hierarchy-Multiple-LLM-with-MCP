@@ -1,0 +1,250 @@
+{
+  "experiment_type": "improved_qa",
+  "total_tasks": 5,
+  "successful_tasks": 5,
+  "success_rate": 1.0,
+  "average_execution_time": 0.7412327766418457,
+  "total_execution_time": 3.7061638832092285,
+  "average_accuracy": 1.0,
+  "task_results": [
+    {
+      "task_id": "qa_1",
+      "questions": [
+        "What is AI doing in healthcare?",
+        "What are the main benefits?"
+      ],
+      "answers": [
+        "In healthcare, AI is being used for improved diagnostics and patient care.",
+        "The main benefits of AI in healthcare are improved diagnostics and patient care."
+      ],
+      "expected_answers": [
+        "transforming healthcare through improved diagnostics and patient care",
+        "improved diagnostics and patient care"
+      ],
+      "success": true,
+      "execution_time": 0.8598709106445312,
+      "accuracy": 1.0,
+      "evaluation_details": [
+        {
+          "question": "What is AI doing in healthcare?",
+          "answer": "In healthcare, AI is being used for improved diagnostics and patient care.",
+          "expected": "transforming healthcare through improved diagnostics and patient care",
+          "is_correct": true,
+          "keywords_matched": [
+            "transforming",
+            "healthcare",
+            "diagnostics",
+            "patient care"
+          ]
+        },
+        {
+          "question": "What are the main benefits?",
+          "answer": "The main benefits of AI in healthcare are improved diagnostics and patient care.",
+          "expected": "improved diagnostics and patient care",
+          "is_correct": true,
+          "keywords_matched": [
+            "improved",
+            "diagnostics",
+            "patient care",
+            "benefits"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "qa_2",
+      "questions": [
+        "What is Python?",
+        "What is Python known for?"
+      ],
+      "answers": [
+        "Python is a popular programming language known for its readability and versatility.",
+        "Python is known for its readability and versatility."
+      ],
+      "expected_answers": [
+        "popular programming language",
+        "readability and versatility"
+      ],
+      "success": true,
+      "execution_time": 0.5328578948974609,
+      "accuracy": 1.0,
+      "evaluation_details": [
+        {
+          "question": "What is Python?",
+          "answer": "Python is a popular programming language known for its readability and versatility.",
+          "expected": "popular programming language",
+          "is_correct": true,
+          "keywords_matched": [
+            "popular",
+            "programming",
+            "language"
+          ]
+        },
+        {
+          "question": "What is Python known for?",
+          "answer": "Python is known for its readability and versatility.",
+          "expected": "readability and versatility",
+          "is_correct": true,
+          "keywords_matched": [
+            "readability",
+            "versatility"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "qa_3",
+      "questions": [
+        "What is machine learning?",
+        "How does it relate to AI?"
+      ],
+      "answers": [
+        "Machine learning is a subset of artificial intelligence that enables computers to learn without being explicitly programmed.",
+        "Machine learning is a subset of artificial intelligence (AI) that enables computers to learn without being explicitly programmed. In other words, machine learning is a type of AI that allows computers to improve their performance on a task over time through automated experimentation and improvement, rather than being explicitly programmed for that task."
+      ],
+      "expected_answers": [
+        "subset of artificial intelligence that enables computers to learn without being explicitly programmed",
+        "subset of artificial intelligence"
+      ],
+      "success": true,
+      "execution_time": 1.1145718097686768,
+      "accuracy": 1.0,
+      "evaluation_details": [
+        {
+          "question": "What is machine learning?",
+          "answer": "Machine learning is a subset of artificial intelligence that enables computers to learn without being explicitly programmed.",
+          "expected": "subset of artificial intelligence that enables computers to learn without being explicitly programmed",
+          "is_correct": true,
+          "keywords_matched": [
+            "subset",
+            "artificial intelligence",
+            "computers",
+            "learn",
+            "without",
+            "explicitly",
+            "programmed"
+          ]
+        },
+        {
+          "question": "How does it relate to AI?",
+          "answer": "Machine learning is a subset of artificial intelligence (AI) that enables computers to learn without being explicitly programmed. In other words, machine learning is a type of AI that allows computers to improve their performance on a task over time through automated experimentation and improvement, rather than being explicitly programmed for that task.",
+          "expected": "subset of artificial intelligence",
+          "is_correct": true,
+          "keywords_matched": [
+            "subset",
+            "artificial intelligence"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "qa_4",
+      "questions": [
+        "What is the Internet?",
+        "What does it allow people to do?"
+      ],
+      "answers": [
+        "The Internet is a global network of connected computers that allows people to share information and communicate worldwide.",
+        "The Internet allows people to share information and communicate worldwide."
+      ],
+      "expected_answers": [
+        "global network of connected computers",
+        "share information and communicate worldwide"
+      ],
+      "success": true,
+      "execution_time": 0.5778160095214844,
+      "accuracy": 1.0,
+      "evaluation_details": [
+        {
+          "question": "What is the Internet?",
+          "answer": "The Internet is a global network of connected computers that allows people to share information and communicate worldwide.",
+          "expected": "global network of connected computers",
+          "is_correct": true,
+          "keywords_matched": [
+            "global",
+            "network",
+            "connected",
+            "computers"
+          ]
+        },
+        {
+          "question": "What does it allow people to do?",
+          "answer": "The Internet allows people to share information and communicate worldwide.",
+          "expected": "share information and communicate worldwide",
+          "is_correct": true,
+          "keywords_matched": [
+            "share",
+            "information",
+            "communicate",
+            "worldwide"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "qa_5",
+      "questions": [
+        "What is climate change?",
+        "What does it involve?"
+      ],
+      "answers": [
+        "Climate change refers to long-term shifts in global weather patterns and average temperatures.",
+        "It involves long-term shifts in global weather patterns and average temperatures."
+      ],
+      "expected_answers": [
+        "long-term shifts in global weather patterns and average temperatures",
+        "shifts in weather patterns and temperatures"
+      ],
+      "success": true,
+      "execution_time": 0.6210472583770752,
+      "accuracy": 1.0,
+      "evaluation_details": [
+        {
+          "question": "What is climate change?",
+          "answer": "Climate change refers to long-term shifts in global weather patterns and average temperatures.",
+          "expected": "long-term shifts in global weather patterns and average temperatures",
+          "is_correct": true,
+          "keywords_matched": [
+            "long-term",
+            "shifts",
+            "global",
+            "weather",
+            "patterns",
+            "temperatures"
+          ]
+        },
+        {
+          "question": "What does it involve?",
+          "answer": "It involves long-term shifts in global weather patterns and average temperatures.",
+          "expected": "shifts in weather patterns and temperatures",
+          "is_correct": true,
+          "keywords_matched": [
+            "shifts",
+            "weather",
+            "patterns",
+            "temperatures"
+          ]
+        }
+      ]
+    }
+  ],
+  "manager_performance": {},
+  "executor_performance": {},
+  "quality_metrics": {
+    "overall_accuracy": 1.0,
+    "task_success_rate": 1.0,
+    "improvements": {
+      "better_prompts": true,
+      "improved_evaluation": true,
+      "keyword_matching": true,
+      "more_tasks": true
+    }
+  },
+  "resource_utilization": {
+    "cpu_user_time": 0.0,
+    "cpu_system_time": 0.0,
+    "memory_peak_bytes": 0,
+    "token_total": 0,
+    "token_per_sec": 0.0
+  }
+}
